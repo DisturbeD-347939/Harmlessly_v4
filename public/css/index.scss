@@ -1,0 +1,99 @@
+@mixin center
+{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background-image: linear-gradient(45deg, #3F61AA, #009FE3);
+    
+    display: flex;
+    justify-content: center;
+}
+
+#content
+{
+    @include center;
+}
+
+#home
+{
+    @include center;
+}
+
+#loginDiv
+{
+    @include center;
+    width: 90%;
+
+    #loginForm
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        margin: 60px 0px 10px 0px;
+    }
+
+    #loginButton
+    {
+        color: black;
+        width: 100px;
+    }
+}
+
+#registerDiv
+{
+    @include center;
+    width: 90%;
+
+    #registerForm
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        margin: 60px 0px 10px 0px;
+    }
+
+    #registerButton
+    {
+        color: black;
+        width: 100px;
+    }
+}
+
+#register
+{
+    color: black;
+    width: 100px;
+}
+
+#login
+{
+    color: black;
+    margin: 100px 0px 10px 0px;
+    width: 100px;
+}
+
+img
+{
+    width: 150px;
+    height: 120px;
+}
+
+.back
+{
+    color: black;
+    width: 100px;
+}

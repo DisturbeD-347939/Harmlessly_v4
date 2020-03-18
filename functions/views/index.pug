@@ -1,0 +1,42 @@
+html
+    head
+        title Harmlessly
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device=width, initial-scale=1.0")
+        link(rel="stylesheet" href="./css/index.css")
+        link(rel="stylesheet" href="./css/materialize.min.css")
+        link(rel="manifest" href="./manifest.json")
+        script(src="./js/materialize.min.js")
+        script(src="./js/jquery-3.4.1.min.js")
+        script(src="./js/index.js")
+    body
+        div#content
+            div#home 
+                img(src="./img/logo_no_background.png")
+                div#login.waves-effect.waves-light.btn.white Login
+                div#register.waves-effect.waves-light.btn.white Register
+            div#loginDiv
+                img(src="./img/logo_no_background.png")
+                form#loginForm(method="POST")
+                    div.input-field
+                        input.form-control.validate(type='email', name='email')
+                        label(for="email") Email
+                    div.input-field
+                        input.form-control.validate(type='password', name='password')
+                        label(for="password") Password
+                    div#loginButton.waves-effect.waves-light.waves-blue.btn.white(type="submit") Login
+                div.back.waves-effect.waves-light.btn.white back
+            div#registerDiv
+                img(src="./img/logo_no_background.png")
+                form#registerForm(method="POST")
+                    div.input-field
+                        input.form-control.validate(type='text', name='name')
+                        label(for="name") First Name
+                    div.input-field
+                        input.form-control.validate(type='email', name='email')
+                        label(for="email") Email
+                    div.input-field
+                        input.form-control.validate(type='password', name='password')
+                        label(for="password") Password
+                    div#registerButton.waves-effect.waves-light.btn.white(type="submit") Register
+                div.black.back.waves-effect.waves-light.waves-blue.btn.white back
