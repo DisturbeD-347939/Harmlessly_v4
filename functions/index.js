@@ -106,7 +106,8 @@ app.post('/login', (request, response) =>
                 if(res == true)
                 {
                     console.log("Logged in");
-                    response.render('home', {email: data.email});
+                    //response.send("200");
+                    response.render('home');
                 }
                 else
                 {
