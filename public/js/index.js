@@ -36,6 +36,7 @@ $(document).ready(function()
     {
         e.preventDefault();
         
+        var valid = true;
         var inputs = $('#loginForm :input');
         var values = {};
         inputs.each(function()
@@ -43,7 +44,43 @@ $(document).ready(function()
             values[this.name] = $(this).val();
         })
 
-        console.log(values);
+        $('#loginForm > div > input').each(function(index)
+        {
+            if(!$(this).hasClass("valid")) { valid = false; }
+        })
+
+        if(valid)
+        {
+            $.post("/login",
+            {
+                data: values
+            },
+            function(data, status)
+            {
+                //409 - Wrong password/email
+                if(data == "409")
+                {
+                    console.log("Wrong password/email");
+                    $('#loginForm > div:first-child() > input, #loginForm > div:nth-child(2) > input').val("");
+                    $('#loginForm > div:first-child() > input, #loginForm > div:nth-child(2) > input').removeClass("valid");
+                    $('#loginForm > div:first-child() > input, #loginForm > div:nth-child(2) > input').addClass("invalid");
+                }
+    
+                //500 - Server issues
+                if(data == "500")
+                {
+                    $('.back').click();
+                    alert("Sorry, we are having trouble with our servers at the moment. Try again later!");
+                }
+    
+            })
+            console.log("Submitted register");
+        }
+        else
+        {
+            alert("Fill up all the fields correctly before submitting!");
+        }
+
     })
     
     $('#registerForm').submit(function(e)
