@@ -69,6 +69,7 @@ $(document).ready(function()
             },
             function(data, status)
             {
+
                 //409 - Wrong password/email
                 if(data == "409")
                 {
@@ -79,11 +80,20 @@ $(document).ready(function()
                 }
     
                 //500 - Server issues
-                if(data == "500")
+                else if(data == "500")
                 {
                     $('.back').click();
                     alert("Sorry, we are having trouble with our servers at the moment. Try again later!");
                 }
+
+                //200 - OK
+                else
+                {
+                    setCookie("email", "ricardojg1@hotmail.com", "1");
+                    $('html').html(data);
+                }
+                
+                
     
             })
             console.log("Submitted register");
@@ -178,3 +188,10 @@ $(document).ready(function()
     })
 })
 
+function setCookie(cname, cvalue, exdays) 
+{
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
