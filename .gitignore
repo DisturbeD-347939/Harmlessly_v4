@@ -63,3 +63,8 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+/functions/.json
+/functions/ServiceAccountKey.json
+/public/css/.map
+/public/css/index.scss
