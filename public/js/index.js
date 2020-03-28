@@ -2,6 +2,7 @@ $(document).ready(function()
 {
     $('#loginDiv').hide();
     $('#registerDiv').hide();
+    $('.back').css("color", "black");
 
     $('#register').click(function()
     {
