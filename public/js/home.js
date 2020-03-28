@@ -1,15 +1,30 @@
-//Check if browser supports service workers.
-if('serviceWorker' in navigator)
+function getCookie(cname) 
 {
-    //Put it in all scripts (installs/updates the service worker)
-    navigator.serviceWorker.register('/sw.js')
-        .then(function()
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) 
+    {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') 
         {
-            console.log("Service worked registered!");
-        })
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) 
+        {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }
 
-$('#add').click(function()
+$(document).ready(function()
 {
-    console.log("Add new");
+    console.log("lmao");
+    console.log(getCookie("email"));
+    
+    $('#add').click(function()
+    {
+        console.log("Add new");
+    })
 })
