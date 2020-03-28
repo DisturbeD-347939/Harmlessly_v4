@@ -19,6 +19,11 @@ body
     justify-content: center;
 }
 
+.back
+{
+    width: 100px;
+}
+
 #content
 {
     @include center;
@@ -90,10 +95,4 @@ img
 {
     width: 150px;
     height: 120px;
-}
-
-.back
-{
-    color: black;
-    width: 100px;
 }
