@@ -50,6 +50,28 @@ $(document).ready(function()
     {
         e.preventDefault();
         console.log("Submitted register");
+    //Enable users to press enter to submit the form
+    $("#registerForm").keypress(function(event)
+    {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        //If the user presses ENTER
+        if(keycode == '13')
+        {
+            $('#registerForm').submit();
+        }
+    })
+
+    //Enable users to press enter to submit the form
+    $("#loginForm").keypress(function(event)
+    {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        //If the user presses ENTER
+        if(keycode == '13')
+        {
+            $('#loginForm').submit();
+        }
     })
 })
 
