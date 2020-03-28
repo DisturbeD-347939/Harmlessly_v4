@@ -1,0 +1,98 @@
+{
+    "Substances":
+    {
+        "MDMA":
+        {
+            "name": "3,4-Methyl​enedioxy​methamphetamine",
+            "nicknames": ["Molly", "Ecstasy", "Mandy", "XTC", "MD"],
+            "dosing_methods": ["Orally", "Snorting", "Bombing"],
+            "sold_as": ["Pills", "Powder"],
+            "effects":
+            {
+                "positive_effects": ["Happyness", "Love", "Energised", "Alert", "Euphoria", "Empathy"],
+                "negative_effects": ["Anxiety", "Panic Attacks", "Confused episodes", "Paranoia", "Psychosis"],
+                "physical_effects": ["Dilated pupils", "Tingling sensation", "Tightening or moving of the jaw muscles", "Higher body temperature", "Faster heartbeat", "Nausea", "Thirst", "Dry mouth", "Lack of appetite", "Perspiration", "Restless legs"]
+            },
+            "duration":
+            {
+                "orally":
+                {
+                    "kick_in": "20-60 minutes",
+                    "duration": "2-4 hours"
+                    
+                },
+                "snorting":
+                {
+                    "kick_in": "5-10 minutes",
+                    "duration": "30-60 minutes"
+                },
+                "comedown": "Few days",
+                "detection": "1-4 days"
+            },
+            "risks": 
+            {
+                "short_term": ["Fake MDMA", "Overheating", "Drinking too much water"],
+                "long_term": ["Depression", "Neurotoxicity", "Permanently losing the positive effects of MDMA"]
+            },
+            "safety":
+            {
+                "comedown_cause": ["Fake MDMA", "Unsafe dosages", "Not taking a long enough break between MDMA uses", "Lack of sleep", "Mixing drugs"],
+                "safety_steps":
+                {
+                    "1": 
+                    {
+                        "rule": "I have no pre-existing health conditions that make MDMA less safe",
+                        "info": "Avoid MDMA if you have cardiovascular disease, cerebrovascular disease, uncontrolled hypertension, malignant hyperthermia, anhydrosis, central core disease, or any condition that increases the risk of heat stroke or hyperthermia, you are susceptible to seizures or if you have liver problems"
+                    },
+                    "2": 
+                    {
+                        "rule": "I'm not taking medicines or supplements that may interact badly with MDMA",
+                        "info": 
+                        [
+                            "If you've taken any MAOIs (e.g. Nardil, Parnate, Marplan, Ayahuasca) in the last 3 weeks you could die",
+                            "There are rumors that 5-HTP can react badly to MDMA",
+                            "St John's wort has a high potential for drug interactions, some of which may be serious",
+                            "If you have recently taken any CYP2D6 inhibitors",
+                            "Drugs that increase heat rate or blood pressure (e.g. asthma medications, stimulants like cocaine/amphetamine/caffeine, DXM, stomach acid medications and sedatives like alcohol/opioids",
+                            "Avoid consuming LSD, 2C-B or shrooms since this combination increases neurotoxicity"
+                        ]
+                    },
+                    "3": 
+                    {
+                        "rule": "I have tested my MDMA with a reagent test"
+                    },
+                    "4":
+                    {
+                        "rule": "I have my optional supplements ready",
+                        "info":
+                        {
+                            "regular":
+                            [
+                                "4g Ginger",
+                                "1,5g ALCAR",
+                                "2g Vitamin C",
+                                "200mg Magnesium",
+                                "2,4g ALA"
+                            ],
+                            "minimum":
+                            [
+                                "1g ALCAR",
+                                "200-600mg CoQ10",
+                                "800-IU Vitamin E"
+                            ]
+                        }
+                    },
+                    "5": "I haven't rolled in at least 5 weeks but ideally 3 months",
+                    "6": "I'm aware of the dosage guideline (your weight in kg + 50 = dosage in mg for the night)",
+                    "7": "I'll drink 250-500 ml/h (1-2 cups), definitely no more than 500 ml/h (2 cups) and ideally Gatorade/Lucozade instead of water",
+                    "8": "I'll stay cool to avoid heat stroke",
+                    "9": "I'll take MDMA in a safe, cool and positive environment",
+                    "10": "I'm aware that MDMA can bring to the surface issues that I may be emotionally struggling with",
+                    "11": "I know the signs of heat stroke and agree to pay attention to the friend I am rolling with",
+                    "12": "I know my intention for taking MDMA, even if it's just for fun, and I will tell the people I plan to roll with"
+                }
+            }
+        }
+    },
+    "Disclaimer": "We do not promote the use of illegal psychoactive substances. This content has been created strictly for harm reduction purposes, and you should note that the only way to be perfectly safe using MDMA is to not take it at all."
+}
