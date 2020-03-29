@@ -49,6 +49,16 @@ $(document).ready(function()
         }
     });
 
+    /************************************************RUN***********************************************/
+
+    if(getCookie("email") == "")
+    {
+        window.location.href = "/";
+    }
+    else
+    {
+        $('#welcomeHome').text("Welcome " + getCookie("name"));
+    }
     
     $('#add').click(function()
     {
