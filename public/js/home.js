@@ -20,8 +20,6 @@ function getCookie(cname)
 
 $(document).ready(function()
 {
-    console.log("lmao");
-    console.log(getCookie("email"));
     
     $('#add').click(function()
     {
