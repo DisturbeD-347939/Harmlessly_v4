@@ -114,7 +114,7 @@ app.post('/login', (request, response) =>
                 {
                     console.log("Logged in");
                     //response.send("200");
-                    response.render('home');
+                    response.send(doc.data()["username"]);
                 }
                 else
                 {
