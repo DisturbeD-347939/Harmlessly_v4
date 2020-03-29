@@ -14,8 +14,8 @@ html
         div#content
             div#home 
                 img(src="./img/logo_no_background.png")
-                div#login.waves-effect.waves-light.btn.white Login
-                div#register.waves-effect.waves-light.btn.white Register
+                div#login.waves-effect.waves-blue.btn.white Login
+                div#register.waves-effect.waves-blue.btn.white Register
             div#loginDiv
                 img(src="./img/logo_no_background.png")
                 form#loginForm(method="POST")
@@ -25,8 +25,8 @@ html
                     div.input-field
                         input.form-control.validate(type='password', name='password')
                         label(for="password") Password
-                    div#loginButton.waves-effect.waves-light.waves-blue.btn.white(type="submit") Login
-                div.back.waves-effect.waves-light.btn.white Back
+                    div#loginButton.waves-effect.waves-blue.waves-blue.btn.white(type="submit") Login
+                div.back.waves-effect.waves-blue.btn.white Back
             div#registerDiv
                 img(src="./img/logo_no_background.png")
                 form#registerForm(method="POST")
@@ -42,5 +42,5 @@ html
                         input.form-control.validate(type='password', name='password' minlength="8" maxlength="30" required)
                         label(for="password") Password
                         span.helper-text(data-error="Minimum 8 characters")
-                    div#registerButton.waves-effect.waves-light.btn.white(type="submit") Register
-                div.back.waves-effect.waves-light.waves-blue.btn.white Back
+                    div#registerButton.waves-effect.waves-blue.btn.white(type="submit") Register
+                div.back.waves-effect.waves-blue.waves-blue.btn.white Back
