@@ -62,6 +62,17 @@ $(document).ready(function()
     
     $('#add').click(function()
     {
-        console.log("Add new");
+        if(!addUse)
+        {
+            $('#addUse').show();
+            $('header, .content').css("filter","blur(3px)");
+            addUse = true;
+        }
+        else
+        {
+            addUse = false;
+            $('#addUse').hide();
+        }
+    })
     })
 })
