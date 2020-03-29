@@ -74,5 +74,15 @@ $(document).ready(function()
             $('#addUse').hide();
         }
     })
+
+    $('.content, header').click(function()
+    {
+        if(addUse)
+        {
+            addUse = false;
+            $('#addUse').hide();
+            $('header, .content').css("filter","none");
+        }
+    })
     })
 })
