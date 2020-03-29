@@ -89,8 +89,9 @@ $(document).ready(function()
                 //200 - OK
                 else
                 {
-                    setCookie("email", "ricardojg1@hotmail.com", "1");
-                    $('html').html(data);
+                    setCookie("email", values.email, "1");
+                    setCookie("name", data, "1");
+                    window.location.href = "/home";
                 }
                 
                 
