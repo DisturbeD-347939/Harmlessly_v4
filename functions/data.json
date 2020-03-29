@@ -4,7 +4,7 @@
         "MDMA":
         {
             "name": "3,4-Methyl​enedioxy​methamphetamine",
-            "nicknames": ["Molly", "Ecstasy", "Mandy", "XTC", "MD"],
+            "nicknames": ["Molly", "Ecstasy", "Mandy", "XTC", "MD", "E", "X"],
             "dosing_methods": ["Orally", "Snorting", "Bombing"],
             "sold_as": ["Pills", "Powder"],
             "effects":
@@ -92,6 +92,10 @@
                     "12": "I know my intention for taking MDMA, even if it's just for fun, and I will tell the people I plan to roll with"
                 }
             }
+        },
+        "Cocaine": 
+        {
+
         }
     },
     "Disclaimer": "We do not promote the use of illegal psychoactive substances. This content has been created strictly for harm reduction purposes, and you should note that the only way to be perfectly safe using MDMA is to not take it at all."
