@@ -84,5 +84,30 @@ $(document).ready(function()
             $('header, .content').css("filter","none");
         }
     })
+
+    /***********************************************FORMS**********************************************/
+
+    $('#addDose').click(function()
+    {
+        var timestamp;
+
+        if($('#timeSelect').val() == "Now")
+        {
+            timestamp = Date.now();
+        }
+        else
+        {
+            var hours = $('#timeSelect').val()[0];
+            timestamp = Date.now() + (hours * 3600);
+        }
+
+        console.log(timestamp);
+
+        $.post("/addDose",
+        {
+            substance: $("#addDose").val(),
+            time: timestamp
+        }
+        )
     })
 })
