@@ -40,6 +40,12 @@ app.get('/home', (request, response) =>
     response.render('home');
 })
 
+app.get('/info', (request, response) =>
+{
+    var data = JSON.parse(fs.readFileSync('data.json'));
+    response.send(data);
+})
+
 app.post('/register', (request, response) =>
 {
     var data = request.body.data;
