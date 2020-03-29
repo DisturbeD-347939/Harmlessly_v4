@@ -1,9 +1,10 @@
-var functions = require('firebase-functions');
-var admin = require('firebase-admin');
-var express = require('express');
-var engines = require('consolidate');
-var bcrypt = require('bcryptjs');
-var serviceAccount = require('./ServiceAccountKey.json');
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const express = require('express');
+const engines = require('consolidate');
+const bcrypt = require('bcryptjs');
+const fs = require('fs');
+const serviceAccount = require('./ServiceAccountKey.json');
 
 admin.initializeApp
 ({
