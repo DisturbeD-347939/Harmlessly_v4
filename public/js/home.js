@@ -29,8 +29,6 @@ $(document).ready(function()
         }
     });
 
-    /************************************************RUN***********************************************/
-
     if(getCookie("email") == "")
     {
         window.location.href = "/";
@@ -39,6 +37,10 @@ $(document).ready(function()
     {
         $('#welcomeHome').text("Welcome " + getCookie("name"));
     }
+
+    updateSubstances();
+
+    /************************************************RUN***********************************************/
     
     $('#add').click(function()
     {
@@ -91,6 +93,37 @@ $(document).ready(function()
         )
     })
 })
+
+function updateSubstances()
+{
+    if(getCookie("email") != "")
+    {
+        $(".content").empty();
+
+        $.get("/usage",
+        {
+            email: getCookie("email")
+        },
+        function(data, status)
+        {
+            if(data == "409")
+            {
+                console.log("No data");
+            }
+            else
+            {
+                console.log(data);  
+                for(var i = 0; i < data.length; i++)
+                {
+                    var date = new Date(data[i]["id"] * 1000);
+                
+                    $(".content").append("<div><img class='logoSubstance' src=./img/substances/" + data[i]  ["data"]["substance"] + ".png><p class='titleSubstance'>" + data[i]["data"]["substance"]  + "</p><p class='dateSubstance'>" + date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear() + "</p><div class='infoSubstance waves-effect   waves-blue btn white'>Info</div><div class='warningSubstance waves-effect waves-blue btn  white'>Dangers</div>");
+                }
+            }
+        })
+    }
+}
+
 function getCookie(cname) 
 {
     var name = cname + "=";
