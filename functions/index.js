@@ -46,6 +46,46 @@ app.get('/info', (request, response) =>
     response.send(data);
 })
 
+app.get('/usage', (request,response) =>
+{
+    var counter = 0;
+    var data = [];
+    var email = request.query.email;
+
+    db.collection('Users').get()
+    .then(snapshot => 
+        {
+            snapshot.forEach(doc => 
+            {
+                if(doc.id == email)
+                {
+                    db.collection('Users').doc(doc.id).collection('Usage').get()
+                    .then(snapshot =>
+                        {
+                            snapshot.forEach(doc =>
+                                {
+                                    if(snapshot["_size"] == 0)
+                                    {
+                                        response.send("409");
+                                    }
+                                    else
+                                    {
+                                        counter++;
+                                        data.push({data:doc.data(), id:doc.id});
+        
+                                        if(counter == snapshot["_size"])
+                                        {
+                                            console.log("Sent results");
+                                            response.send(data);
+                                        }
+                                    }
+                                })
+                        })
+                }
+            })
+        })
+})
+
 app.post('/register', (request, response) =>
 {
     var data = request.body.data;
