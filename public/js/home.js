@@ -85,14 +85,23 @@ $(document).ready(function()
             timestamp = Date.now() + (hours * 3600);
         }
 
-        console.log(timestamp);
-
         $.post("/addDose",
         {
-            substance: $("#addDose").val(),
-            time: timestamp
-        }
-        )
+            substance: $("#substancesSelect").val(),
+            time: timestamp,
+            email: getCookie("email")
+        }, 
+        function(data, status)
+        {
+            if(data == "200")
+            {
+                updateSubstances();
+            }
+        })
+
+        addUse = false;
+        $('#addUse').hide();
+        $('header, .content').css("filter","none");
     })
 })
 
