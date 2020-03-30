@@ -43,9 +43,87 @@ header
     position: fixed;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    align-items: center;
 
     width: 100%;
+
+    overflow: auto;
+
+    div:first-child
+    {
+        margin-top: 10px;
+    }
+    div:last-child
+    {
+        margin-bottom: 10px;
+    }
+
+    div
+    {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas:
+            "substance title date"
+            "substance info warning";
+        grid-gap: 3px;
+        justify-items: center;
+        align-items: center;
+
+        width: 90%;
+        height: 25%;
+        background-color: white;
+        border: 1px solid black;
+
+        margin: 0px 5% 5px 5%;
+
+        .logoSubstance
+        {
+            grid-area: substance;
+
+            border: 1px solid black;
+
+            margin-left: 5px;
+
+            height: 80%;
+            width: 100%;
+        }
+
+        .titleSubstance
+        {
+            grid-area: title;
+        }
+
+        .dateSubstance
+        {
+            grid-area: date;
+        }
+
+        .infoSubstance
+        {
+            grid-area: info;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 50%;
+            width: 90%;
+            color: black;
+        }
+
+        .warningSubstance
+        {
+            grid-area: warning;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 50%;
+            width: 90%;
+            color: black;
+        }
+    }
 }
 
 footer
@@ -93,6 +171,7 @@ footer
     align-items: flex-start;
 
     border: 1px solid black;
+    background-color: white;
 
     height: 50%;
     width: 65%;
