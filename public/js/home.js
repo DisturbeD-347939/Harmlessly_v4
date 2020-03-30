@@ -54,6 +54,7 @@ $(document).ready(function()
         {
             addUse = false;
             $('#addUse').hide();
+            $('header, .content').css("filter","none");
         }
     })
 
