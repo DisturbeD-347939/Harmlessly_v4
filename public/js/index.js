@@ -93,17 +93,9 @@ $(document).ready(function()
                     setCookie("name", data, "1");
                     window.location.href = "/home";
                 }
-                
-                
-    
             })
             console.log("Submitted register");
         }
-        else
-        {
-            alert("Fill up all the fields correctly before submitting!");
-        }
-
     })
     
     $('#registerForm').submit(function(e)
