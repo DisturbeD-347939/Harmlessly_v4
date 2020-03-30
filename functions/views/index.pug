@@ -20,27 +20,27 @@ html
                 img(src="./img/logo_no_background.png")
                 form#loginForm(method="POST")
                     div.input-field
-                        input.form-control.validate(type='email', name='email')
-                        label(for="email") Email
+                        input#loginEmail.form-control.validate(type='email' name="email" required)
+                        label(for="loginEmail") Email
                     div.input-field
-                        input.form-control.validate(type='password', name='password')
-                        label(for="password") Password
+                        input#loginPassword.form-control.validate(type='password', name='password' required)
+                        label(for="loginPassword") Password
                     div#loginButton.waves-effect.waves-blue.waves-blue.btn.white(type="submit") Login
                 div.back.waves-effect.waves-blue.btn.white Back
             div#registerDiv
                 img(src="./img/logo_no_background.png")
                 form#registerForm(method="POST")
                     div.input-field
-                        input.form-control.validate(type='text', name='name' minlength="4" maxlength="15" required)
-                        label(for="name") First Name
+                        input#registerName.form-control.validate(type='text', name='name' minlength="4" maxlength="15" required)
+                        label(for="registerName") First Name
                         span.helper-text(data-error="Minimum 4 characters")
                     div.input-field
-                        input.form-control.validate(type='email', name='email' maxlength="40" required)
-                        label(for="email") Email
+                        input#registerEmail.form-control.validate(type='email', name='email' maxlength="40" required)
+                        label(for="registerEmail") Email
                         span.helper-text(data-error="Enter a valid email")
                     div.input-field
-                        input.form-control.validate(type='password', name='password' minlength="8" maxlength="30" required)
-                        label(for="password") Password
+                        input#registerPassword.form-control.validate(type='password', name='password' minlength="8" maxlength="30" required)
+                        label(for="registerPassword") Password
                         span.helper-text(data-error="Minimum 8 characters")
                     div#registerButton.waves-effect.waves-blue.btn.white(type="submit") Register
                 div.back.waves-effect.waves-blue.waves-blue.btn.white Back
