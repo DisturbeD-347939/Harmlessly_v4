@@ -171,5 +171,21 @@ app.post('/login', (request, response) =>
     })
 })
 
+app.post('/addDose', (request, response) =>
+{
+    var data = request.body;
+    console.log(data["substance"]);
+
+    var fields =
+    {
+        substance: data["substance"]
+    }
+
+    db.collection('Users').doc(data["email"]).collection('Usage').doc(data["time"]).set(fields).then(() =>
+    {
+        response.send("200");
+    })
+})
+
 //Export app
 exports.app = functions.https.onRequest(app);
