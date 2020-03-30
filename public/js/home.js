@@ -76,7 +76,8 @@ $(document).ready(function()
 
         if($('#timeSelect').val() == "Now")
         {
-            timestamp = Date.now();
+            timestamp = Math.round((new Date()).getTime() / 1000);
+            console.log(timestamp);
         }
         else
         {
