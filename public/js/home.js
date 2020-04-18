@@ -73,9 +73,62 @@ $(document).ready(function()
         }
     })
 
-    /***********************************************FORMS**********************************************/
+    $('#good, #neutral, #bad').click(function(e)
+    {
+        if(inputData.length < 1)
+        {
+            $('#substances').empty();
+            inputData.push(e.target.id);
 
-    $('#addDose').click(function()
+            $.get("/getSubstances", function(data, status)
+            {
+                if(data != "500")
+                {
+                    $('#addMood').hide();
+                    $('#addUse').show();
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        $('#substances').append("<div class='substances btn blue lighten-1'>" + data[i] + "</div>");
+
+                        if(i+1 >= data.length)
+                        {
+                            $('.substances').click(function(e)
+                            {
+                                if(inputData.length >= 2)
+                                {
+                                    $($('#substances').children('div')[selectedSubstanceIndex]).addClass("blue lighten-1");
+                                    $($('#substances').children('div')[selectedSubstanceIndex]).removeClass("white");
+                                    $($('#substances').children('div')[selectedSubstanceIndex]).css
+                                    ({
+                                        "color": "white",
+                                        "border": "0px"
+                                    });
+
+                                    inputData[1] = $(e.target).text();
+                                    selectedSubstanceIndex = $(e.target).index();
+                                }
+                                else
+                                {
+                                    inputData.push($(e.target).text());
+                                    selectedSubstanceIndex = $(e.target).index();
+                                }
+
+                                $(e.target).addClass("white");
+                                $(e.target).removeClass("blue lighten-1");
+                                $(e.target).css
+                                ({
+                                    "color": "#42a5f5",
+                                    "border": "1px solid #42a5f5"
+                                });
+
+                                $('#addDose').removeClass("disabled");
+                            })
+                        }
+                    }
+                }
+            });
+        }
+    })
     {
         var timestamp;
 
