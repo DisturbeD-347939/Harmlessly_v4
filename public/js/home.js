@@ -64,10 +64,11 @@ $(document).ready(function()
 
     $('.content, header').click(function()
     {
-        if(addUse)
+        if(add)
         {
-            addUse = false;
-            $('#addUse').hide();
+            add = false;
+            inputData = [];
+            $('#addMood, #addUse').hide();
             $('header, .content').css("filter","none");
         }
     })
