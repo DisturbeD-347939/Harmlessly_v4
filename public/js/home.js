@@ -27,17 +27,6 @@ $(document).ready(function()
     $('#addUse').css("bottom", $("footer").height() + 15 + "px");
     $('#addMood').css("bottom", $("footer").height() + 15 + "px");
 
-    //Get drug info
-    $.get("/info", function(data, status)
-    {
-        var substances = Object.keys(data.Substances);
-        
-
-        for(var i = 0; i < substances.length; i++)
-        {
-            $("#substancesSelect").append("<option value= " + substances[i] + ">" + substances[i] + "</option>")
-        }
-    });
 
     if(getCookie("email") == "")
     {
