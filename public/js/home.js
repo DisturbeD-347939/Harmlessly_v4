@@ -135,6 +135,12 @@ function updateSubstances()
     }
 }
 
+//Get drugs info
+$.get('/info', function(data, status)
+{
+    substancesInfo = data["Substances"];
+})
+
 //Conversions
 function convert(original, value, final)
 {
