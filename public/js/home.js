@@ -47,16 +47,17 @@ $(document).ready(function()
     
     $('#add').click(function()
     {
-        if(!addUse)
+        if(!add)
         {
-            $('#addUse').show();
+            $('#addMood').show();
             $('header, .content').css("filter","blur(3px)");
-            addUse = true;
+            add = true;
         }
         else
         {
-            addUse = false;
-            $('#addUse').hide();
+            add = false;
+            inputData = [];
+            $('#addMood, #addUse').hide();
             $('header, .content').css("filter","none");
         }
     })
