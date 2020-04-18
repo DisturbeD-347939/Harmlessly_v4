@@ -27,7 +27,10 @@ $(document).ready(function()
     $('#addUse').css("bottom", $("footer").height() + 15 + "px");
     $('#addMood').css("bottom", $("footer").height() + 15 + "px");
 
+    //Substance dosage
+    $('#doseVal').text($('#dosage').val());
 
+    //Check if user is logged in
     if(getCookie("email") == "")
     {
         window.location.href = "/";
@@ -37,9 +40,10 @@ $(document).ready(function()
         $('#welcomeHome').text("Welcome " + getCookie("name"));
     }
 
+    //Update substances
     updateSubstances();
 
-    /************************************************RUN***********************************************/
+    /************************************************ EVENTS ***********************************************/
     
     $('#add').click(function()
     {
