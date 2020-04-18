@@ -25,6 +25,7 @@ $(document).ready(function()
 
     //Setup add tab bottom
     $('#addUse').css("bottom", $("footer").height() + 15 + "px");
+    $('#addMood').css("bottom", $("footer").height() + 15 + "px");
 
     //Get drug info
     $.get("/info", function(data, status)
