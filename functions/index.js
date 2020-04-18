@@ -75,7 +75,6 @@ app.get('/usage', (request,response) =>
         
                                         if(counter == snapshot["_size"])
                                         {
-                                            console.log("Sent results");
                                             response.send(data);
                                         }
                                     }
@@ -83,6 +82,35 @@ app.get('/usage', (request,response) =>
                         })
                 }
             })
+        })
+})
+
+app.get('/getSubstances', (request, response) =>
+{
+    var counter = 0;
+    var substances = [];
+
+    db.collection('Substances').get()
+    .then(snapshot =>
+        {
+            snapshot.forEach(doc =>
+                {
+                    if(snapshot["_size"] == 0)
+                    {
+                        response.send("500");
+                    }
+                    else
+                    {
+                        counter++;
+                        substances.push(doc.id);
+
+                        if(counter == snapshot["_size"])
+                        {
+                            console.log(substances);
+                            response.send(substances);
+                        }
+                    }
+                })
         })
 })
 
