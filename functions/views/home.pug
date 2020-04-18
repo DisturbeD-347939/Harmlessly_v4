@@ -25,18 +25,30 @@ html
                 img#add.image(src="./img/icons/add.png")
                 img.standardImage(src="./img/icons/calendar.png")
                 img.standardImage(src="./img/icons/burguer.png")
+        div#addMood
+            div
+                p How do you feel?
+                div
+                    img#good(src="./img/moods/good.png")
+                    img#neutral(src="./img/moods/neutral.png")
+                    img#bad(src="./img/moods/bad.png")
         div#addUse
+
+            div#substancePicker
+                p Substance
+                div#substances
+            div#substanceDose
+                p Dose
+                p.range-field
+                    input#dosage(type="range" min="5" step="5" max="995")
+                div
+                    p#doseVal 0
+                    select#selectScale
+                        option(value = "μg") μg or mcg
+                        option(value = "mg") mg
+                        option(value = "g") g
+                label
+                    input#unknownDose(type="checkbox")
+                    span Unknown
             div
-                p What are you consuming?
-                select#substancesSelect
-            div
-                p When?
-                select#timeSelect
-                    option Now
-                    option 1 Hour
-                    option 2 Hours
-                    option 3 Hours
-                    option 4 Hours
-                    option 5 Hours
-            div
-                div#addDose.waves-effect.waves-blue.btn.white Add dose
+                div#addDose.waves-effect.waves-blue.btn.blue.lighten-1.disabled NEXT
