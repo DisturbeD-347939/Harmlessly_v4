@@ -29,50 +29,41 @@ header {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  overflow: auto; }
-  .content div:first-child {
-    margin-top: 10px; }
-  .content div:last-child {
-    margin-bottom: 10px; }
-  .content div {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-areas: "substance title date" "substance info warning";
-    grid-gap: 3px;
-    justify-items: center;
+  overflow: auto;
+  margin-bottom: 20px; }
+  .content .usageCard:first-child {
+    margin-top: 20px; }
+  .content .usageCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
-    width: 90%;
-    height: 25%;
-    background-color: white;
-    border: 1px solid black;
-    margin: 0px 5% 5px 5%; }
-    .content div .logoSubstance {
-      grid-area: substance;
-      border: 1px solid black;
-      margin-left: 5px;
-      height: 80%;
-      width: 100%; }
-    .content div .titleSubstance {
-      grid-area: title; }
-    .content div .dateSubstance {
-      grid-area: date; }
-    .content div .infoSubstance {
-      grid-area: info;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 50%;
-      width: 90%;
-      color: black; }
-    .content div .warningSubstance {
-      grid-area: warning;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 50%;
-      width: 90%;
-      color: black; }
+    width: 95%;
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: white; }
+  .content .usageCard:last-child {
+    margin-bottom: 20px; }
+  .content .usageCardImage img {
+    width: 75px;
+    height: 75px; }
+  .content .usageCardContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%; }
+    .content .usageCardContent p {
+      font-size: 15px; }
+    .content .usageCardContent .danger {
+      width: 100%;
+      height: 32px;
+      background-image: linear-gradient(to right, green, yellow, red);
+      border: 1px solid black; }
+    .content .usageCardContent .dangerLevel {
+      border-left: 1px solid black;
+      position: relative;
+      height: 30px;
+      background-color: white; }
 
 footer {
   position: fixed;
@@ -97,30 +88,84 @@ footer {
   width: 20%;
   height: 100%; }
 
-#addUse {
+#addMood {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: flex-start;
   border: 1px solid black;
   background-color: white;
   height: 50%;
   width: 65%;
   left: 17.5%; }
-  #addUse div {
-    margin-left: 20px; }
-  #addUse div:last-child {
+  #addMood div {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    margin-left: 0px;
-    color: black; }
-    #addUse div:last-child div {
-      width: 50%; }
-  #addUse select {
-    display: block; }
+    height: 100%; }
+    #addMood div p {
+      font-size: 20px;
+      text-align: center; }
+    #addMood div div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      width: auto;
+      height: auto; }
+      #addMood div div img {
+        margin: 0px 10px;
+        width: 50px;
+        height: 50px; }
+
+#addUse {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid black;
+  background-color: white;
+  height: 50%;
+  width: 65%;
+  left: 17.5%; }
+  #addUse p {
+    font-size: 20px; }
+  #addUse #substancePicker #substances {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; }
+  #addUse #substanceDose {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; }
+    #addUse #substanceDose .range-field {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin: 0px; }
+    #addUse #substanceDose #dosage {
+      width: 90%; }
+    #addUse #substanceDose #dosage::-webkit-slider-thumb {
+      background-color: #42a5f5; }
+    #addUse #substanceDose #dosage::-moz-range-thumb {
+      background-color: #42a5f5; }
+    #addUse #substanceDose #dosage::-ms-thumb {
+      background-color: #42a5f5; }
+    #addUse #substanceDose div {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%; }
+      #addUse #substanceDose div select {
+        width: auto; }
+
+.verticalHr {
+  border-left: 1px solid black;
+  min-height: 100%;
+  margin: 0px 20px; }
 
 /*# sourceMappingURL=home.css.map */
