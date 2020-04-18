@@ -135,6 +135,43 @@ function updateSubstances()
     }
 }
 
+//Conversions
+function convert(original, value, final)
+{
+    if(original == final)
+    {
+        return value;
+    }
+    else
+    {
+        if(original == "μg" && final == "g")
+        {
+            return value / 1000000;
+        }
+        else if(original == "μg" && final == "mg")
+        {
+            return value / 1000;
+        }
+        else if(original == "g" && final == "mg")
+        {
+            return value * 1000;
+        }
+        else if(original == "g" && final == "μg")
+        {
+            return value * 1000000;
+        }
+        else if(original == "mg" && final == "g")
+        {
+            return value / 1000;
+        }
+        else if(original = "mg" && final == "μg")
+        {
+            return value * 1000;
+        }
+    }
+
+}
+
 function getCookie(cname) 
 {
     var name = cname + "=";
