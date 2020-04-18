@@ -181,7 +181,6 @@ app.post('/login', (request, response) =>
                 if(res == true)
                 {
                     console.log("Logged in");
-                    //response.send("200");
                     response.send(doc.data()["username"]);
                 }
                 else
@@ -202,14 +201,30 @@ app.post('/login', (request, response) =>
 app.post('/addDose', (request, response) =>
 {
     var data = request.body;
-    console.log(data["substance"]);
+    var fields;
 
-    var fields =
+    if(data["data"].length == 3)
     {
-        substance: data["substance"]
+        fields =
+        {
+            mood: data["data"][0],
+            substance: data["data"][1],
+            dosage: "Unknown",
+            scale: "Unknown"
+        }
+    }
+    else
+    {
+        fields =
+        {
+            mood: data["data"][0],
+            substance: data["data"][1],
+            dosage: data["data"][2],
+            scale: data["data"][3]
+        }
     }
 
-    db.collection('Users').doc(data["email"]).collection('Usage').doc(data["time"]).set(fields).then(() =>
+    db.collection('Users').doc(data["email"]).collection('Usage').doc(data["timestamp"]).set(fields).then(() =>
     {
         response.send("200");
     })
