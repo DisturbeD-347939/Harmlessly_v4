@@ -1,7 +1,13 @@
+//General
+var substancesInfo;
+
 $(document).ready(function()
 {
     /*********************************************VARIABLES********************************************/
-    var addUse = false;
+    //Adding substances
+    var add = false;
+    var inputData = [];
+    var selectedSubstanceIndex;
 
     /***********************************************SETUP**********************************************/
     
