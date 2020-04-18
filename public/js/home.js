@@ -241,12 +241,31 @@ function updateSubstances()
             }
             else
             {
-                console.log(data);  
-                for(var i = 0; i < data.length; i++)
+                for(var i = data.length-1; i >= 0; i--)
                 {
-                    var date = new Date(data[i]["id"] * 1000);
-                
-                    $(".content").append("<div><img class='logoSubstance' src=./img/substances/" + data[i]  ["data"]["substance"] + ".png><p class='titleSubstance'>" + data[i]["data"]["substance"]  + "</p><p class='dateSubstance'>" + date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear() + "</p><div class='infoSubstance waves-effect   waves-blue btn white'>Info</div><div class='warningSubstance waves-effect waves-blue btn  white'>Dangers</div>");
+                    //Card setup
+                    var card = "<div class='usageCard' id='usage-" + i + "'>";
+                    var cardImg = "<div class='usageCardImage'><img src='./img/moods/" + data[i]["data"]["mood"] + ".png'</img></div>";
+                    var cardInfo = "<div class='verticalHr'></div><div class='usageCardContent'><p>" + data[i]["data"]["substance"] + " - " + data[i]["data"]["dosage"] + data[i]["data"]["scale"] + "</p><div class='danger'><div class='dangerLevel'></div></div></div>";
+
+                    //Draw card
+                    $('.content').append(card + cardImg + cardInfo + "</div>");
+
+                    //Check danger levels
+                    var convertScale = convert(data[i]["data"]["scale"], data[i]["data"]["dosage"], substancesInfo[data[i]["data"]["substance"]]["dosages"]["scale"]);
+                    
+                    var dangerLevel = (convertScale * 100) / substancesInfo[data[i]["data"]["substance"]]["dosages"]["danger_level"];
+
+                    if(dangerLevel > 100)
+                    {
+                        dangerLevel = 100;
+                    }
+
+                    $('.content div:last-child > div:last-child > div > div').css
+                    ({
+                        "width": 100 - dangerLevel + "%",
+                        "left": dangerLevel + "%"
+                    })
                 }
             }
         })
