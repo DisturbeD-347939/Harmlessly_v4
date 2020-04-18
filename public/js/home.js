@@ -143,6 +143,11 @@ $(document).ready(function()
             $('#dosage, #selectScale').prop("disabled", false);
         }
     })
+
+    $('#dosage').on('input', function()
+    {
+        $('#doseVal').text($(this).val());
+    })
     {
         var timestamp;
 
