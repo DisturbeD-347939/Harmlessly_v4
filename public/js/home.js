@@ -148,13 +148,46 @@ $(document).ready(function()
     {
         $('#doseVal').text($(this).val());
     })
-    {
-        var timestamp;
 
-        if($('#timeSelect').val() == "Now")
+    $('#selectScale').change(function()
+    {
+        if(this.value == "μg")
         {
-            timestamp = Math.round((new Date()).getTime() / 1000);
-            console.log(timestamp);
+            $('#dosage').attr
+            ({
+                "min": "5",
+                "max": "995",
+                "step": "5",
+                "value": "5"
+            })
+            $('#dosage').val(5);
+        }
+
+        else if(this.value == "mg")
+        {
+            $('#dosage').attr
+            ({
+                "min": "5",
+                "max": "995",
+                "step": "5",
+                "value": "1"
+            })
+            $('#dosage').val(1);
+        }
+
+        else if(this.value == "g")
+        {
+            $('#dosage').attr
+            ({
+                "min": "1",
+                "max": "20",
+                "step": "1",
+                "value": "1"
+            })
+            $('#dosage').val(1);
+        }
+        $('#doseVal').text($('#dosage').val());
+    })
         }
         else
         {
