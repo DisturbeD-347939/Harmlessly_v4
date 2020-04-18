@@ -129,6 +129,20 @@ $(document).ready(function()
             });
         }
     })
+
+    //INPUTS
+
+    $('#unknownDose').click(function()
+    {
+        if($(this).is(":checked"))
+        {
+            $('#dosage, #selectScale').prop("disabled", true);
+        }
+        else
+        {
+            $('#dosage, #selectScale').prop("disabled", false);
+        }
+    })
     {
         var timestamp;
 
