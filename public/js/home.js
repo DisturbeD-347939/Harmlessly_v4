@@ -10,9 +10,12 @@ $(document).ready(function()
     var selectedSubstanceIndex;
 
     /***********************************************SETUP**********************************************/
-    
+    //Show elements
+    $('select').show();
+
     //Hide elements
     $('#addUse').hide();
+    $('#addMood').hide();
 
     //Set content height and position
     var remainingScreen = ($("body").height() - ($("header").height() + 10 + $("footer").height() + 10));
