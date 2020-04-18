@@ -188,17 +188,27 @@ $(document).ready(function()
         }
         $('#doseVal').text($('#dosage').val());
     })
+
+    /*********************************************** SUBMISSIONS **********************************************/
+
+    $('#addDose').click(function()
+    {
+        if($('#unknownDose').is(":checked"))
+        {
+            inputData.push("Unknown");
         }
         else
         {
-            var hours = $('#timeSelect').val()[0];
-            timestamp = Date.now() + (hours * 3600);
+            inputData.push($('#dosage').val());
+            inputData.push($('#selectScale option:selected').text());
         }
+
+        console.log(inputData);
 
         $.post("/addDose",
         {
-            substance: $("#substancesSelect").val(),
-            time: timestamp,
+            data: inputData,
+            timestamp: Math.round((new Date()).getTime() / 1000),
             email: getCookie("email")
         }, 
         function(data, status)
@@ -209,9 +219,7 @@ $(document).ready(function()
             }
         })
 
-        addUse = false;
-        $('#addUse').hide();
-        $('header, .content').css("filter","none");
+        $('#add').click();
     })
 })
 
