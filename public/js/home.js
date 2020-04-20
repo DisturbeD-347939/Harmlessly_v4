@@ -37,7 +37,7 @@ $(document).ready(function()
     }
     else
     {
-        $('#welcomeHome').text("Welcome " + getCookie("name"));
+        $(".content").css("justify-content", "center");
     }
 
     //Update substances
@@ -227,8 +227,6 @@ function updateSubstances()
 {
     if(getCookie("email") != "")
     {
-        $(".content").empty();
-
         $.get("/usage",
         {
             email: getCookie("email")
