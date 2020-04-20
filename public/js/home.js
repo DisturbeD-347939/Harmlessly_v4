@@ -244,6 +244,10 @@ function updateSubstances()
             }
             else
             {
+                $(".content").empty();
+                $(".content").css("justify-content", "flex-start");
+                $('.content').append("<div id='add' class='waves-effect waves-blue btn blue lighten-1'>Add a new entry</div>");
+
                 for(var i = data.length-1; i >= 0; i--)
                 {
                     //Card setup
