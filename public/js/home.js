@@ -255,12 +255,16 @@ function updateSubstances()
                     var cardImg = "<div class='usageCardImage'><img src='./img/moods/" + data[i]["data"]["mood"] + ".png'</img></div>";
                     var cardInfo = "<div class='verticalHr'></div><div class='usageCardContent'><p>" + data[i]["data"]["substance"] + " - " + data[i]["data"]["dosage"] + data[i]["data"]["scale"] + "</p><div class='danger'><div class='dangerLevel'></div></div></div>";
 
-                    //Draw card
-                    $('.content').append(card + cardImg + cardInfo + "</div>");
+                    if(data[i]["data"]["scale"] == "μg or mcg")
+                    {
+                        data[i]["data"]["scale"] = "μg";
+                    }
+
+                    //console.log(data[i]["data"]["scale"] + " - " + data[i]["data"]["dosage"] + " - " + substancesInfo[data[i]["data"]["substance"]]["dosages"]["scale"]);
 
                     //Check danger levels
                     var convertScale = convert(data[i]["data"]["scale"], data[i]["data"]["dosage"], substancesInfo[data[i]["data"]["substance"]]["dosages"]["scale"]);
-                    
+
                     var dangerLevel = (convertScale * 100) / substancesInfo[data[i]["data"]["substance"]]["dosages"]["danger_level"];
 
                     if(dangerLevel > 100)
