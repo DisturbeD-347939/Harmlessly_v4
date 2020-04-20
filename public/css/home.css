@@ -26,21 +26,26 @@ header {
   position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  padding-top: 20px;
   width: 100%;
   overflow: auto;
   margin-bottom: 20px; }
-  .content .usageCard:first-child {
-    margin-top: 20px; }
+  .content .usageCards {
+    display: flex;
+    width: 95%; }
+    .content .usageCards .sideDangerBar {
+      width: 3%;
+      background-color: red;
+      margin-bottom: 20px; }
   .content .usageCard {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 95%;
+    width: 97%;
     padding: 20px;
-    margin-bottom: 10px;
+    border-radius: 0% 4% 4% 0%;
     background-color: white; }
   .content .usageCard:last-child {
     margin-bottom: 20px; }

@@ -43,16 +43,25 @@ header
     position: fixed;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+
+    padding-top: 20px;
 
     width: 100%;
     overflow: auto;
     margin-bottom: 20px;
 
-    .usageCard:first-child
+    .usageCards
     {
-        margin-top: 20px;
+        display: flex;
+        width: 95%;
+
+        .sideDangerBar
+        {
+            width: 3%;
+            background-color: red;
+            margin-bottom: 20px;
+        }
     }
 
     .usageCard
@@ -62,9 +71,9 @@ header
         justify-content: flex-start;
         align-items: center;
 
-        width: 95%;
+        width: 97%;
         padding: 20px;
-        margin-bottom: 10px;
+        border-radius: 0% 4% 4% 0%;
 
         background-color: white;
     }
