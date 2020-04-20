@@ -130,6 +130,11 @@ $(document).ready(function()
         }
     })
 
+    $('#wikipediaBtn').click(function()
+    {
+        $('.content').empty();
+    })
+
     //INPUTS
 
     $('#unknownDose').click(function()
