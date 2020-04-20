@@ -272,7 +272,46 @@ function updateSubstances()
                         dangerLevel = 100;
                     }
 
-                    $('.content div:last-child > div:last-child > div > div').css
+                    var dangerBarColour;
+                    var dangerBarStatus = Math.floor(dangerLevel / 33);
+
+
+                    switch(dangerBarStatus)
+                    {
+                        case 0:
+                            {
+                                dangerBarColour = "green";
+                                break;
+                            }
+                        case 1:
+                            {
+                                dangerBarColour = "yellow";
+                                break;
+                            }
+                        case 2:
+                            {
+                                dangerBarColour = "red";
+                                break;
+                            }
+                        case 3:
+                            {
+                                dangerBarColour = "red";
+                                break;
+                            }
+                        default:
+                            {
+                                dangerBarColour = "green";
+                            }
+                    }
+
+                    var dangerBar = "<div class='sideDangerBar'></div>"
+
+                    //Draw card
+                    $('.content').append("<div class='usageCards'>" + dangerBar + card + cardImg + cardInfo + "</div></div>");
+
+                    $('.content div:last-child > .sideDangerBar').css("background-color", dangerBarColour);
+
+                    $('.content div:last-child > div:last-child > div:last-child > div > div').css
                     ({
                         "width": 100 - dangerLevel + "%",
                         "left": dangerLevel + "%"
