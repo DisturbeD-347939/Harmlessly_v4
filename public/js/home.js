@@ -27,6 +27,10 @@ $(document).ready(function()
     //Hide Elements - Dashboard Nav Bar
     $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
 
+    //Hide Elements - New Substance
+    $('#newSubstance').hide();
+    $('#newSubstanceSecond').hide();
+
     //Processing calendar
     $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
 
