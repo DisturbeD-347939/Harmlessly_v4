@@ -62,8 +62,35 @@ html
                             input#inputDose.validate(placeholder="100" type="number" data-length="4")
                         div#inputDoseScale
                     img#submitDosage(src="./img/icons/check.png")
+            div#newSubstanceThird
                 i.small.material-icons.backArrow arrow_back
+                h5 When?
+                input#inputDoseTime.timepicker(placeholder="Time" type="text" readonly="true")
+                input#inputDoseDate.datepicker(placeholder="Date" type="text")
+                img#submitDoseTime(src="./img/icons/check.png")
+            div#newSubstanceFourth
                 i.small.material-icons.backArrow arrow_back
+                h5
+                div#moodInputBefore.z-depth-4
+                    h6 Before taking it?
+                    div.moods
+                        img.bad(src="./img/moods/bad.png")
+                        img.neutral(src="./img/moods/neutral.png")
+                        img.good(src="./img/moods/good.png")
+                div#moodInputDuring.z-depth-4.z-depth-4
+                    h6 While on it?
+                    div.moods
+                        img.bad(src="./img/moods/bad.png")
+                        img.neutral(src="./img/moods/neutral.png")
+                        img.good(src="./img/moods/good.png")
+                div#moodInputAfter.z-depth-4
+                    h6 After you've comedown?
+                    div.moods
+                        img.bad(src="./img/moods/bad.png")
+                        img.neutral(src="./img/moods/neutral.png")
+                        img.good(src="./img/moods/good.png")
+                a Skip for now
+                img#submitMood(src="./img/icons/check.png")
         footer
             div#footerNavBar
                     img#footerDashboardBtn(src="./img/icons/wiki.png")(name="entries")
