@@ -9,6 +9,12 @@ if('serviceWorker' in navigator)
     })
 }
 
+//Check if user is logged in
+if(getCookie("email") != "")
+{
+    window.location.href = "/home";
+}
+
 $(document).ready(function()
 {
     $('#loginDiv').hide();
