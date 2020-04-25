@@ -35,8 +35,17 @@ $(document).ready(function()
     $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
 
     var days = [];
+    //Get first date of the month number
     var firstDayMonthNumber = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    var daysLength = 34;
+
+    //If the month starts on a Sunday, add an extra week to the calendar
+    if(firstDayMonthNumber == 7)
+    {
+        daysLength = 41;
+    }
     
+    //If it's not monday
     if(firstDayMonthNumber != 1)
     {
         for(var i = -Math.abs(firstDayMonthNumber - 2); i <= 0; i++)
@@ -51,17 +60,40 @@ $(document).ready(function()
                     if(j+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
                     {
                         var counterDays = 1;
-                        for(var k = days.length; k <= 34; k++)
+                        for(var k = days.length; k <= daysLength; k++)
                         {
                             days.push(counterDays);
                             counterDays++;
-                            if(k == 34)
+                            if(k == daysLength)
                             {
                                 for(var r = 0; r < days.length; r++)
                                 {
                                     $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        for(var i = 1; i <= new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); i++)
+        {
+            days.push(i);
+            if(i+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
+            {
+                var counterDays = 1;
+                for(var j = days.length; j <= daysLength; j++)
+                {
+                    days.push(counterDays);
+                    counterDays++;
+                    if(j == daysLength)
+                    {
+                        for(var k = 0; k < days.length; k++)
+                        {
+                            $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[k] + "</p>");
                         }
                     }
                 }
