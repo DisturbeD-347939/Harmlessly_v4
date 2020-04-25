@@ -41,6 +41,26 @@ html
                             div.circle
                         div.circle-cippler.right
                             div.circle
+        div#newSubstance
+            div#newSubstanceFirst
+                h5 I'm taking...
+                div#displaySubstances
+                    div#displaySubstancesLoading.preloader-wrapper.big.active
+                        div.spinner-layer.spinner-blue-only
+                            div.circle-clipper.left
+                                div.circle
+                            div.gap-patch
+                                div.circle
+                            div.circle-cippler.right
+                                div.circle
+            div#newSubstanceSecond
+                h5 How much?
+                div#getDosage
+                    div
+                        div.input-field.inline
+                            input#inputDose.validate(placeholder="100" type="number" data-length="4")
+                        div#inputDoseScale
+                    img#submitDosage(src="./img/icons/check.png")
         footer
             div#footerNavBar
                     img#footerDashboardBtn(src="./img/icons/wiki.png")(name="entries")
