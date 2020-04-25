@@ -4,8 +4,8 @@
         "MDMA":
         {
             "name": "3,4-Methyl​enedioxy​methamphetamine",
-            "nicknames": ["Molly", "Ecstasy", "Mandy", "XTC", "MD", "E", "X"],
-            "dosing_methods": ["Orally", "Snorting", "Bombing"],
+            "nicknames": "MDMA is also known as Molly, Ecstasy, Mandy, XTC, MD, E and X.",
+            "dosing_methods": "This substance is usually consumed orally, by snorting or by bombing",
             "dosages":
             {
                 "scale": "mg",
@@ -16,7 +16,7 @@
                 "heavy": "180",
                 "danger_level": "180"
             },
-            "sold_as": ["Pills", "Powder"],
+            "sold_as": "It's usually found as either a powder or a pressed as a pill",
             "effects":
             {
                 "positive_effects": ["Happyness", "Love", "Energised", "Alert", "Euphoria", "Empathy"],
@@ -25,23 +25,15 @@
             },
             "duration":
             {
-                "orally":
-                {
-                    "kick_in": "20-60 minutes",
-                    "duration": "2-4 hours"
-                    
-                },
-                "snorting":
-                {
-                    "kick_in": "5-10 minutes",
-                    "duration": "30-60 minutes"
-                },
-                "comedown": "Few days",
-                "detection": "1-4 days"
+                "info": "MDMA reacts durations depend on a lot of circumstances (such as dosage) but here's a general rule of the thumb",
+                "orally": "Orally it can take between 20-60 minutes to kick in. Once it does it, the effects last for around 2-4 hours",
+                "snorting": "Snorting it can take between 5-10 minutes to kick in. Once it does it, the effects last for around 30-60 hours",
+                "comedown": "Comedown: Few days",
+                "detection": "Detection in the blood: 1-4 days"
             },
             "risks": 
             {
-                "short_term": ["Fake MDMA", "Overheating", "Drinking too much water"],
+                "short_term": "Short-term risks exist such as fake MDMA (mixing amphetamine, caffeine or methamphetamine with the MDMA), overheating due to the fact that MDMA increases body temperature or even water intoxication caused by drinking too much water.",
                 "long_term": ["Depression", "Neurotoxicity", "Permanently losing the positive effects of MDMA"]
             },
             "safety":
@@ -107,7 +99,7 @@
         {
             "name": "TO_DO",
             "nicknames": ["TO_DO"],
-            "dosing_methods": ["Orally", "Snorting", "Bombing"],
+            "dosing_methods": ["orally", "by norting", "by bombing"],
             "dosages":
             {
                 "scale": "mg",
