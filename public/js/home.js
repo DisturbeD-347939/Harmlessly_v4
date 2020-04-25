@@ -101,6 +101,12 @@ $(document).ready(function()
         }
     }
 
+    //Get data.json
+    $.get('/getSubstanceData', function(data, status)
+    {
+        substancesInfo = data["Substances"];
+    })
+
     /******************************************* DASHBOARD ************************************************/
     $("#calendarBtn").click(function()
     {
