@@ -293,6 +293,41 @@ $(document).ready(function()
 
                 $('#newSubstanceFourth').show();
 
+                var moods = [];
+
+                $('.moods > img').click(function(e)
+                {
+                    if($(e.target).parent().parent().attr('id') == "moodInputBefore")
+                    {
+                        if(moods[0])
+                        {
+                            $('#moodInputBefore > .moods > img').attr('src', './img/moods/' + $(e.target).attr('class') + '.png');
+                        }
+                        moods[0] = $(e.target).attr('class');
+                    }
+
+                    if($(e.target).parent().parent().attr('id') == "moodInputDuring")
+                    {
+                        if(moods[1])
+                        {
+                            $('#moodInputDuring > .moods > img').attr('src', './img/moods/' + $(e.target).attr('class') + '.png');
+                        }
+                        moods[1] = $(e.target).attr('class');
+                    }
+
+                    if($(e.target).parent().parent().attr('id') == "moodInputAfter")
+                    {
+                        if(moods[2])
+                        {
+                            $('#moodInputAfter > .moods > img').attr('src', './img/moods/' + $(e.target).attr('class') + '.png');
+                        }
+                        moods[2] = $(e.target).attr('class');
+                    }
+
+                    $(e.target).attr('src', './img/moods/' + $(e.target).attr('class') + 'Clicked.png');
+
+                    console.log(moods);
+                })
             }
         })
     })
