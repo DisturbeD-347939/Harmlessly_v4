@@ -44,8 +44,8 @@ $(document).ready(function()
 
     //Processing calendar
     $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
-
     var days = [];
+
     //Get first date of the month number
     var firstDayMonthNumber = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     var daysLength = 34;
@@ -193,7 +193,11 @@ $(document).ready(function()
         {
             if($('#inputDose').hasClass("valid"))
             {
-                console.log("submitted");
+                substanceInputData.push($('#inputDose').val());
+                $('#newSubstanceSecond').hide();
+                $('#newSubstanceThird').show();
+            }
+        })
             }
         })
     })
