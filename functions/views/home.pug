@@ -25,11 +25,27 @@ html
                     p#dashboardMiniCalendarTitle Calendar
                     p#dashboardMiniCalendarMonth
                 div
+                    p.bold.weekDaysMiniCalendar Mon
+                    p.bold.weekDaysMiniCalendar Tue
+                    p.bold.weekDaysMiniCalendar Wed
+                    p.bold.weekDaysMiniCalendar Thu
+                    p.bold.weekDaysMiniCalendar Fri
+                    p.bold.weekDaysMiniCalendar Sat
+                    p.bold.weekDaysMiniCalendar Sun
+            div#dashboardSubstances
+                div#displaySubstancesLoading.preloader-wrapper.big.active
+                    div.spinner-layer.spinner-blue-only
+                        div.circle-clipper.left
+                            div.circle
+                        div.gap-patch
+                            div.circle
+                        div.circle-cippler.right
+                            div.circle
         footer
             div#footerNavBar
-                    img#wikipediaBtn(src="./img/icons/wiki.png")
-                    img(src="./img/icons/wiki.png")
-                    img#addBtn(src="./img/icons/add.png")
-                    img(src="./img/icons/calendar.png")
-                    img(src="./img/icons/social.png")
+                    img#footerDashboardBtn(src="./img/icons/wiki.png")(name="entries")
+                    img#footerWikipediaBtn(src="./img/icons/wiki.png")(name="wiki")
+                    img#footerNewSubstanceBtn(src="./img/icons/add.png")(name="add")
+                    img(src="./img/icons/calendar.png")(name="calendar")
+                    img(src="./img/icons/burger.png")(name="burger")
         
