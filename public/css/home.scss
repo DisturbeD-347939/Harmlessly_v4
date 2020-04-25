@@ -97,6 +97,11 @@ body
             margin-bottom: 0px;
         }
     }
+
+    #dashboardSubstances
+    {
+        margin-top: 25px;
+    }
 }
 
 #newSubstance
@@ -106,44 +111,78 @@ body
     width: 100%;
     overflow: scroll;
 
-    h5
+    #newSubstanceFirst
     {
-        margin-bottom: 30px;
+        @include flex(column, center, center);
+
+        width: 100%;
+
+        h5
+        {
+            margin-bottom: 30px;
+        }
+    
+        #displaySubstances
+        {
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            grid-gap: 20px;
+    
+            .substanceCard
+            {
+                @include flex(column, center, center);
+    
+                background-color: white;
+    
+                width: 70px;
+                height: 100px;
+    
+                .substanceCardImage img
+                {
+                    width: 70px;
+                    height: 70px;
+                }
+    
+                .substanceCardName
+                {
+                    p
+                    {
+                        height: 30px;
+                        line-height: 30px;
+                        margin: 0px;
+                    }
+                }
+                
+            }
+        }
     }
 
-    #displaySubstances
+    #newSubstanceSecond
     {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        justify-items: center;
-        align-items: center;
-        grid-gap: 20px;
+        @include flex(column, center, center);
 
-        .substanceCard
+        width: 100%;
+
+        #getDosage
         {
             @include flex(column, center, center);
 
-            background-color: white;
-
-            width: 70px;
-            height: 100px;
-
-            .substanceCardImage img
+            div:first-child
             {
-                width: 70px;
-                height: 70px;
-            }
+                @include flex(row, center, center);
 
-            .substanceCardName
-            {
-                p
+                div input
                 {
-                    height: 30px;
-                    line-height: 30px;
-                    margin: 0px;
+                    width: 50px;
                 }
             }
-            
+
+            #submitDosage
+            {
+                width: 40px;
+                height: 40px; 
+            }
         }
     }
 }
@@ -175,6 +214,11 @@ footer
             border-radius: 50%;
             border: 5px solid $color1;
             width: 70px;
+        }
+
+        #footerNewSubstanceBtn
+        {
+            margin-bottom: 20px;
         }
     }
 }
