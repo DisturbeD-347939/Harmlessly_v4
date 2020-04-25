@@ -137,3 +137,27 @@ $(document).ready(function()
         $('#dashboard').hide();
         $('#displaySubstancesLoading').show();
         $('#newSubstance').show();
+
+        if(substancesInfo)
+        {
+            $('#displaySubstances').empty();
+
+            $('#displaySubstancesLoading').hide();
+
+            if(Object.keys(substancesInfo).length >= 3)
+            {
+                $('#displaySubstances').css('grid-template-columns', 'repeat(3, 1fr)');
+            }
+            else
+            {
+                $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ');
+            }
+
+            $('#displaySubstancesLoading')
+            for(var i = 0; i < Object.keys(substancesInfo).length; i++)
+            {
+                $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i] + ".png'></div><div class='substanceCardName'><p     class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
+
+                
+            }
+        }
