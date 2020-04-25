@@ -161,3 +161,10 @@ $(document).ready(function()
                 
             }
         }
+        else
+        {
+            updateNewSubstances = setTimeout(function()
+            {
+                $('#footerNewSubstanceBtn').click();
+            }, 500);
+        }
