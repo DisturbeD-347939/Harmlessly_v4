@@ -51,12 +51,45 @@ body {
     #dashboard #dashboardMiniCalendar div:last-child {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(5, 1fr);
       justify-items: center;
       align-items: center;
-      width: 95%; }
+      width: 95%;
+      margin-bottom: 15px; }
       #dashboard #dashboardMiniCalendar div:last-child p {
         color: #EAEDED; }
+    #dashboard #dashboardMiniCalendar .weekDaysMiniCalendar {
+      margin-bottom: 0px; }
+
+#newSubstance {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: scroll; }
+  #newSubstance h5 {
+    margin-bottom: 30px; }
+  #newSubstance #displaySubstances {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    grid-gap: 20px; }
+    #newSubstance #displaySubstances .substanceCard {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      width: 70px;
+      height: 100px; }
+      #newSubstance #displaySubstances .substanceCard .substanceCardImage img {
+        width: 70px;
+        height: 70px; }
+      #newSubstance #displaySubstances .substanceCard .substanceCardName p {
+        height: 30px;
+        line-height: 30px;
+        margin: 0px; }
 
 footer {
   position: fixed;
@@ -78,5 +111,14 @@ footer {
       border-radius: 50%;
       border: 5px solid #009FE3;
       width: 70px; }
+
+.underline {
+  text-decoration: underline; }
+
+.bold {
+  font-weight: bold; }
+
+.center {
+  vertical-align: middle; }
 
 /*# sourceMappingURL=home.css.map */

@@ -80,23 +80,73 @@ body
         {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(5, 1fr);
             justify-items: center;
             align-items: center;
 
             width: 95%;
+            margin-bottom: 15px;
 
             p
             {
                 color: $background
             }
         }
+
+        .weekDaysMiniCalendar
+        {
+            margin-bottom: 0px;
+        }
     }
 }
 
+#newSubstance
+{
+    @include flex(column, center, center);
+    
+    width: 100%;
+    overflow: scroll;
 
+    h5
+    {
+        margin-bottom: 30px;
+    }
 
+    #displaySubstances
+    {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
+        align-items: center;
+        grid-gap: 20px;
 
+        .substanceCard
+        {
+            @include flex(column, center, center);
+
+            background-color: white;
+
+            width: 70px;
+            height: 100px;
+
+            .substanceCardImage img
+            {
+                width: 70px;
+                height: 70px;
+            }
+
+            .substanceCardName
+            {
+                p
+                {
+                    height: 30px;
+                    line-height: 30px;
+                    margin: 0px;
+                }
+            }
+            
+        }
+    }
+}
 
 footer
 {
@@ -129,3 +179,17 @@ footer
     }
 }
 
+.underline
+{
+    text-decoration: underline;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.center
+{
+    vertical-align: middle;
+}
