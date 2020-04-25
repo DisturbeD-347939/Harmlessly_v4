@@ -23,6 +23,11 @@ $(document).ready(function()
     //Timers
     var updateNewSubstances;
 
+    //Sizing/Position - Footer
+    $('#footerNewSubstanceBtn').width($('#footerNewSubstanceBtn').height());
+    $('#footerCalendarBtn').width($('#footerCalendarBtn').height());
+    $('#footerBurgerBtn').width($('#footerBurgerBtn').height());
+
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
     $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
