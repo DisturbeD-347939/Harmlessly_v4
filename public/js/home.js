@@ -14,6 +14,12 @@ $(document).ready(function()
     var color1 = "#009FE3";
     var substancesInfo;
 
+    //Hide Elements - New Substance
+    $('#newSubstance').hide();
+    $('#newSubstanceSecond').hide();
+    $('#newSubstanceThird').hide();
+    $('#newSubstanceFourth').hide();
+
     //Timers
     var updateNewSubstances;
 
@@ -27,9 +33,6 @@ $(document).ready(function()
     //Hide Elements - Dashboard Nav Bar
     $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
 
-    //Hide Elements - New Substance
-    $('#newSubstance').hide();
-    $('#newSubstanceSecond').hide();
 
     //Processing calendar
     $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
