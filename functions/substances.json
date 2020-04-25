@@ -29,7 +29,12 @@
                 "orally": "Orally it can take between 20-60 minutes to kick in. Once it does it, the effects last for around 2-4 hours",
                 "snorting": "Snorting it can take between 5-10 minutes to kick in. Once it does it, the effects last for around 30-60 hours",
                 "comedown": "Comedown: Few days",
-                "detection": "Detection in the blood: 1-4 days"
+                "detection": "Detection in the blood: 1-4 days",
+                "vars":
+                {
+                    "kick_in": 0.05,
+                    "maximum_duration": 6
+                }
             },
             "risks": 
             {
