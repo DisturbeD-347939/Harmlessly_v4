@@ -198,6 +198,101 @@ $(document).ready(function()
                 $('#newSubstanceThird').show();
             }
         })
+
+        $('#submitDoseTime').click(function()
+        {
+            if($('#inputDoseTime').val() != "" && $('#inputDoseDate').val() != "")
+            {
+                var timeChosen = $('#inputDoseTime').val();
+                var dateChosen = $('#inputDoseDate').val();
+
+                //Parse Time
+                timeChosen = timeChosen.split(" ");
+                var timeChosenSplit = timeChosen[0].split(":");
+                var timeChosenHour = parseInt(timeChosenSplit[0]);
+                var timeChosenMin = timeChosenSplit[1];
+
+                //Convert from 12 hour clock to 24 hour clock
+                if(timeChosen[1] == "AM")
+                {
+                    if(timeChosenHour == 12)
+                    {
+                        timeChosenHour = 0;
+                    }
+                }
+                else
+                {
+                    if(timeChosenHour != 12)
+                    {
+                        timeChosenHour += 12;
+                    }
+                }
+
+                //Parse Date
+                dateChosen = dateChosen.replace(',', "");
+                dateChosen = dateChosen.split(" ");
+                [dateChosen[0], dateChosen[1]] = [dateChosen[1], dateChosen[0]];
+                dateChosen = dateChosen.join(" ");
+
+                //Detect timezone
+                var timeChosenTimezone = new Date().getTimezoneOffset();
+
+                if(timeChosenTimezone < 0)
+                {
+                    timeChosenTimezone = "+" + Math.abs(timeChosenTimezone/60);
+                }
+                else
+                {
+                    timeChosenTimezone = "-" + Math.abs(timeChosenTimezone/60);
+                }
+
+                //Put it all together and create timestamp
+                var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":00 GMT" + timeChosenTimezone);
+                substanceInputData.push(timeChosenTimestamp);
+
+                $('#newSubstanceThird').hide();
+                $('#newSubstance').height("auto");
+
+                var timeDifference = (Math.round((timeChosenTimestamp - Math.round(new Date().getTime()))/1000))/3600;
+                var chosenSubstanceTimes = substancesInfo[substanceInputData[0]]["duration"]["vars"];
+
+                console.log(chosenSubstanceTimes);
+
+                $('#moodInputBefore > h6').show();
+
+                if(timeDifference >= -Math.abs(chosenSubstanceTimes["kick_in"]) && timeDifference < 4)
+                {
+                    console.log("About to take");
+                    $('#newSubstanceFourth > h5').text("How do you feel");
+                    $('#moodInputBefore > h6').hide();
+                    $('#moodInputBefore').show();
+                    $('#moodInputDuring').hide();
+                    $('#moodInputAfter').hide();
+                }
+                else if(timeDifference < -Math.abs(chosenSubstanceTimes["maximum_duration"]))
+                {
+                    console.log("Taken. Effects are gone");
+                    $('#newSubstanceFourth > h5').text("How did you felt");
+                    $('#moodInputBefore').show();
+                    $('#moodInputDuring').show();
+                    $('#moodInputAfter').show();
+                }
+                else if(timeDifference < -Math.abs(chosenSubstanceTimes["kick_in"]))
+                {
+                    console.log("On the drug");
+                    $('#newSubstanceFourth > h5').text("How did/do you feel");
+                    $('#moodInputBefore').show();
+                    $('#moodInputDuring').show();
+                    $('#moodInputAfter').hide();
+                }
+                else
+                {
+                    console.log("Future");
+                    $('#dashboard').show();
+                }
+
+                $('#newSubstanceFourth').show();
+
             }
         })
     })
