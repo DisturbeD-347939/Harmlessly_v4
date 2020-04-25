@@ -186,3 +186,10 @@ $(document).ready(function()
             }
         })
     })
+
+    function cancelTimers()
+    {
+        clearTimeout(updateNewSubstances);
+    }
+
+})
