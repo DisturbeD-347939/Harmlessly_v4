@@ -168,3 +168,12 @@ $(document).ready(function()
                 $('#footerNewSubstanceBtn').click();
             }, 500);
         }
+
+        $('.substanceCard').click(function(e)
+        {
+            substanceInputData.push($(e.currentTarget).children()[1].innerText);
+            $('#newSubstanceFirst').hide();
+            $('#newSubstanceSecond').show();
+            $('#inputDoseScale').css('margin-bottom', $('#inputDose').css('marginBottom'));
+            $('#inputDoseScale').text(substancesInfo[$(e.currentTarget).children()[1].innerText]["dosages"]["scale"]);
+        })
