@@ -114,10 +114,6 @@ $(document).ready(function()
         inputs.each(function()
         {
             values[this.name] = $(this).val();
-        })
-
-        $('#registerForm > div > input').each(function(index)
-        {
             if(!$(this).hasClass("valid")) { valid = false; }
         })
 
@@ -161,6 +157,8 @@ $(document).ready(function()
             alert("Fill up all the fields correctly before submitting!");
         }
     })
+
+    //Put both together using $(this)
 
     //Enable users to press enter to submit the form
     $("#registerForm").keypress(function(event)
