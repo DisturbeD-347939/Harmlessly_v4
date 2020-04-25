@@ -118,6 +118,35 @@ body {
       #newSubstance #newSubstanceSecond #getDosage #submitDosage {
         width: 40px;
         height: 40px; }
+  #newSubstance #newSubstanceThird {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    #newSubstance #newSubstanceThird h5 {
+      margin-bottom: 20px; }
+    #newSubstance #newSubstanceThird #submitDoseTime {
+      width: 40px;
+      height: 40px;
+      margin-top: 20px; }
+  #newSubstance #newSubstanceFourth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    #newSubstance #newSubstanceFourth div .moods {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+      #newSubstance #newSubstanceFourth div .moods img {
+        width: 80px;
+        height: 80px;
+        margin: 0px 10px; }
+    #newSubstance #newSubstanceFourth #submitMood {
+      width: 40px;
+      height: 40px;
+      margin-top: 20px; }
 
 footer {
   position: fixed;
@@ -150,5 +179,37 @@ footer {
 
 .center {
   vertical-align: middle; }
+
+.backArrow {
+  position: fixed;
+  left: 10px;
+  top: 10px; }
+
+.timepicker-digital-display {
+  background-image: linear-gradient(45deg, #3F61AA, #009FE3); }
+
+.timepicker-canvas line {
+  stroke: #009FE3; }
+
+.timepicker-canvas-bg {
+  fill: #009FE3; }
+
+.timepicker-canvas-bearing {
+  fill: #009FE3; }
+
+.confirmation-btns button {
+  color: #009FE3; }
+
+.datepicker-date-display {
+  background-image: linear-gradient(45deg, #3F61AA, #009FE3); }
+
+.datepicker-table td.is-selected {
+  background-color: #009FE3; }
+
+.datepicker-table td.is-today {
+  color: #009FE3; }
+
+.datepicker-table td.is-selected {
+  color: white; }
 
 /*# sourceMappingURL=home.css.map */
