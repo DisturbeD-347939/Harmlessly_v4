@@ -12,6 +12,10 @@ $(document).ready(function()
     //Variables
     var backgroundColorHEX = "#EAEDED";
     var color1 = "#009FE3";
+    var substancesInfo;
+
+    //Timers
+    var updateNewSubstances;
 
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
