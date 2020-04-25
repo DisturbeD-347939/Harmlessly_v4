@@ -40,9 +40,9 @@ app.get('/home', (request, response) =>
     response.render('home');
 })
 
-app.get('/info', (request, response) =>
+app.get('/getSubstanceData', (request, response) =>
 {
-    var data = JSON.parse(fs.readFileSync('data.json'));
+    var data = JSON.parse(fs.readFileSync('substances.json'));
     response.send(data);
 })
 
@@ -85,7 +85,7 @@ app.get('/usage', (request,response) =>
         })
 })
 
-app.get('/getSubstances', (request, response) =>
+app.get('/getSubstanceData', (request, response) =>
 {
     var counter = 0;
     var substances = [];
