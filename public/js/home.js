@@ -108,6 +108,13 @@ $(document).ready(function()
     })
 
     /******************************************* DASHBOARD ************************************************/
+    $('#footerDashboardBtn').click(function()
+    {
+        cancelTimers();
+        $('#dashboard').show();
+        $('#newSubstance').hide();
+    })
+
     $("#calendarBtn").click(function()
     {
         $('#dashboardNavBar > div:first-child > div').css('background-color', backgroundColorHEX);
@@ -120,6 +127,13 @@ $(document).ready(function()
         $('#dashboardNavBar > div:first-child > div').css('background-color', color1);
     })
 
-    /******************************************* MINI CALENDAR ************************************************/
-    //console.log(new Date(date.getFullYear(), date.getMonth(), -2));
-})
+
+
+    /******************************************* NEW SUBSTANCE ************************************************/
+    $('#footerNewSubstanceBtn').click(function()
+    {
+        var substanceInputData = [];
+        cancelTimers();
+        $('#dashboard').hide();
+        $('#displaySubstancesLoading').show();
+        $('#newSubstance').show();
