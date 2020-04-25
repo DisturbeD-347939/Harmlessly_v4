@@ -177,3 +177,12 @@ $(document).ready(function()
             $('#inputDoseScale').css('margin-bottom', $('#inputDose').css('marginBottom'));
             $('#inputDoseScale').text(substancesInfo[$(e.currentTarget).children()[1].innerText]["dosages"]["scale"]);
         })
+
+        $('#submitDosage').click(function()
+        {
+            if($('#inputDose').hasClass("valid"))
+            {
+                console.log("submitted");
+            }
+        })
+    })
