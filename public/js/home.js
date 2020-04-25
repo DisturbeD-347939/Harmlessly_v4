@@ -1,386 +1,76 @@
-//General
-var substancesInfo;
+var date = new Date();
 
 $(document).ready(function()
 {
-    /*********************************************VARIABLES********************************************/
-    //Adding substances
-    var add = false;
-    var inputData = [];
-    var selectedSubstanceIndex;
+    /******************************************* SETUP ************************************************/
+    //Variables
+    var backgroundColorHEX = "#EAEDED";
+    var color1 = "#009FE3";
 
-    /***********************************************SETUP**********************************************/
-    //Show elements
-    $('select').show();
+    //Sizing/Position - Dashboard Nav Bar
+    $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
+    $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
 
-    //Hide elements
-    $('#addUse').hide();
-    $('#addMood').hide();
+    //Sizing/Position - Footer
+    $('#addBtn').css
+    ({
+        'margin-bottom': ($('#wikipediaBtn').position()).top * 4
+    });
 
-    //Set content height and position
-    var remainingScreen = ($("body").height() - ($("header").height() + 10 + $("footer").height() + 10));
-    var percentageFreeScreen = Math.round(((remainingScreen * 100)/$("body").height())) + "%";
-    $(".content").height(percentageFreeScreen);
-    $(".content").css("top", $("header").height() + 10);
+    //Hide Elements - Dashboard Nav Bar
+    $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
 
-    //Setup add tab bottom
-    $('#addUse').css("bottom", $("footer").height() + 15 + "px");
-    $('#addMood').css("bottom", $("footer").height() + 15 + "px");
+    //Processing calendar
+    $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
 
-    //Substance dosage
-    $('#doseVal').text($('#dosage').val());
-
-    //Check if user is logged in
-    if(getCookie("email") == "")
-    {
-        window.location.href = "/";
-    }
-    else
-    {
-        $(".content").css("justify-content", "center");
-    }
-
-    //Update substances
-    updateSubstances();
-
-    /************************************************ EVENTS ***********************************************/
+    var days = [];
+    var firstDayMonthNumber = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     
-    $('#add').click(function()
+    if(firstDayMonthNumber != 1)
     {
-        if(!add)
+        for(var i = -Math.abs(firstDayMonthNumber - 2); i <= 0; i++)
         {
-            $('#addMood').show();
-            $('header, .content').css("filter","blur(3px)");
-            add = true;
-        }
-        else
-        {
-            add = false;
-            inputData = [];
-            $('#addMood, #addUse').hide();
-            $('header, .content').css("filter","none");
-        }
-    })
+            days.push(new Date(date.getFullYear(), date.getMonth(), i).getDate())
 
-    $('.content, header').click(function()
-    {
-        if(add)
-        {
-            add = false;
-            inputData = [];
-            $('#addMood, #addUse').hide();
-            $('header, .content').css("filter","none");
-        }
-    })
-
-    $('#good, #neutral, #bad').click(function(e)
-    {
-        if(inputData.length < 1)
-        {
-            $('#substances').empty();
-            inputData.push(e.target.id);
-
-            $.get("/getSubstances", function(data, status)
+            if(i+1 >= 1)
             {
-                if(data != "500")
+                for(var j = 1; j <= new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); j++)
                 {
-                    $('#addMood').hide();
-                    $('#addUse').show();
-                    for(var i = 0; i < data.length; i++)
+                    days.push(j);
+                    if(j+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
                     {
-                        $('#substances').append("<div class='substances btn blue lighten-1'>" + data[i] + "</div>");
-
-                        if(i+1 >= data.length)
+                        var counterDays = 1;
+                        for(var k = days.length; k <= 34; k++)
                         {
-                            $('.substances').click(function(e)
+                            days.push(counterDays);
+                            counterDays++;
+                            if(k == 34)
                             {
-                                if(inputData.length >= 2)
+                                for(var r = 0; r < days.length; r++)
                                 {
-                                    $($('#substances').children('div')[selectedSubstanceIndex]).addClass("blue lighten-1");
-                                    $($('#substances').children('div')[selectedSubstanceIndex]).removeClass("white");
-                                    $($('#substances').children('div')[selectedSubstanceIndex]).css
-                                    ({
-                                        "color": "white",
-                                        "border": "0px"
-                                    });
-
-                                    inputData[1] = $(e.target).text();
-                                    selectedSubstanceIndex = $(e.target).index();
+                                    $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
                                 }
-                                else
-                                {
-                                    inputData.push($(e.target).text());
-                                    selectedSubstanceIndex = $(e.target).index();
-                                }
-
-                                $(e.target).addClass("white");
-                                $(e.target).removeClass("blue lighten-1");
-                                $(e.target).css
-                                ({
-                                    "color": "#42a5f5",
-                                    "border": "1px solid #42a5f5"
-                                });
-
-                                $('#addDose').removeClass("disabled");
-                            })
+                            }
                         }
                     }
                 }
-            });
-        }
-    })
-
-    $('#wikipediaBtn').click(function()
-    {
-        $('.content').empty();
-    })
-
-    //INPUTS
-
-    $('#unknownDose').click(function()
-    {
-        if($(this).is(":checked"))
-        {
-            $('#dosage, #selectScale').prop("disabled", true);
-        }
-        else
-        {
-            $('#dosage, #selectScale').prop("disabled", false);
-        }
-    })
-
-    $('#dosage').on('input', function()
-    {
-        $('#doseVal').text($(this).val());
-    })
-
-    $('#selectScale').change(function()
-    {
-        if(this.value == "μg")
-        {
-            $('#dosage').attr
-            ({
-                "min": "5",
-                "max": "995",
-                "step": "5",
-                "value": "5"
-            })
-            $('#dosage').val(5);
-        }
-
-        else if(this.value == "mg")
-        {
-            $('#dosage').attr
-            ({
-                "min": "5",
-                "max": "995",
-                "step": "5",
-                "value": "1"
-            })
-            $('#dosage').val(1);
-        }
-
-        else if(this.value == "g")
-        {
-            $('#dosage').attr
-            ({
-                "min": "1",
-                "max": "20",
-                "step": "1",
-                "value": "1"
-            })
-            $('#dosage').val(1);
-        }
-        $('#doseVal').text($('#dosage').val());
-    })
-
-    /*********************************************** SUBMISSIONS **********************************************/
-
-    $('#addDose').click(function()
-    {
-        if($('#unknownDose').is(":checked"))
-        {
-            inputData.push("Unknown");
-        }
-        else
-        {
-            inputData.push($('#dosage').val());
-            inputData.push($('#selectScale option:selected').text());
-        }
-
-        console.log(inputData);
-
-        $.post("/addDose",
-        {
-            data: inputData,
-            timestamp: Math.round((new Date()).getTime() / 1000),
-            email: getCookie("email")
-        }, 
-        function(data, status)
-        {
-            if(data == "200")
-            {
-                updateSubstances();
             }
-        })
+        }
+    }
 
-        $('#add').click();
+    /******************************************* DASHBOARD ************************************************/
+    $("#calendarBtn").click(function()
+    {
+        $('#dashboardNavBar > div:first-child > div').css('background-color', backgroundColorHEX);
+        $('#dashboardNavBar > div:last-child > div').css('background-color', color1);
     })
+
+    $("#dashboardBtn").click(function()
+    {
+        $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
+        $('#dashboardNavBar > div:first-child > div').css('background-color', color1);
+    })
+
+    /******************************************* MINI CALENDAR ************************************************/
+    //console.log(new Date(date.getFullYear(), date.getMonth(), -2));
 })
-
-function updateSubstances()
-{
-    if(getCookie("email") != "")
-    {
-        $.get("/usage",
-        {
-            email: getCookie("email")
-        },
-        function(data, status)
-        {
-            if(data == "409")
-            {
-                console.log("No data");
-            }
-            else
-            {
-                $(".content").empty();
-                $(".content").css("justify-content", "flex-start");
-                $('.content').append("<div id='add' class='waves-effect waves-blue btn blue lighten-1'>Add a new entry</div>");
-
-                for(var i = data.length-1; i >= 0; i--)
-                {
-                    //Card setup
-                    var card = "<div class='usageCard' id='usage-" + i + "'>";
-                    var cardImg = "<div class='usageCardImage'><img src='./img/moods/" + data[i]["data"]["mood"] + ".png'</img></div>";
-                    var cardInfo = "<div class='verticalHr'></div><div class='usageCardContent'><p>" + data[i]["data"]["substance"] + " - " + data[i]["data"]["dosage"] + data[i]["data"]["scale"] + "</p><div class='danger'><div class='dangerLevel'></div></div></div>";
-
-                    if(data[i]["data"]["scale"] == "μg or mcg")
-                    {
-                        data[i]["data"]["scale"] = "μg";
-                    }
-
-                    //console.log(data[i]["data"]["scale"] + " - " + data[i]["data"]["dosage"] + " - " + substancesInfo[data[i]["data"]["substance"]]["dosages"]["scale"]);
-
-                    //Check danger levels
-                    var convertScale = convert(data[i]["data"]["scale"], data[i]["data"]["dosage"], substancesInfo[data[i]["data"]["substance"]]["dosages"]["scale"]);
-
-                    var dangerLevel = (convertScale * 100) / substancesInfo[data[i]["data"]["substance"]]["dosages"]["danger_level"];
-
-                    if(dangerLevel > 100)
-                    {
-                        dangerLevel = 100;
-                    }
-
-                    var dangerBarColour;
-                    var dangerBarStatus = Math.floor(dangerLevel / 33);
-
-
-                    switch(dangerBarStatus)
-                    {
-                        case 0:
-                            {
-                                dangerBarColour = "green";
-                                break;
-                            }
-                        case 1:
-                            {
-                                dangerBarColour = "yellow";
-                                break;
-                            }
-                        case 2:
-                            {
-                                dangerBarColour = "red";
-                                break;
-                            }
-                        case 3:
-                            {
-                                dangerBarColour = "red";
-                                break;
-                            }
-                        default:
-                            {
-                                dangerBarColour = "green";
-                            }
-                    }
-
-                    var dangerBar = "<div class='sideDangerBar'></div>"
-
-                    //Draw card
-                    $('.content').append("<div class='usageCards'>" + dangerBar + card + cardImg + cardInfo + "</div></div>");
-
-                    $('.content div:last-child > .sideDangerBar').css("background-color", dangerBarColour);
-
-                    $('.content div:last-child > div:last-child > div:last-child > div > div').css
-                    ({
-                        "width": 100 - dangerLevel + "%",
-                        "left": dangerLevel + "%"
-                    })
-                }
-            }
-        })
-    }
-}
-
-//Get drugs info
-$.get('/info', function(data, status)
-{
-    substancesInfo = data["Substances"];
-})
-
-//Conversions
-function convert(original, value, final)
-{
-    if(original == final)
-    {
-        return value;
-    }
-    else
-    {
-        if(original == "μg" && final == "g")
-        {
-            return value / 1000000;
-        }
-        else if(original == "μg" && final == "mg")
-        {
-            return value / 1000;
-        }
-        else if(original == "g" && final == "mg")
-        {
-            return value * 1000;
-        }
-        else if(original == "g" && final == "μg")
-        {
-            return value * 1000000;
-        }
-        else if(original == "mg" && final == "g")
-        {
-            return value / 1000;
-        }
-        else if(original = "mg" && final == "μg")
-        {
-            return value * 1000;
-        }
-    }
-
-}
-
-function getCookie(cname) 
-{
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) 
-    {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') 
-        {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) 
-        {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}

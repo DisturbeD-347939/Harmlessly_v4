@@ -1,297 +1,131 @@
+@mixin flex($direction, $justify, $align)
+{
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+$background: #EAEDED;
+$color1: #009FE3;
+$color2: #3F61AA;
+
 body
 {
-    display: flex;
-    flex-direction: column;
-    margin: 0px;
-
-    background-image: linear-gradient(45deg, #3F61AA, #009FE3);
-
-    height: 100%;
-    width: 100%;
+    background-color: $background;
 }
 
-header
+#dashboard
 {
-    position: fixed;
-    width: 100%;
-    height: 9%;
-    top: 10px;
+    @include flex(column, flex-start, center);
 
-    div
+    #dashboardNavBar
     {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        height: 100%;
+        @include flex(row, space-evenly, center);
         width: 100%;
-
-        img:first-child
+    
+        div
         {
-            margin-left: 15px;
+            @include flex(column, center, center);
+    
+            p
+            {
+                font-size: 20px;
+            }
         }
-
-        img:last-child
-        {
-            margin-right: 15px;
-        }
-    }
-}
-
-.content
-{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding-top: 20px;
-
-    width: 100%;
-    overflow: auto;
-    margin-bottom: 20px;
-
-    .usageCards
-    {
-        display: flex;
-        width: 95%;
-
-        .sideDangerBar
-        {
-            width: 3%;
-            background-color: red;
-            margin-bottom: 20px;
-        }
-    }
-
-    .usageCard
-    {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-
-        width: 97%;
-        padding: 20px;
-        border-radius: 0% 4% 4% 0%;
-
-        background-color: white;
-    }
-
-    .usageCard:last-child
-    {
-        margin-bottom: 20px;
-    }
-
-    .usageCardImage img
-    {
-        width: 75px;
-        height: 75px;
-    }
-
-    .usageCardContent
-    {
-        display: flex;
-        flex-direction: column;
-
-        width: 100%;
-        height: 100%;
-
+    
         p
         {
-            font-size: 15px;
+            margin-bottom: 0px;
         }
-
-        .danger
+    
+        .dashboardSelected
         {
-            width: 100%;
-            height: 32px;
-            background-image: linear-gradient(to right, green, yellow, red);
-            border: 1px solid black;
-        }
-
-        .dangerLevel
-        {
-            border-left: 1px solid black;
             position: relative;
-            height: 30px;
-            background-color: white;
+            width: 10px;
+            height: 6px;
+    
+            background-color: $color1;
+        }
+    }
+
+    #dashboardMiniCalendar
+    {
+        @include flex(column, center, flex-start);
+
+        background-image: linear-gradient(45deg, $color2, $color1);
+
+        margin-top: 20px;
+        border-radius: 2%;
+        width: 95%;
+        padding-left: 5%;
+
+        div:first-child
+        {
+            @include flex(row, space-between, center);
+
+            width: 95%;
+
+            p
+            {
+                color: $background;
+                margin-top: 10px;
+                margin-bottom: 0px;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+
+        div:last-child
+        {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            justify-items: center;
+            align-items: center;
+
+            width: 95%;
+
+            p
+            {
+                color: $background
+            }
         }
     }
 }
+
+
+
+
 
 footer
 {
     position: fixed;
-
-    bottom: 10px;
+    bottom: 0px;
     width: 100%;
-    height: 10%;
-    flex-shrink: 0;
+    height: 7%;
 
-    li
+    background-color: $color1;
+
+    #footerNavBar
     {
-        height: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: flex-end;
-        list-style-type: none;
-        u
-        {
-            text-decoration: none;
-        }
-
-    }
-}
-
-.standardImage
-{
-    width: 12%;
-    height: 60%;
-}
-
-.image
-{
-    width: 20%;
-    height: 100%;
-}
-
-#addMood
-{
-    position: absolute;
-
-    border: 1px solid black;
-    background-color: white;
-
-    height: 50%;
-    width: 65%;
-    left: 17.5%;
-
-    div
-    {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
+        @include flex(row, space-evenly, center);
 
         width: 100%;
         height: 100%;
 
-        p
+        img
         {
-            font-size: 20px;
-            text-align: center;
-        }
-    
-        div
-        {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            align-items: flex-start;
-
-            width: auto;
-            height: auto;
-
-            img
-            {
-                margin: 0px 10px;
-                width: 50px;
-                height: 50px;
-            }
-        }
-    }
-
-    
-}
-
-#addUse
-{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-
-    border: 1px solid black;
-    background-color: white;
-
-    height: 50%;
-    width: 65%;
-    left: 17.5%;
-
-    p
-    {
-        font-size: 20px;
-    }
-
-    #substancePicker
-    {
-        #substances
-        {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-    }
-
-    #substanceDose
-    {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-
-        .range-field
-        {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            width: 100%;
-            margin: 0px;
+            width: 40px;
         }
 
-        #dosage
+        img:nth-child(3)
         {
-            width: 90%;
+            background-color: $color1;
+            border-radius: 50%;
+            border: 5px solid $color1;
+            width: 70px;
         }
-
-        #dosage::-webkit-slider-thumb 
-        {
-            background-color: #42a5f5;
-        }
-          #dosage::-moz-range-thumb 
-        {
-            background-color: #42a5f5;
-        }
-          #dosage::-ms-thumb 
-        {
-            background-color: #42a5f5;
-        }
-
-        div
-        {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-
-            width: 100%;
-
-            select
-            {
-                width: auto;
-            }
-        }
-        
     }
 }
 
-.verticalHr
-{
-    border-left: 1px solid black;
-    min-height: 100%;
-    margin: 0px 20px;
-}

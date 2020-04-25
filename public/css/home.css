@@ -1,176 +1,82 @@
 body {
+  background-color: #EAEDED; }
+
+#dashboard {
   display: flex;
   flex-direction: column;
-  margin: 0px;
-  background-image: linear-gradient(45deg, #3F61AA, #009FE3);
-  height: 100%;
-  width: 100%; }
-
-header {
-  position: fixed;
-  width: 100%;
-  height: 9%;
-  top: 10px; }
-  header div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    width: 100%; }
-    header div img:first-child {
-      margin-left: 15px; }
-    header div img:last-child {
-      margin-right: 15px; }
-
-.content {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-  width: 100%;
-  overflow: auto;
-  margin-bottom: 20px; }
-  .content .usageCards {
-    display: flex;
-    width: 95%; }
-    .content .usageCards .sideDangerBar {
-      width: 3%;
-      background-color: red;
-      margin-bottom: 20px; }
-  .content .usageCard {
+  justify-content: flex-start;
+  align-items: center; }
+  #dashboard #dashboardNavBar {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: 97%;
-    padding: 20px;
-    border-radius: 0% 4% 4% 0%;
-    background-color: white; }
-  .content .usageCard:last-child {
-    margin-bottom: 20px; }
-  .content .usageCardImage img {
-    width: 75px;
-    height: 75px; }
-  .content .usageCardContent {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%; }
-    .content .usageCardContent p {
-      font-size: 15px; }
-    .content .usageCardContent .danger {
-      width: 100%;
-      height: 32px;
-      background-image: linear-gradient(to right, green, yellow, red);
-      border: 1px solid black; }
-    .content .usageCardContent .dangerLevel {
-      border-left: 1px solid black;
-      position: relative;
-      height: 30px;
-      background-color: white; }
-
-footer {
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
-  height: 10%;
-  flex-shrink: 0; }
-  footer li {
-    height: 100%;
-    display: flex;
     justify-content: space-evenly;
-    align-items: flex-end;
-    list-style-type: none; }
-    footer li u {
-      text-decoration: none; }
-
-.standardImage {
-  width: 12%;
-  height: 60%; }
-
-.image {
-  width: 20%;
-  height: 100%; }
-
-#addMood {
-  position: absolute;
-  border: 1px solid black;
-  background-color: white;
-  height: 50%;
-  width: 65%;
-  left: 17.5%; }
-  #addMood div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 100%; }
-    #addMood div p {
-      font-size: 20px;
-      text-align: center; }
-    #addMood div div {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      width: auto;
-      height: auto; }
-      #addMood div div img {
-        margin: 0px 10px;
-        width: 50px;
-        height: 50px; }
-
-#addUse {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  border: 1px solid black;
-  background-color: white;
-  height: 50%;
-  width: 65%;
-  left: 17.5%; }
-  #addUse p {
-    font-size: 20px; }
-  #addUse #substancePicker #substances {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; }
-  #addUse #substanceDose {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%; }
-    #addUse #substanceDose .range-field {
+    #dashboard #dashboardNavBar div {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      width: 100%;
-      margin: 0px; }
-    #addUse #substanceDose #dosage {
-      width: 90%; }
-    #addUse #substanceDose #dosage::-webkit-slider-thumb {
-      background-color: #42a5f5; }
-    #addUse #substanceDose #dosage::-moz-range-thumb {
-      background-color: #42a5f5; }
-    #addUse #substanceDose #dosage::-ms-thumb {
-      background-color: #42a5f5; }
-    #addUse #substanceDose div {
+      align-items: center; }
+      #dashboard #dashboardNavBar div p {
+        font-size: 20px; }
+    #dashboard #dashboardNavBar p {
+      margin-bottom: 0px; }
+    #dashboard #dashboardNavBar .dashboardSelected {
+      position: relative;
+      width: 10px;
+      height: 6px;
+      background-color: #009FE3; }
+  #dashboard #dashboardMiniCalendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-image: linear-gradient(45deg, #3F61AA, #009FE3);
+    margin-top: 20px;
+    border-radius: 2%;
+    width: 95%;
+    padding-left: 5%; }
+    #dashboard #dashboardMiniCalendar div:first-child {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      width: 100%; }
-      #addUse #substanceDose div select {
-        width: auto; }
+      width: 95%; }
+      #dashboard #dashboardMiniCalendar div:first-child p {
+        color: #EAEDED;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        font-size: 15px;
+        font-weight: bold; }
+    #dashboard #dashboardMiniCalendar div:last-child {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      justify-items: center;
+      align-items: center;
+      width: 95%; }
+      #dashboard #dashboardMiniCalendar div:last-child p {
+        color: #EAEDED; }
 
-.verticalHr {
-  border-left: 1px solid black;
-  min-height: 100%;
-  margin: 0px 20px; }
+footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 7%;
+  background-color: #009FE3; }
+  footer #footerNavBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%; }
+    footer #footerNavBar img {
+      width: 40px; }
+    footer #footerNavBar img:nth-child(3) {
+      background-color: #009FE3;
+      border-radius: 50%;
+      border: 5px solid #009FE3;
+      width: 70px; }
 
 /*# sourceMappingURL=home.css.map */

@@ -1,0 +1,108 @@
+html
+    head
+        title Harmlessly
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device=width, initial-scale=1.0")
+        link(rel="stylesheet" href="./css/home.css")
+        link(rel="stylesheet" href="./css/materialize.min.css")
+        link(rel="manifest" href="./manifest.json")
+        link(rel="icon" href="./img/logo.png" type="image")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        script(src="./js/jquery-3.4.1.min.js")
+        script(src="./js/materialize.min.js")
+        script(src="./js/home.js")
+    body
+        header
+            div
+                img.standardImage(src="./img/icons/settings.png")
+                img.image#logo(src="./img/logo_no_background.png")
+                img.standardImage(src="./img/icons/messages.png")
+        div.content
+            div.preloader-wrapper.big.active
+                div.spinner-layer.spinner-green-only
+                    div.circle-clipper.left
+                        div.circle
+                    div.gap-patch
+                        div.circle
+                    div.circle-clipper.right
+                        div.circle
+        div#wikipedia
+            div#wikiWelcome
+            div#wikiCollapsible
+                h2#wikiSubstanceTitle
+                h6#wikiSubstanceSubtitle
+                ul.collapsible.popout
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Nicknames
+                        div.collapsible-body
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Dosing Methods
+                        div.collapsible-body
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Dosages
+                        div.collapsible-body
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Sold As
+                        div.collapsible-body
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Effects
+                        div.collapsible-body
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Duration
+                        div.collapsible-body
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Risks
+                        div.collapsible-body
+                    li
+                        div.collapsible-header
+                            i.material-icons place
+                            | Safety
+                        div.collapsible-body
+                div#wikiBack.waves-effect.waves-blue.btn.blue.lighten-1 back
+        footer
+            li
+                img#wikipediaBtn.standardImage(src="./img/icons/wiki.png")
+                img#wikipediaBtn.standardImage(src="./img/icons/wiki.png")
+                img#queriesBtn.standardImage(src="./img/icons/add.png")
+                img.standardImage(src="./img/icons/calendar.png")
+                img.standardImage(src="./img/icons/burguer.png")
+        div#addMood
+            div
+                p How do you feel?
+                div
+                    img#good(src="./img/moods/good.png")
+                    img#neutral(src="./img/moods/neutral.png")
+                    img#bad(src="./img/moods/bad.png")
+        div#addUse
+            div#substancePicker
+                p Substance
+                div#substances
+            div#substanceDose
+                p Dose
+                p.range-field
+                    input#dosage(type="range" min="5" step="5" max="995")
+                div
+                    p#doseVal 0
+                    select#selectScale
+                        option(value = "μg") μg or mcg
+                        option(value = "mg") mg
+                        option(value = "g") g
+                label
+                    input#unknownDose(type="checkbox")
+                    span Unknown
+            div
+                div#addDose.waves-effect.waves-blue.btn.blue.lighten-1.disabled NEXT
