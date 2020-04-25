@@ -38,6 +38,9 @@ $(document).ready(function()
     //Hide Elements - Dashboard Nav Bar
     $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
 
+    //Initialize materialize items
+    $('.timepicker').timepicker();
+    $('.datepicker').datepicker();
 
     //Processing calendar
     $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
