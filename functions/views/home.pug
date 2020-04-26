@@ -89,8 +89,16 @@ html
                         img.bad(src="./img/moods/bad.png")
                         img.neutral(src="./img/moods/neutral.png")
                         img.good(src="./img/moods/good.png")
-                a Skip for now
-                img#submitMood(src="./img/icons/check.png")
+                a#skipMoodsInput Skip for now
+                img#submitMoods(src="./img/icons/check.png")
+                div#uploadingInputsLoading.preloader-wrapper.big.active
+                    div.spinner-layer.spinner-blue-only
+                        div.circle-clipper.left
+                            div.circle
+                        div.gap-patch
+                            div.circle
+                        div.circle-cippler.right
+                            div.circle
         footer
             div#footerNavBar
                     img#footerDashboardBtn(src="./img/icons/wiki.png")(name="entries")
