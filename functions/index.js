@@ -201,33 +201,22 @@ app.post('/login', (request, response) =>
 app.post('/addDose', (request, response) =>
 {
     var data = request.body;
-    var fields;
-
-    if(data["data"].length == 3)
+    var fields = 
     {
-        fields =
-        {
-            mood: data["data"][0],
-            substance: data["data"][1],
-            dosage: "Unknown",
-            scale: "Unknown"
-        }
-    }
-    else
-    {
-        fields =
-        {
-            mood: data["data"][0],
-            substance: data["data"][1],
-            dosage: data["data"][2],
-            scale: data["data"][3]
-        }
+        substance : data["data"][0],
+        dosage: data["data"][1],
+        moods: data["data"][3]
     }
 
-    db.collection('Users').doc(data["email"]).collection('Usage').doc(data["timestamp"]).set(fields).then(() =>
-    {
-        response.send("200");
-    })
+    db.collection('Users').doc(data["email"]).collection('Usage').doc(data["data"][2]).set(fields)
+        .then(() =>
+        {
+            response.send("200");
+        })
+        .catch(() =>
+        {
+            response.send("500");
+        })
 })
 
 //Export app
