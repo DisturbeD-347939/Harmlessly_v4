@@ -253,7 +253,7 @@ $(document).ready(function()
 
                 //Put it all together and create timestamp
                 var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":00 GMT" + timeChosenTimezone);
-                substanceInputData.push(timeChosenTimestamp);
+                substanceInputData.push(timeChosenTimestamp/1000);
 
                 $('#newSubstanceThird').hide();
                 $('#newSubstance').height("auto");
