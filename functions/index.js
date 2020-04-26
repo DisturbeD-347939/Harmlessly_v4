@@ -111,15 +111,44 @@ app.get('/getSubstanceUsage', (request, response) =>
                                                             }
                                                         })
                                                     }
+                                                    else
+                                                    {
+                                                        counterNames++;
+                                                        if(counterNames >= substanceNamesSize)
+                                                        {
+                                                            console.log(substanceUse);
+                                                            response.send({code: "200", data: substanceUse});
+                                                        }
+                                                    }
+                                                })
+                                                .catch(err =>
+                                                {
+                                                    response.send({code: "500"});
                                                 })
                                             }
                                         })
                                     })
+                                    .catch(err =>
+                                    {
+                                        response.send({code: "500"});
+                                    })
                                 })
                             }
+                            else
+                            {
+                                response.send({code: "200", data: substanceUse});
+                            }
+                        })
+                        .catch(err =>
+                        {
+                            response.send({code: "500"});
                         })
                 }
             })
+        })
+        .catch(err =>
+        {
+            response.send({code: "500"});
         })
 })
 
