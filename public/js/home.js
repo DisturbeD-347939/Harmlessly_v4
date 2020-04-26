@@ -18,6 +18,7 @@ $(document).ready(function()
     var backgroundColorHEX = "#EAEDED";
     var color1 = "#009FE3";
     var substancesInfo;
+    var substancesUsage;
 
     //Hide Elements - New Substance
     $('#newSubstance').hide();
@@ -118,6 +119,20 @@ $(document).ready(function()
     $.get('/getSubstanceData', function(data, status)
     {
         substancesInfo = data["Substances"];
+    })
+
+    $.get('/getSubstanceUsage',
+    {
+        email: email
+    },
+    function(data, status)
+    {
+        console.log(data);
+        if(data["code"] == "200")
+        {
+            substancesUsage = data["data"];
+            populateDashboardSubstances();
+        }
     })
 
     /******************************************* DASHBOARD ************************************************/
