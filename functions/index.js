@@ -210,17 +210,31 @@ app.post('/login', (request, response) =>
 app.post('/addDose', (request, response) =>
 {
     var data = request.body;
+
     var fields = 
     {
-        substance : data["data"][0],
         dosage: data["data"][1],
-        moods: data["data"][3]
+        moods: data["data"][3],
+        timestamp: data["data"][2]
     }
 
-    db.collection('Users').doc(data["email"]).collection('Usage').doc(data["data"][2]).set(fields)
-        .then(() =>
+    var substanceName =
+    {
+        name: data["data"][0]
+    }
+
+    db.collection('Users').doc(data["email"]).collection('Usage').doc(data["data"][0]).set(substanceName)
+        .then(doc =>
         {
-            response.send("200");
+            db.collection('Users').doc(data["email"]).collection('Usage').doc(data["data"][0]).collection('Entries').add(fields)
+            .then(doc =>
+            {
+                response.send("200");
+            }) 
+            .catch(() =>
+            {
+                response.send("500");
+            })
         })
         .catch(() =>
         {
