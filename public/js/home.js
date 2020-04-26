@@ -305,7 +305,10 @@ $(document).ready(function()
                     {
                         if(moods[0])
                         {
-                            $('#moodInputBefore > .moods > img').attr('src', './img/moods/' + $(e.target).attr('class') + '.png');
+                            $('#moodInputBefore > .moods').children('img').each(function()
+                            {
+                                $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
+                            })
                         }
                         moods[0] = $(e.target).attr('class');
                     }
@@ -314,7 +317,10 @@ $(document).ready(function()
                     {
                         if(moods[1])
                         {
-                            $('#moodInputDuring > .moods > img').attr('src', './img/moods/' + $(e.target).attr('class') + '.png');
+                            $('#moodInputDuring > .moods').children('img').each(function()
+                            {
+                                $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
+                            })
                         }
                         moods[1] = $(e.target).attr('class');
                     }
@@ -323,7 +329,10 @@ $(document).ready(function()
                     {
                         if(moods[2])
                         {
-                            $('#moodInputAfter > .moods > img').attr('src', './img/moods/' + $(e.target).attr('class') + '.png');
+                            $('#moodInputAfter > .moods').children('img').each(function()
+                            {
+                                $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
+                            })
                         }
                         moods[2] = $(e.target).attr('class');
                     }
