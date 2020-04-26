@@ -46,39 +46,77 @@ app.get('/getSubstanceData', (request, response) =>
     response.send(data);
 })
 
-app.get('/usage', (request,response) =>
+app.get('/getSubstanceUsage', (request, response) =>
 {
-    var counter = 0;
-    var data = [];
     var email = request.query.email;
 
-    db.collection('Users').get()
-    .then(snapshot => 
+    var substanceUse = {};
+    var substances = [];
+    var substancesCounter = 0;
+
+    db.collection('Users').doc(email).listCollections()
+        .then(col =>
         {
-            snapshot.forEach(doc => 
+            if(col.empty)
             {
-                if(doc.id == email)
+                return;
+            }
+            col.map(col => col.id).forEach(col =>
+            {
+                if(col == "Usage")
                 {
-                    db.collection('Users').doc(doc.id).collection('Usage').get()
-                    .then(snapshot =>
+                    db.collection('Users').doc(email).collection("Usage").get()
+                        .then(snapshot =>
                         {
-                            snapshot.forEach(doc =>
+                            if(snapshot["_size"] > 0)
+                            {
+                                var counterNames = 0;
+                                var substanceNamesSize = snapshot["_size"];
+                                snapshot.forEach(doc =>
                                 {
-                                    if(snapshot["_size"] == 0)
+                                    substances.push(doc.id);
+                                    substanceUse[substances[substancesCounter]] = [];
+                                    substancesCounter++;
+                                    db.collection('Users').doc(email).collection("Usage").doc(doc.id).listCollections()
+                                    .then(col =>
                                     {
-                                        response.send("409");
-                                    }
-                                    else
-                                    {
-                                        counter++;
-                                        data.push({data:doc.data(), id:doc.id});
-        
-                                        if(counter == snapshot["_size"])
+                                        if(col.empty)
                                         {
-                                            response.send(data);
+                                            response.send("500");
                                         }
-                                    }
+                                        col.map(col => col.id).forEach(col =>
+                                        {
+                                            if(col == "Entries")
+                                            {
+                                                db.collection('Users').doc(email).collection("Usage").doc(doc.id).collection(col).get()
+                                                .then(snapshot =>
+                                                {
+                                                    if(snapshot["_size"] > 0)
+                                                    {
+                                                        var substanceInfoSize = snapshot["_size"];
+                                                        var counterInfo = 0;
+                                                        snapshot.forEach(doc =>
+                                                        {
+                                                            substanceUse[substances[counterNames]].push(doc.data());
+                                                            counterInfo++;
+                                                            if(counterInfo >= substanceInfoSize)
+                                                            {
+                                                                counterNames++;
+                                                            }
+
+                                                            if(counterNames >= substanceNamesSize)
+                                                            {
+                                                                console.log(substanceUse);
+                                                                response.send({code: "200", data: substanceUse});
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    })
                                 })
+                            }
                         })
                 }
             })
