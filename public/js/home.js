@@ -1,9 +1,14 @@
 var date = new Date();
+var email;
 
 //Check if user is logged in
 if(getCookie("email") == "")
 {
     window.location.href = "/";
+}
+else
+{
+    email = getCookie("email");
 }
 
 $(document).ready(function()
