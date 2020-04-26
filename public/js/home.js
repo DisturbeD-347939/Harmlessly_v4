@@ -364,6 +364,36 @@ $(document).ready(function()
             }
             $(e.target).attr('src', './img/moods/' + $(e.target).attr('class') + 'Clicked.png');
         })
+    }
+
+    function submitMoods(data)
+    {
+        console.log("Submit moods");
+        $.post('/addDose',
+        {
+            data: data,
+            email: email
+        }, 
+        function(data, status)
+        {
+            $('.moods').children('img').each(function()
+            {
+                $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
+            })
+            if(data == "200")
+            {
+                $('#submitMoods').show();
+                $('#skipMoodsInput').show();
+                $('#uploadingInputsLoading').hide();
+                $('#dashboard').show();
+                $('#newSubstanceFourth').hide();
+                $('#newSubstance').hide();
+                clearSubstanceInputs();
+            }
+        })
+    }
+
+    /******************************************* GENERAL ************************************************/
 
     function cancelTimers()
     {
