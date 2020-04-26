@@ -134,22 +134,23 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center; }
-    #newSubstance #newSubstanceFourth div {
-      background-image: linear-gradient(45deg, #3F61AA, #009FE3);
+    #newSubstance #newSubstanceFourth .moodsBox {
       padding: 10px;
       margin: 10px 0px; }
-      #newSubstance #newSubstanceFourth div div {
-        background-image: none; }
-      #newSubstance #newSubstanceFourth div .moods {
+      #newSubstance #newSubstanceFourth .moodsBox .moods {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center; }
-        #newSubstance #newSubstanceFourth div .moods img {
+        align-items: center;
+        padding: 10px;
+        margin: 10px 0px;
+        background-image: linear-gradient(-45deg, #3F61AA, #009FE3);
+        border-radius: 2%; }
+        #newSubstance #newSubstanceFourth .moodsBox .moods img {
           width: 80px;
           height: 80px;
           margin: 0px 10px; }
-    #newSubstance #newSubstanceFourth #submitMood {
+    #newSubstance #newSubstanceFourth #submitMoods {
       width: 40px;
       height: 40px;
       margin-top: 20px;
