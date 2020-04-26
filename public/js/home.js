@@ -127,6 +127,7 @@ $(document).ready(function()
     $('#footerDashboardBtn').click(function()
     {
         cancelTimers();
+        clearSubstanceInputs();
         $('#dashboard').show();
         $('#newSubstance').hide();
     })
@@ -398,6 +399,12 @@ $(document).ready(function()
     function cancelTimers()
     {
         clearTimeout(updateNewSubstances);
+    }
+
+    function clearSubstanceInputs()
+    {
+        $('#inputDose, #inputDoseTime, #inputDoseDate').val("");
+        $('#inputDose, #inputDoseTime, #inputDoseDate').removeClass("valid");
     }
 })
 
