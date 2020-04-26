@@ -338,8 +338,41 @@ $(document).ready(function()
                     }
 
                     $(e.target).attr('src', './img/moods/' + $(e.target).attr('class') + 'Clicked.png');
+                })
 
-                    console.log(moods);
+                $('#skipMoodsInput').click(function()
+                {
+                    moods[0] = "neutral";
+                    moods[1] = "neutral";
+                    moods[2] = "neutral";
+
+                    $('#submitMoods').click();
+                })
+
+                $('#submitMoods').click(function()
+                {
+                    if(moods[0] && moods[1] && moods[2])
+                    {
+                        substanceInputData.push(moods);
+                        $('#submitMoods').hide();
+                        $('#skipMoodsInput').hide();
+                        $('#uploadingInputsLoading').show();
+
+                        $.post('/addDose',
+                        {
+                            data: substanceInputData,
+                            email: email
+                        }, 
+                        function(data, status)
+                        {
+                            if(data == "200")
+                            {
+                                $('#dashboard').show();
+                                $('#newSubstanceFourth').hide();
+                                $('#newSubstance').hide();
+                            }
+                        })
+                    }
                 })
             }
         })
@@ -349,7 +382,6 @@ $(document).ready(function()
     {
         clearTimeout(updateNewSubstances);
     }
-
 })
 
 function getCookie(cname) 
