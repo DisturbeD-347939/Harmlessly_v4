@@ -261,8 +261,7 @@ $(document).ready(function()
                 var timeDifference = (Math.round((timeChosenTimestamp - Math.round(new Date().getTime()))/1000))/3600;
                 var chosenSubstanceTimes = substancesInfo[substanceInputData[0]]["duration"]["vars"];
 
-                console.log(chosenSubstanceTimes);
-
+                $('#uploadingInputsLoading').hide();
                 $('#moodInputBefore > h6').show();
 
                 if(timeDifference >= -Math.abs(chosenSubstanceTimes["kick_in"]) && timeDifference < 4)
