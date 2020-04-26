@@ -251,7 +251,7 @@ $(document).ready(function()
                 timeChosenTimezone = "-" + Math.abs(timeChosenTimezone/60);
             }
             //Put it all together and create timestamp
-            var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":00 GMT"+ timeChosenTimezone);
+            var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":" + new Date().getSeconds() + " GMT"+ timeChosenTimezone);
 
             substanceInputData.push(timeChosenTimestamp/1000);
 
