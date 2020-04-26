@@ -461,4 +461,21 @@ function timeDifference(current, previous)
         return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
     }
 }
+
+function lessThanAWeek(current, previous)
+{
+    var elapsed = current - previous;
+
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+
+    if (elapsed < msPerMonth) 
+    {
+        if(Math.round(elapsed/msPerDay) <= 7)
+        {
+            return Math.round(elapsed/msPerDay);
+        }   
+    }
 }
