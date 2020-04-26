@@ -141,7 +141,53 @@ $(document).ready(function()
         $('#dashboardNavBar > div:first-child > div').css('background-color', color1);
     })
 
+    function populateDashboardSubstances()
+    {
+        $('#displayEntriesLoading').hide();
+        $('#dashboardSubstances').css('margin-top', '15');
 
+        var recentTimestamp = {};
+        var weekTimestamps = [];
+
+        for(var i = 0; i < Object.keys(substancesUsage).length; i++)
+        {
+            recentTimestamp[Object.keys(substancesUsage)[i]] = [];
+            for(var j = 0; j < substancesUsage[Object.keys(substancesUsage)[i]].length; j++)
+            {
+                recentTimestamp[Object.keys(substancesUsage)[i]].push(substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"]);
+
+                weekTimestamps[lessThanAWeek(+ new Date(), substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"] * 1000)] = true;
+
+                if(j+1 >= substancesUsage[Object.keys(substancesUsage)[i]].length)
+                {
+                    recentTimestamp[Object.keys(substancesUsage)[i]] = Math.max(...recentTimestamp[Object.keys(substancesUsage)[i]]);
+                    if(weekTimestamps[0] || weekTimestamps[1])
+                    {
+                        weekTimestamps.shift();
+                        weekTimestamps[0] = true;
+                    }
+                }
+            }
+        }
+
+        for(var i = 0; i < Object.keys(substancesUsage).length; i++)
+        {
+            $('#dashboardSubstances').append("<div class='dashboardSubstancesGroups'><h5>" + Object.keys(substancesUsage)[i] + "</h5><p>Last consumed - " + timeDifference(+ new Date(), recentTimestamp[Object.keys(substancesUsage)[i]]*1000) + "</p><div class='dashboardSubstancesGroupsStatus'></div>");
+
+            if(i+1 >= Object.keys(substancesUsage).length)
+            {
+                for(var j = 0; j < 7; j++)
+                {
+                    $('.dashboardSubstancesGroupsStatus').append("<div class='dashboardSubstancesGroupsStatus" + j + "'></div>");
+
+                    if(weekTimestamps[j])
+                    {
+                        $('.dashboardSubstancesGroupsStatus:last-child > div:last-child').css('background-color', 'black');
+                    }
+                }
+            }
+        }
+    }
 
     /******************************************* NEW SUBSTANCE ************************************************/
     var moods, substanceInputData;
