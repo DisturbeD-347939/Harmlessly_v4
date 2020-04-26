@@ -123,35 +123,6 @@ app.get('/getSubstanceUsage', (request, response) =>
         })
 })
 
-app.get('/getSubstanceData', (request, response) =>
-{
-    var counter = 0;
-    var substances = [];
-
-    db.collection('Substances').get()
-    .then(snapshot =>
-        {
-            snapshot.forEach(doc =>
-                {
-                    if(snapshot["_size"] == 0)
-                    {
-                        response.send("500");
-                    }
-                    else
-                    {
-                        counter++;
-                        substances.push(doc.id);
-
-                        if(counter == snapshot["_size"])
-                        {
-                            console.log(substances);
-                            response.send(substances);
-                        }
-                    }
-                })
-        })
-})
-
 app.post('/register', (request, response) =>
 {
     var data = request.body.data;
