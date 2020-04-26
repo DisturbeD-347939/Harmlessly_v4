@@ -266,7 +266,7 @@ $(document).ready(function()
 
                 if(timeDifference >= -Math.abs(chosenSubstanceTimes["kick_in"]) && timeDifference < 4)
                 {
-                    console.log("About to take");
+                    //About to take the substance
                     $('#newSubstanceFourth > h5').text("How do you feel");
                     $('#moodInputBefore > h6').hide();
                     $('#moodInputBefore').show();
@@ -275,7 +275,7 @@ $(document).ready(function()
                 }
                 else if(timeDifference < -Math.abs(chosenSubstanceTimes["maximum_duration"]))
                 {
-                    console.log("Taken. Effects are gone");
+                    //Substance effects have worn off
                     $('#newSubstanceFourth > h5').text("How did you felt");
                     $('#moodInputBefore').show();
                     $('#moodInputDuring').show();
@@ -283,7 +283,7 @@ $(document).ready(function()
                 }
                 else if(timeDifference < -Math.abs(chosenSubstanceTimes["kick_in"]))
                 {
-                    console.log("On the drug");
+                    //On the effects of the susbtance at the moment
                     $('#newSubstanceFourth > h5').text("How did/do you feel");
                     $('#moodInputBefore').show();
                     $('#moodInputDuring').show();
@@ -291,7 +291,7 @@ $(document).ready(function()
                 }
                 else
                 {
-                    console.log("Future");
+                    //Taking the substance in the future
                     $('#dashboard').show();
                 }
 
