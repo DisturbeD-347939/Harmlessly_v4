@@ -146,13 +146,18 @@ $(document).ready(function()
 
 
     /******************************************* NEW SUBSTANCE ************************************************/
+    var moods, substanceInputData;
+
     $('#footerNewSubstanceBtn').click(function()
     {
-        var substanceInputData = [];
+        moods = ["f", "f", "f"];
+        substanceInputData = [];
         cancelTimers();
         $('#dashboard').hide();
         $('#displaySubstancesLoading').show();
         $('#newSubstance').show();
+        $('#newSubstanceFirst').show();
+        $('#newSubstance').height($(document).height() - $('footer').height());
 
         if(substancesInfo)
         {
@@ -184,199 +189,181 @@ $(document).ready(function()
                 $('#footerNewSubstanceBtn').click();
             }, 500);
         }
+    })
 
-        $('.substanceCard').click(function(e)
-        {
-            substanceInputData.push($(e.currentTarget).children()[1].innerText);
-            $('#newSubstanceFirst').hide();
-            $('#newSubstanceSecond').show();
-            $('#inputDoseScale').css('margin-bottom', $('#inputDose').css('marginBottom'));
-            $('#inputDoseScale').text(substancesInfo[$(e.currentTarget).children()[1].innerText]["dosages"]["scale"]);
-        })
+    //On first page selection, open second page
+    $('body').delegate('.substanceCard', 'click', function(e)
+    {
+        substanceInputData.push($(e.currentTarget).children()[1].innerText);
+        $('#newSubstanceFirst').hide();
+        $('#newSubstanceSecond').show();
+        $('#inputDoseScale').css('margin-bottom', $('#inputDose').css('marginBottom'));
+        $('#inputDoseScale').text(substancesInfo[$(e.currentTarget).children()[1].innerText]["dosages"]["scale"]);
+    })
 
-        $('#submitDosage').click(function()
+    $('body').delegate('#submitDosage', 'click', function(e)
+    {
+        if($('#inputDose').hasClass("valid"))
         {
-            if($('#inputDose').hasClass("valid"))
+            substanceInputData.push($('#inputDose').val());
+            $('#newSubstanceSecond').hide();
+            $('#newSubstanceThird').show();
+        }
+    })
+
+    $('#submitDoseTime').click(function()
+    {
+        if($('#inputDoseTime').val() != "" && $('#inputDoseDate').val() != "")
+        {
+            var timeChosen = $('#inputDoseTime').val();
+            var dateChosen = $('#inputDoseDate').val();
+            //Parse Time
+            timeChosen = timeChosen.split(" ");
+            var timeChosenSplit = timeChosen[0].split(":");
+            var timeChosenHour = parseInt(timeChosenSplit[0]);
+            var timeChosenMin = timeChosenSplit[1];
+            //Convert from 12 hour clock to 24 hour clock
+            if(timeChosen[1] == "AM")
             {
-                substanceInputData.push($('#inputDose').val());
-                $('#newSubstanceSecond').hide();
-                $('#newSubstanceThird').show();
+                if(timeChosenHour == 12)
+                {
+                    timeChosenHour = 0;
+                }
             }
-        })
-
-        $('#submitDoseTime').click(function()
-        {
-            if($('#inputDoseTime').val() != "" && $('#inputDoseDate').val() != "")
+            else
             {
-                var timeChosen = $('#inputDoseTime').val();
-                var dateChosen = $('#inputDoseDate').val();
-
-                //Parse Time
-                timeChosen = timeChosen.split(" ");
-                var timeChosenSplit = timeChosen[0].split(":");
-                var timeChosenHour = parseInt(timeChosenSplit[0]);
-                var timeChosenMin = timeChosenSplit[1];
-
-                //Convert from 12 hour clock to 24 hour clock
-                if(timeChosen[1] == "AM")
+                if(timeChosenHour != 12)
                 {
-                    if(timeChosenHour == 12)
+                    timeChosenHour += 12;
+                }
+            }
+            //Parse Date
+            dateChosen = dateChosen.replace(',', "");
+            dateChosen = dateChosen.split(" ");
+            [dateChosen[0], dateChosen[1]] = [dateChosen[1], dateChosen[0]];
+            dateChosen = dateChosen.join(" ");
+            //Detect timezone
+            var timeChosenTimezone = new Date().getTimezoneOffset();
+            if(timeChosenTimezone < 0)
+            {
+                timeChosenTimezone = "+" + Math.abs(timeChosenTimezone/60);
+            }
+            else
+            {
+                timeChosenTimezone = "-" + Math.abs(timeChosenTimezone/60);
+            }
+            //Put it all together and create timestamp
+            var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":00 GMT"+ timeChosenTimezone);
+
+            substanceInputData.push(timeChosenTimestamp/1000);
+
+            $('#newSubstanceThird').hide();
+
+            var timeDifference = (Math.round((timeChosenTimestamp - Math.round(new Date().getTime()))/1000))/3600;
+            var chosenSubstanceTimes = substancesInfo[substanceInputData[0]]["duration"]["vars"];
+
+            $('#uploadingInputsLoading').hide();
+            $('#moodInputBefore > h6').show();
+
+            if(timeDifference >= -Math.abs(chosenSubstanceTimes["kick_in"]) && timeDifference < 4)
+            {
+                //About to take the substance
+                $('#newSubstanceFourth > h5').text("How do you feel");
+                $('#moodInputBefore').show();
+                $('#moodInputDuring, #moodInputAfter, #moodInputBefore > h6').hide();
+                displayMoodsTab();
+            }
+            else if(timeDifference < -Math.abs(chosenSubstanceTimes["maximum_duration"]))
+            {
+                //Substance effects have worn off
+                $('#newSubstanceFourth > h5').text("How did you felt");
+                $('#moodInputBefore, #moodInputDuring, #moodInputAfter').show();
+                displayMoodsTab();
+            }
+            else if(timeDifference < -Math.abs(chosenSubstanceTimes["kick_in"]))
+            {
+                //On the effects of the susbtance at the moment
+                $('#newSubstanceFourth > h5').text("How did/do you feel");
+                $('#moodInputBefore, #moodInputDuring').show();
+                $('#moodInputAfter').hide();
+                displayMoodsTab();
+            }
+            else
+            {
+                //Taking the substance in the future
+                substanceInputData.push(moods);
+                submitMoods(substanceInputData);
+            }
+        }
+    })
+
+    $('#skipMoodsInput').click(function()
+    {
+        moods[0] = "f";
+        moods[1] = "f";
+        moods[2] = "f";
+        $('#submitMoods').click();
+    })
+
+    $('#submitMoods').click(function()
+    {
+        if(moods[0] && moods[1] && moods[2])
+        {
+            substanceInputData.push(moods);
+            $('#submitMoods').hide();
+            $('#skipMoodsInput').hide();
+            $('#uploadingInputsLoading').show();
+            submitMoods(substanceInputData);
+        }
+    })
+
+    //Go back on second page
+    $('#newSubstanceSecondBack').click(function(e)
+    {
+        substanceInputData.pop();
+        $('#newSubstanceSecond').hide();
+        $('#newSubstanceFirst').show();
+    })
+
+    $('#newSubstanceThirdBack').click(function(e)
+    {
+        substanceInputData.pop();
+        $('#newSubstanceThird').hide();
+        $('#newSubstanceSecond').show();
+    })
+
+    $('#newSubstanceFourthBack').click(function(e)
+    {
+        substanceInputData.pop();
+        $('#newSubstanceFourth').hide();
+        $('#newSubstanceThird').show();
+        $('#newSubstance').height($(document).height() - $('footer').height());
+    })
+
+    function displayMoodsTab()
+    {
+        $('#newSubstance').height("auto");
+        $('#newSubstanceFourth').show();
+
+        $('.moods > img').click(function(e)
+        {
+            var moodInputVar = ["moodInputBefore", "moodInputDuring", "moodInputAfter"];
+            for(var i = 0; i < moodInputVar.length; i++)
+            {
+                if($(e.target).parent().parent().attr('id') == moodInputVar[i])
+                {
+                    if(moods[i])
                     {
-                        timeChosenHour = 0;
-                    }
-                }
-                else
-                {
-                    if(timeChosenHour != 12)
-                    {
-                        timeChosenHour += 12;
-                    }
-                }
-
-                //Parse Date
-                dateChosen = dateChosen.replace(',', "");
-                dateChosen = dateChosen.split(" ");
-                [dateChosen[0], dateChosen[1]] = [dateChosen[1], dateChosen[0]];
-                dateChosen = dateChosen.join(" ");
-
-                //Detect timezone
-                var timeChosenTimezone = new Date().getTimezoneOffset();
-
-                if(timeChosenTimezone < 0)
-                {
-                    timeChosenTimezone = "+" + Math.abs(timeChosenTimezone/60);
-                }
-                else
-                {
-                    timeChosenTimezone = "-" + Math.abs(timeChosenTimezone/60);
-                }
-
-                //Put it all together and create timestamp
-                var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":00 GMT" + timeChosenTimezone);
-                substanceInputData.push(timeChosenTimestamp/1000);
-
-                $('#newSubstanceThird').hide();
-                $('#newSubstance').height("auto");
-
-                var timeDifference = (Math.round((timeChosenTimestamp - Math.round(new Date().getTime()))/1000))/3600;
-                var chosenSubstanceTimes = substancesInfo[substanceInputData[0]]["duration"]["vars"];
-
-                $('#uploadingInputsLoading').hide();
-                $('#moodInputBefore > h6').show();
-
-                if(timeDifference >= -Math.abs(chosenSubstanceTimes["kick_in"]) && timeDifference < 4)
-                {
-                    //About to take the substance
-                    $('#newSubstanceFourth > h5').text("How do you feel");
-                    $('#moodInputBefore > h6').hide();
-                    $('#moodInputBefore').show();
-                    $('#moodInputDuring').hide();
-                    $('#moodInputAfter').hide();
-                }
-                else if(timeDifference < -Math.abs(chosenSubstanceTimes["maximum_duration"]))
-                {
-                    //Substance effects have worn off
-                    $('#newSubstanceFourth > h5').text("How did you felt");
-                    $('#moodInputBefore').show();
-                    $('#moodInputDuring').show();
-                    $('#moodInputAfter').show();
-                }
-                else if(timeDifference < -Math.abs(chosenSubstanceTimes["kick_in"]))
-                {
-                    //On the effects of the susbtance at the moment
-                    $('#newSubstanceFourth > h5').text("How did/do you feel");
-                    $('#moodInputBefore').show();
-                    $('#moodInputDuring').show();
-                    $('#moodInputAfter').hide();
-                }
-                else
-                {
-                    //Taking the substance in the future
-                    $('#dashboard').show();
-                }
-
-                $('#newSubstanceFourth').show();
-
-                var moods = [];
-
-                $('.moods > img').click(function(e)
-                {
-                    if($(e.target).parent().parent().attr('id') == "moodInputBefore")
-                    {
-                        if(moods[0])
+                        $('#' + moodInputVar[i] + " > .moods").children('img').each(function()
                         {
-                            $('#moodInputBefore > .moods').children('img').each(function()
-                            {
-                                $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
-                            })
-                        }
-                        moods[0] = $(e.target).attr('class');
-                    }
-
-                    if($(e.target).parent().parent().attr('id') == "moodInputDuring")
-                    {
-                        if(moods[1])
-                        {
-                            $('#moodInputDuring > .moods').children('img').each(function()
-                            {
-                                $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
-                            })
-                        }
-                        moods[1] = $(e.target).attr('class');
-                    }
-
-                    if($(e.target).parent().parent().attr('id') == "moodInputAfter")
-                    {
-                        if(moods[2])
-                        {
-                            $('#moodInputAfter > .moods').children('img').each(function()
-                            {
-                                $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
-                            })
-                        }
-                        moods[2] = $(e.target).attr('class');
-                    }
-
-                    $(e.target).attr('src', './img/moods/' + $(e.target).attr('class') + 'Clicked.png');
-                })
-
-                $('#skipMoodsInput').click(function()
-                {
-                    moods[0] = "neutral";
-                    moods[1] = "neutral";
-                    moods[2] = "neutral";
-
-                    $('#submitMoods').click();
-                })
-
-                $('#submitMoods').click(function()
-                {
-                    if(moods[0] && moods[1] && moods[2])
-                    {
-                        substanceInputData.push(moods);
-                        $('#submitMoods').hide();
-                        $('#skipMoodsInput').hide();
-                        $('#uploadingInputsLoading').show();
-
-                        $.post('/addDose',
-                        {
-                            data: substanceInputData,
-                            email: email
-                        }, 
-                        function(data, status)
-                        {
-                            if(data == "200")
-                            {
-                                $('#dashboard').show();
-                                $('#newSubstanceFourth').hide();
-                                $('#newSubstance').hide();
-                            }
+                            $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
                         })
                     }
-                })
+                    moods[i] = $(e.target).attr('class');
+                }
             }
+            $(e.target).attr('src', './img/moods/' + $(e.target).attr('class') + 'Clicked.png');
         })
-    })
 
     function cancelTimers()
     {
