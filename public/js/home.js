@@ -37,9 +37,6 @@ $(document).ready(function()
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
     $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
 
-    //Sizing/Position - New Substance
-    $('#newSubstance').height($(document).height() - $('footer').height());
-
     //Hide Elements - Dashboard Nav Bar
     $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
 
