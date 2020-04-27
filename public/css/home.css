@@ -192,9 +192,9 @@ footer {
   z-index: 1;
   background-image: linear-gradient(0deg, #3F61AA, #009FE3); }
   footer #footerNewSubstanceBtnBorder {
-    position: fixed;
+    position: absolute;
     border-radius: 50%;
-    background-image: linear-gradient(0deg, #3F61AA, #009FE3);
+    background-image: linear-gradient(0deg, #3F61AA, #31c1ff);
     z-index: -1; }
   footer #footerNavBar {
     display: flex;
