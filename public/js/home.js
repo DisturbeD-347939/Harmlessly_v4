@@ -141,11 +141,14 @@ $(document).ready(function()
         }
     })
 
+    footerResetImages("social");
+
     /******************************************* DASHBOARD ************************************************/
     $('#footerDashboardBtn').click(function()
     {
         cancelTimers();
         clearSubstanceInputs();
+        footerResetImages("social");
         $('#dashboard').show();
         $('#newSubstance').hide();
     })
@@ -217,6 +220,8 @@ $(document).ready(function()
     {
         moods = ["f", "f", "f"];
         substanceInputData = [];
+
+        footerResetImages("add");
         cancelTimers();
         $('#dashboard').hide();
         $('#displaySubstancesLoading').show();
@@ -459,6 +464,21 @@ $(document).ready(function()
     }
 
     /******************************************* GENERAL ************************************************/
+
+    function footerResetImages(target)
+    {
+        for(var i = 0; i < $('#footerNavBar').children('img').length; i++)
+        {
+            if($('#footerNavBar').children('img')[i].name == target)
+            {
+                $($('#footerNavBar').children('img')[i]).attr('src', './img/icons/' + $('#footerNavBar').children('img')[i].name + "Clicked.png");
+            }
+            else
+            {
+                $($('#footerNavBar').children('img')[i]).attr('src', './img/icons/' + $('#footerNavBar').children('img')[i].name + ".png");
+            }
+        }
+    }
 
     function cancelTimers()
     {
