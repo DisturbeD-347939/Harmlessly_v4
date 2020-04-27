@@ -139,6 +139,11 @@ $(document).ready(function()
             substancesUsage = data["data"];
             populateDashboardSubstances();
         }
+        else if(data["code"] == "204")
+        {
+            $('#displayEntriesLoading').hide();
+            $('#dashboardSubstances').append("<h5>No substances used! Yay! 🥳</h5>");
+        }
     })
 
     footerResetImages("social");
