@@ -33,7 +33,13 @@ $(document).ready(function()
     $('#footerNewSubstanceBtn').width($('#footerNewSubstanceBtn').height());
     $('#footerCalendarBtn').width($('#footerCalendarBtn').height());
     $('#footerBurgerBtn').width($('#footerBurgerBtn').height());
-
+    $('#footerNewSubstanceBtnBorder').css
+    ({
+        width: $('#footerNewSubstanceBtn').width() + 10,
+        height: $('#footerNewSubstanceBtn').height() + 10
+    })
+    $('#footerNewSubstanceBtnBorder').css('top', screen.height - $('#footerNewSubstanceBtnBorder').height() + 2.5);
+    
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
     $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
