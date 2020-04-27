@@ -174,6 +174,7 @@ $(document).ready(function()
     {
         $('#displayEntriesLoading').hide();
         $('#dashboardSubstances').css('margin-top', '15');
+        $('#dashboardSubstances').empty();
 
         var recentTimestamp = {};
         var weekTimestamps = [];
@@ -190,11 +191,15 @@ $(document).ready(function()
                 if(j+1 >= substancesUsage[Object.keys(substancesUsage)[i]].length)
                 {
                     recentTimestamp[Object.keys(substancesUsage)[i]] = Math.max(...recentTimestamp[Object.keys(substancesUsage)[i]]);
-                    if(weekTimestamps[0] || weekTimestamps[1])
-                    {
-                        weekTimestamps.shift();
-                        weekTimestamps[0] = true;
-                    }
+                    
+                }
+            }
+            if(i+1 >= Object.keys(substancesUsage).length)
+            {
+                if(weekTimestamps[0] || weekTimestamps[1])
+                {
+                    weekTimestamps.shift();
+                    weekTimestamps[0] = true;
                 }
             }
         }
