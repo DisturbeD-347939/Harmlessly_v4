@@ -57,9 +57,9 @@ app.get('/getSubstanceUsage', (request, response) =>
     db.collection('Users').doc(email).listCollections()
         .then(col =>
         {
-            if(col.empty)
+            if(col == "")
             {
-                return;
+                response.send({code: "204"});
             }
             col.map(col => col.id).forEach(col =>
             {
@@ -80,9 +80,9 @@ app.get('/getSubstanceUsage', (request, response) =>
                                     db.collection('Users').doc(email).collection("Usage").doc(doc.id).listCollections()
                                     .then(col =>
                                     {
-                                        if(col.empty)
+                                        if(col == "")
                                         {
-                                            response.send("500");
+                                            response.send({code: "204"});
                                         }
                                         col.map(col => col.id).forEach(col =>
                                         {
@@ -136,13 +136,17 @@ app.get('/getSubstanceUsage', (request, response) =>
                             }
                             else
                             {
-                                response.send({code: "200", data: substanceUse});
+                                response.send({code: "204"});
                             }
                         })
                         .catch(err =>
                         {
                             response.send({code: "500"});
                         })
+                }
+                else
+                {
+                    response.send({code: "204"});
                 }
             })
         })
