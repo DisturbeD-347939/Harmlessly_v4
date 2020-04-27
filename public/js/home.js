@@ -446,12 +446,11 @@ $(document).ready(function()
         })
     }
 
-    function submitMoods(data)
+    function submitMoods(inputs)
     {
-        console.log("Submit moods");
         $.post('/addDose',
         {
-            data: data,
+            data: inputs,
             email: email
         }, 
         function(data, status)
