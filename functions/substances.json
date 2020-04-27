@@ -25,7 +25,7 @@
             },
             "duration":
             {
-                "info": "MDMA reacts durations depend on a lot of circumstances (such as dosage) but here's a general rule of the thumb",
+                "info": "MDMA durations depend on a lot of circumstances (such as dosage) but here's a general rule of the thumb",
                 "orally": "Orally it can take between 20-60 minutes to kick in. Once it does it, the effects last for around 2-4 hours",
                 "snorting": "Snorting it can take between 5-10 minutes to kick in. Once it does it, the effects last for around 30-60 hours",
                 "comedown": "Comedown: Few days",
@@ -98,13 +98,14 @@
                     "11": "I know the signs of heat stroke and agree to pay attention to the friend I am rolling with",
                     "12": "I know my intention for taking MDMA, even if it's just for fun, and I will tell the people I plan to roll with"
                 }
-            }
+            },
+            "colour": "violet"
         },
         "Cocaine": 
         {
-            "name": "TO_DO",
-            "nicknames": ["TO_DO"],
-            "dosing_methods": ["orally", "by norting", "by bombing"],
+            "name": "methyl(1R,2R,3S,5S)-3-(benzoyloxy)-8-methyl-8-azabicyclo[3.2.1]octane-2-carboxylate",
+            "nicknames": "Cocaine is also known as coke, snow, blow, white or by charlie.",
+            "dosing_methods": "It's usually administered orally, intranasally, intravenously or by inhalation",
             "dosages":
             {
                 "scale": "mg",
@@ -114,7 +115,98 @@
                 "strong": "60",
                 "heavy": "90",
                 "danger_level": "100"
-            }
+            },
+            "sold_as": "Cocaine is obtainable as cocaine paste,salts, freebase (base form of cocaine), \"crack\", coca leaf infusions and coca leaf chewing",
+            "effects":
+            {
+                "positive_effects": ["Analysis enhancement", "Anxiety suppression", "Cognitive euphoria", "Ego inflation", "Focus enhancement", "Increased libido", "Increased music appreciation", "Mania", "Motivation enhancement", "Thought acceleration", "Thought organization", "Wakefulness"],
+                "negative_effects": ["Compulsive redosing", "Disinhibition", "Irritability", "Memory suppression", "Suggestibility suppression", "Time compression"],
+                "physical_effects": ["Stimulation", "Abnormal heartbeat", "Physical euphoria", "Increased heart rate", "Increased blood pressure", "Appetite supression", "Bodily control enhancement", "Bronchodilation", "Dehydration", "Frequent urination", "Increased bodily temperature", "Increased perspiration", "Pain relief", "Pupil dilation", "Mouth numbing", "Tacticle hallucination", "Teeth grinding", "Temporary erectile dysfunction", "Vasoconstriction"],
+                "after_effects": ["Anxiety", "Cognitive fatigue", "Compulsive redosing", "Depression", "Irritability", "Motivation suppression", "Respiratory depression", "Tacticle hallucination", "Thought deceleration"]
+            },
+            "duration":
+            {
+                "info": "Cocaine durations depend on a lot of circumstances (such as dosage) but here's a general rule of the thumb, it takes around 15-45 seconds to settle in. Once it does it, the effects last from 10 to 90 minutes.",
+                "orally": "Effects felt within 10-30 minutes and persist for up to 90 minutes",
+                "snorting": "Effects felt within 3-5 minutes and persist for up to 20 minutes",
+                "smoking": "Effects felt within 5-10 seconds and persist for up to 20 minutes",
+                "intravenous": "Effects felt within 5-10 seconds and persist for up to 20 minutes",
+                "detection":
+                {
+                    "Blood/Saliva": "2 days",
+                    "Urine": "3 days or up to 2 weeks for heavy users",
+                    "Hair": "Months to years"
+                },
+                "vars":
+                {
+                    "kick_in": 0.05,
+                    "maximum_duration": 6
+                }
+            },
+            "risks": 
+            {
+                "short_term": "Short-term risks exist such as fake MDMA (mixing amphetamine, caffeine or methamphetamine with the MDMA), overheating due to the fact that MDMA increases body temperature or even water intoxication caused by drinking too much water.",
+                "long_term": ["Depression", "Neurotoxicity", "Permanently losing the positive effects of MDMA"]
+            },
+            "safety":
+            {
+                "comedown_cause": ["Fake MDMA", "Unsafe dosages", "Not taking a long enough break between MDMA uses", "Lack of sleep", "Mixing drugs"],
+                "safety_steps":
+                {
+                    "1": 
+                    {
+                        "rule": "I have no pre-existing health conditions that make MDMA less safe",
+                        "info": "Avoid MDMA if you have cardiovascular disease, cerebrovascular disease, uncontrolled hypertension, malignant hyperthermia, anhydrosis, central core disease, or any condition that increases the risk of heat stroke or hyperthermia, you are susceptible to seizures or if you have liver problems"
+                    },
+                    "2": 
+                    {
+                        "rule": "I'm not taking medicines or supplements that may interact badly with MDMA",
+                        "info": 
+                        [
+                            "If you've taken any MAOIs (e.g. Nardil, Parnate, Marplan, Ayahuasca) in the last 3 weeks you could die",
+                            "There are rumors that 5-HTP can react badly to MDMA",
+                            "St John's wort has a high potential for drug interactions, some of which may be serious",
+                            "If you have recently taken any CYP2D6 inhibitors",
+                            "Drugs that increase heat rate or blood pressure (e.g. asthma medications, stimulants like cocaine/amphetamine/caffeine, DXM, stomach acid medications and sedatives like alcohol/opioids",
+                            "Avoid consuming LSD, 2C-B or shrooms since this combination increases neurotoxicity"
+                        ]
+                    },
+                    "3": 
+                    {
+                        "rule": "I have tested my MDMA with a reagent test"
+                    },
+                    "4":
+                    {
+                        "rule": "I have my optional supplements ready",
+                        "info":
+                        {
+                            "regular":
+                            [
+                                "4g Ginger",
+                                "1,5g ALCAR",
+                                "2g Vitamin C",
+                                "200mg Magnesium",
+                                "2,4g ALA"
+                            ],
+                            "minimum":
+                            [
+                                "1g ALCAR",
+                                "200-600mg CoQ10",
+                                "800-IU Vitamin E"
+                            ]
+                        }
+                    },
+                    "5": "I haven't rolled in at least 5 weeks but ideally 3 months",
+                    "6": "I'm aware of the dosage guideline (your weight in kg + 50 = dosage in mg for the night)",
+                    "7": "I'll drink 250-500 ml/h (1-2 cups), definitely no more than 500 ml/h (2 cups) and ideally Gatorade/Lucozade instead of water",
+                    "8": "I'll stay cool to avoid heat stroke",
+                    "9": "I'll take MDMA in a safe, cool and positive environment",
+                    "10": "I'm aware that MDMA can bring to the surface issues that I may be emotionally struggling with",
+                    "11": "I know the signs of heat stroke and agree to pay attention to the friend I am rolling with",
+                    "12": "I know my intention for taking MDMA, even if it's just for fun, and I will tell the people I plan to roll with"
+                }
+            },
+            "colour": "violet"
         }
     },
     "Disclaimer": "We do not promote the use of illegal psychoactive substances. This content has been created strictly for harm reduction purposes, and you should note that the only way to be perfectly safe using MDMA is to not take it at all."
