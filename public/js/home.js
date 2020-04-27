@@ -38,7 +38,7 @@ $(document).ready(function()
         width: $('#footerNewSubstanceBtn').width() + 10,
         height: $('#footerNewSubstanceBtn').height() + 10
     })
-    $('#footerNewSubstanceBtnBorder').css('top', screen.height - $('#footerNewSubstanceBtnBorder').height() + 2.5);
+    $('#footerNewSubstanceBtnBorder').css('top', $('#footerNewSubstanceBtn').position().top - 5);
     
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
@@ -216,7 +216,12 @@ $(document).ready(function()
 
                     if(weekTimestamps[j])
                     {
-                        $('.dashboardSubstancesGroupsStatus:last-child > div:last-child').css('background-color', 'black');
+                        $('.dashboardSubstancesGroupsStatus:last-child > div:last-child').css('background-color', 'red');
+                    }
+
+                    if(j+1 >= 7)
+                    {
+                        $('.dashboardSubstancesGroups > .dashboardSubstancesGroupsStatus').css('margin-bottom', $('.dashboardSubstancesGroups > h5').css('marginBottom'));
                     }
                 }
             }
@@ -228,46 +233,48 @@ $(document).ready(function()
 
     $('#footerNewSubstanceBtn').click(function()
     {
-        moods = ["f", "f", "f"];
-        substanceInputData = [];
-
-        footerResetImages("add");
-        cancelTimers();
-        $('#dashboard').hide();
-        $('#displaySubstancesLoading').show();
-        $('#newSubstance').show();
-        $('#newSubstanceFirst').show();
-        $('#newSubstance').height($(document).height() - $('footer').height());
-
-        if(substancesInfo)
+        if(!$("#newSubstanceFirst, #newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth").is(":visible"))
         {
-            $('#displaySubstances').empty();
+            moods = ["f", "f", "f"];
+            substanceInputData = [];
 
-            $('#displaySubstancesLoading').hide();
+            footerResetImages("add");
+            cancelTimers();
+            
+            $('#dashboard').hide();
+            $('#displaySubstancesLoading, #newSubstance, #newSubstanceFirst').show();
+            $('#newSubstance').height($(document).height() - $('footer').height());
 
-            if(Object.keys(substancesInfo).length >= 3)
+            if(substancesInfo)
             {
-                $('#displaySubstances').css('grid-template-columns', 'repeat(3, 1fr)');
+                $('#displaySubstances').empty();
+
+                $('#displaySubstancesLoading').hide();
+
+                if(Object.keys(substancesInfo).length >= 3)
+                {
+                    $('#displaySubstances').css('grid-template-columns', 'repeat(3, 1fr)');
+                }
+                else
+                {
+                    $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ')  ;
+                }
+
+                $('#displaySubstancesLoading')
+                for(var i = 0; i < Object.keys(substancesInfo).length; i++)
+                {
+                    $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i].toLowerCase() + ".png'></div><div class='substanceCardName'><p class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
+
+
+                }
             }
             else
             {
-                $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ');
+                updateNewSubstances = setTimeout(function()
+                {
+                    $('#footerNewSubstanceBtn').click();
+                }, 500);
             }
-
-            $('#displaySubstancesLoading')
-            for(var i = 0; i < Object.keys(substancesInfo).length; i++)
-            {
-                $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i] + ".png'></div><div class='substanceCardName'><p     class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
-
-                
-            }
-        }
-        else
-        {
-            updateNewSubstances = setTimeout(function()
-            {
-                $('#footerNewSubstanceBtn').click();
-            }, 500);
         }
     })
 
@@ -390,8 +397,7 @@ $(document).ready(function()
         if(moods[0] && moods[1] && moods[2])
         {
             substanceInputData.push(moods);
-            $('#submitMoods').hide();
-            $('#skipMoodsInput').hide();
+            $('#submitMoods, #skipMoodsInput').hide();
             $('#uploadingInputsLoading').show();
             submitMoods(substanceInputData);
         }
@@ -461,12 +467,13 @@ $(document).ready(function()
             })
             if(data == "200")
             {
-                $('#submitMoods').show();
-                $('#skipMoodsInput').show();
-                $('#uploadingInputsLoading').hide();
-                $('#dashboard').show();
-                $('#newSubstanceFourth').hide();
-                $('#newSubstance').hide();
+                substancesUsage[inputs[0]].push({dosage: inputs[1], timestamp: inputs[2], moods: inputs[3]});
+                
+                $('#submitMoods, #skipMoodsInput, #dashboard').show();
+                $('#uploadingInputsLoading, #newSubstanceFourth, #newSubstance').hide();
+
+                populateDashboardSubstances();
+                footerResetImages("social");
                 clearSubstanceInputs();
             }
         })
@@ -496,6 +503,7 @@ $(document).ready(function()
 
     function clearSubstanceInputs()
     {
+        $('#newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
         $('#inputDose, #inputDoseTime, #inputDoseDate').val("");
         $('#inputDose, #inputDoseTime, #inputDoseDate').removeClass("valid");
     }
