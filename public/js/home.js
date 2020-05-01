@@ -478,7 +478,13 @@ $(document).ready(function()
             })
             if(data == "200")
             {
+                if(!substancesUsage[inputs[0]])
+                {
+                    substancesUsage[inputs[0]] = [];
+                }
+
                 substancesUsage[inputs[0]].push({dosage: inputs[1], timestamp: inputs[2], moods: inputs[3]});
+                console.log(substancesUsage);
                 
                 $('#submitMoods, #skipMoodsInput, #dashboard').show();
                 $('#uploadingInputsLoading, #newSubstanceFourth, #newSubstance').hide();
