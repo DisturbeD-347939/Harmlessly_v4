@@ -225,11 +225,16 @@ $(document).ready(function()
 
                     if(weekTimestamps[j])
                     {
-                        $('.dashboardSubstancesGroupsStatus:last-child > div:last-child').css('background-color', 'black');
+                        $('.dashboardSubstancesGroupsStatus:last-child > div:last-child').css('background-color', 'red');
                     }
+
+                    if(j+1 >= 7)
+                    {
+                        $('.dashboardSubstancesGroups > .dashboardSubstancesGroupsStatus').css('margin-bottom', $('.dashboardSubstancesGroups > h5').css('marginBottom'));
                 }
             }
         }
+    }
     }
 
     /******************************************* NEW SUBSTANCE ************************************************/
@@ -237,15 +242,16 @@ $(document).ready(function()
 
     $('#footerNewSubstanceBtn').click(function()
     {
+        if(!$("#newSubstanceFirst, #newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth").is(":visible"))
+        {
         moods = ["f", "f", "f"];
         substanceInputData = [];
 
         footerResetImages("add");
         cancelTimers();
+            
         $('#dashboard').hide();
-        $('#displaySubstancesLoading').show();
-        $('#newSubstance').show();
-        $('#newSubstanceFirst').show();
+            $('#displaySubstancesLoading, #newSubstance, #newSubstanceFirst').show();
         $('#newSubstance').height($(document).height() - $('footer').height());
 
         if(substancesInfo)
@@ -260,15 +266,13 @@ $(document).ready(function()
             }
             else
             {
-                $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ');
+                    $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ')  ;
             }
 
             $('#displaySubstancesLoading')
             for(var i = 0; i < Object.keys(substancesInfo).length; i++)
             {
-                $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i] + ".png'></div><div class='substanceCardName'><p     class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
-
-                
+                    $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i].toLowerCase() + ".png'></div><div class='substanceCardName'><p class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
             }
         }
         else
@@ -277,6 +281,7 @@ $(document).ready(function()
             {
                 $('#footerNewSubstanceBtn').click();
             }, 500);
+        }
         }
     })
 
@@ -399,8 +404,7 @@ $(document).ready(function()
         if(moods[0] && moods[1] && moods[2])
         {
             substanceInputData.push(moods);
-            $('#submitMoods').hide();
-            $('#skipMoodsInput').hide();
+            $('#submitMoods, #skipMoodsInput').hide();
             $('#uploadingInputsLoading').show();
             submitMoods(substanceInputData);
         }
@@ -470,12 +474,13 @@ $(document).ready(function()
             })
             if(data == "200")
             {
-                $('#submitMoods').show();
-                $('#skipMoodsInput').show();
-                $('#uploadingInputsLoading').hide();
-                $('#dashboard').show();
-                $('#newSubstanceFourth').hide();
-                $('#newSubstance').hide();
+                substancesUsage[inputs[0]].push({dosage: inputs[1], timestamp: inputs[2], moods: inputs[3]});
+                
+                $('#submitMoods, #skipMoodsInput, #dashboard').show();
+                $('#uploadingInputsLoading, #newSubstanceFourth, #newSubstance').hide();
+
+                populateDashboardSubstances();
+                footerResetImages("social");
                 clearSubstanceInputs();
             }
         })
@@ -505,6 +510,7 @@ $(document).ready(function()
 
     function clearSubstanceInputs()
     {
+        $('#newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
         $('#inputDose, #inputDoseTime, #inputDoseDate').val("");
         $('#inputDose, #inputDoseTime, #inputDoseDate').removeClass("valid");
     }
