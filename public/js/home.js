@@ -258,7 +258,11 @@ $(document).ready(function()
             footerResetImages("add");
             cancelTimers();
             
+<<<<<<< HEAD
             hideAppTabs();
+=======
+            $('#dashboard').hide();
+>>>>>>> ef411b6390123a6d7e4e9e1214b0769d5fff1b27
             $('#displaySubstancesLoading, #newSubstance, #newSubstanceFirst').show();
             $('#newSubstance').height($(document).height() - $('footer').height());
 
@@ -281,6 +285,11 @@ $(document).ready(function()
                 for(var i = 0; i < Object.keys(substancesInfo).length; i++)
                 {
                     $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i].toLowerCase() + ".png'></div><div class='substanceCardName'><p class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ef411b6390123a6d7e4e9e1214b0769d5fff1b27
                 }
             }
             else
@@ -482,6 +491,7 @@ $(document).ready(function()
             })
             if(data == "200")
             {
+<<<<<<< HEAD
                 if(!substancesUsage[inputs[0]])
                 {
                     substancesUsage[inputs[0]] = [];
@@ -490,6 +500,10 @@ $(document).ready(function()
                 substancesUsage[inputs[0]].push({dosage: inputs[1], timestamp: inputs[2], moods: inputs[3]});
                 console.log(substancesUsage);
 
+=======
+                substancesUsage[inputs[0]].push({dosage: inputs[1], timestamp: inputs[2], moods: inputs[3]});
+                
+>>>>>>> ef411b6390123a6d7e4e9e1214b0769d5fff1b27
                 $('#submitMoods, #skipMoodsInput, #dashboard').show();
                 $('#uploadingInputsLoading, #newSubstanceFourth, #newSubstance').hide();
 
