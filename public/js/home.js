@@ -71,7 +71,6 @@ $(document).ready(function()
         for(var i = -Math.abs(firstDayMonthNumber - 2); i <= 0; i++)
         {
             days.push(new Date(date.getFullYear(), date.getMonth(), i).getDate())
-
             if(i+1 >= 1)
             {
                 for(var j = 1; j <= new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); j++)
@@ -80,8 +79,10 @@ $(document).ready(function()
                     if(j+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
                     {
                         var counterDays = 1;
-                        for(var k = days.length; k <= daysLength; k++)
+                        if(days.length <= daysLength)
                         {
+                            for(var k = 0; k <= daysLength; k++)
+                            {
                             days.push(counterDays);
                             counterDays++;
                             if(k == daysLength)
@@ -93,7 +94,15 @@ $(document).ready(function()
                             }
                         }
                     }
+                        else
+                        {
+                            for(var r = 0; r < days.length; r++)
+                            {
+                                $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
                 }
+            }
+        }
+    }
             }
         }
     }
