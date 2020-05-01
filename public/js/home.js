@@ -83,26 +83,26 @@ $(document).ready(function()
                         {
                             for(var k = 0; k <= daysLength; k++)
                             {
-                            days.push(counterDays);
-                            counterDays++;
-                            if(k == daysLength)
-                            {
-                                for(var r = 0; r < days.length; r++)
+                                days.push(counterDays);
+                                counterDays++;
+                                if(k == daysLength)
                                 {
-                                    $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
+                                    for(var r = 0; r < days.length; r++)
+                                    {
+                                        $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
+                                    }
                                 }
                             }
                         }
-                    }
                         else
                         {
                             for(var r = 0; r < days.length; r++)
                             {
                                 $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
+                            }
+                        }
+                    }
                 }
-            }
-        }
-    }
             }
         }
     }
@@ -231,10 +231,10 @@ $(document).ready(function()
                     if(j+1 >= 7)
                     {
                         $('.dashboardSubstancesGroups > .dashboardSubstancesGroupsStatus').css('margin-bottom', $('.dashboardSubstancesGroups > h5').css('marginBottom'));
+                    }
                 }
             }
         }
-    }
     }
 
     /******************************************* NEW SUBSTANCE ************************************************/
@@ -244,44 +244,44 @@ $(document).ready(function()
     {
         if(!$("#newSubstanceFirst, #newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth").is(":visible"))
         {
-        moods = ["f", "f", "f"];
-        substanceInputData = [];
+            moods = ["f", "f", "f"];
+            substanceInputData = [];
 
-        footerResetImages("add");
-        cancelTimers();
+            footerResetImages("add");
+            cancelTimers();
             
-        $('#dashboard').hide();
+            $('#dashboard').hide();
             $('#displaySubstancesLoading, #newSubstance, #newSubstanceFirst').show();
-        $('#newSubstance').height($(document).height() - $('footer').height());
+            $('#newSubstance').height($(document).height() - $('footer').height());
 
-        if(substancesInfo)
-        {
-            $('#displaySubstances').empty();
-
-            $('#displaySubstancesLoading').hide();
-
-            if(Object.keys(substancesInfo).length >= 3)
+            if(substancesInfo)
             {
-                $('#displaySubstances').css('grid-template-columns', 'repeat(3, 1fr)');
+                $('#displaySubstances').empty();
+
+                $('#displaySubstancesLoading').hide();
+
+                if(Object.keys(substancesInfo).length >= 3)
+                {
+                    $('#displaySubstances').css('grid-template-columns', 'repeat(3, 1fr)');
+                }
+                else
+                {
+                    $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ')  ;
+                }
+
+                $('#displaySubstancesLoading')
+                for(var i = 0; i < Object.keys(substancesInfo).length; i++)
+                {
+                    $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i].toLowerCase() + ".png'></div><div class='substanceCardName'><p class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
+                }
             }
             else
             {
-                    $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ')  ;
+                updateNewSubstances = setTimeout(function()
+                {
+                    $('#footerNewSubstanceBtn').click();
+                }, 500);
             }
-
-            $('#displaySubstancesLoading')
-            for(var i = 0; i < Object.keys(substancesInfo).length; i++)
-            {
-                    $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i].toLowerCase() + ".png'></div><div class='substanceCardName'><p class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
-            }
-        }
-        else
-        {
-            updateNewSubstances = setTimeout(function()
-            {
-                $('#footerNewSubstanceBtn').click();
-            }, 500);
-        }
         }
     })
 
