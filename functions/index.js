@@ -51,10 +51,59 @@ app.get('/getSubstanceUsage', (request, response) =>
     var email = request.query.email;
 
     var substanceUse = {};
-    var substances = [];
-    var substancesCounter = 0;
+    var substancesNumber = 0;
+    var substancesNumberCounter = 0;
+    var numberEntries = 0;
+    var counter = 0;
 
-    db.collection('Users').doc(email).listCollections()
+    db.collection('Users').doc(email).collection('Usage').get()
+    .then(snapshot =>
+    {
+        if(snapshot["_size"] > 0)
+        {
+            substancesNumber = snapshot["_size"];
+            snapshot.forEach(doc =>
+            {
+                var substance = doc.id;
+                substanceUse[substance] = [];
+                db.collection('Users').doc(email).collection('Usage').doc(doc.id).collection('Entries').get()
+                .then(snapshot =>
+                {
+                    if(snapshot["_size"] > 0)
+                    {
+                        numberEntries += snapshot["_size"];
+                        snapshot.forEach(doc =>
+                        {
+                            substanceUse[substance].push(doc.data());
+                            counter++;
+                            if(counter >= numberEntries)
+                            {
+                                substancesNumberCounter++;
+                                if(substancesNumberCounter == substancesNumber)
+                                {
+                                    response.send({"code": "200", "data": substanceUse});
+                                }
+                            }
+                        })
+                    }
+                })
+                .catch(err =>
+                {
+                    response.send({"code": "204"});
+                })
+            })
+        }
+        else
+        {
+            response.send({"code": "204"});
+        }
+    })
+    .catch(err =>
+    {
+        response.send({"code": "204"});
+    })
+
+    /*db.collection('Users').doc(email).listCollections()
         .then(col =>
         {
             if(col == "")
@@ -153,7 +202,7 @@ app.get('/getSubstanceUsage', (request, response) =>
         .catch(err =>
         {
             response.send({code: "500"});
-        })
+        })*/
 })
 
 app.post('/register', (request, response) =>
