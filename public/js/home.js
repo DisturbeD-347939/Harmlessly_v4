@@ -18,7 +18,8 @@ $(document).ready(function()
     var backgroundColorHEX = "#EAEDED";
     var color1 = "#009FE3";
     var substancesInfo;
-    var substancesUsage;
+    var substancesUsage = {};
+    var prices = {"MDMA": 35, "Cocaine": 80}
 
     //Materialize
     $('.collapsible').collapsible();
@@ -31,6 +32,9 @@ $(document).ready(function()
 
     //Hide Elements - Wikipedia
     $('#wikipedia, #wikipediaSubstanceInfo').hide();
+
+    //Hide Elements - Detailed Substance
+    $('#detailedSubstance').hide();
 
     //Timers
     var updateNewSubstances;
@@ -219,7 +223,7 @@ $(document).ready(function()
 
         for(var i = 0; i < Object.keys(substancesUsage).length; i++)
         {
-            $('#dashboardSubstances').append("<div class='dashboardSubstancesGroups'><h5>" + Object.keys(substancesUsage)[i] + "</h5><p>Last consumed - " + timeDifference(+ new Date(), recentTimestamp[Object.keys(substancesUsage)[i]]*1000) + "</p><div class='dashboardSubstancesGroupsStatus'></div>");
+            $('#dashboardSubstances').append("<div class='dashboardSubstancesGroups z-depth-3'><div class='dashboardSubstancesGroupsData'><h5>" + Object.keys(substancesUsage)[i] + "</h5><p>Last consumed - " + timeDifference(+ new Date(), recentTimestamp[Object.keys(substancesUsage)[i]]*1000) + "</p><div class='dashboardSubstancesGroupsStatus'></div></div><i class='medium material-icons'>arrow_forward_ios</i>");
 
             if(i+1 >= Object.keys(substancesUsage).length)
             {
@@ -485,7 +489,7 @@ $(document).ready(function()
 
                 substancesUsage[inputs[0]].push({dosage: inputs[1], timestamp: inputs[2], moods: inputs[3]});
                 console.log(substancesUsage);
-                
+
                 $('#submitMoods, #skipMoodsInput, #dashboard').show();
                 $('#uploadingInputsLoading, #newSubstanceFourth, #newSubstance').hide();
 
@@ -730,8 +734,8 @@ function timeDifference(current, previous)
     {
         if(Math.round(elapsed/1000) != 1)
         {
-         return Math.round(elapsed/1000) + ' seconds ago';   
-    }
+            return Math.round(elapsed/1000) + ' seconds ago';
+        }
         else
         {
             return Math.round(elapsed/1000) + ' second ago';
@@ -742,7 +746,7 @@ function timeDifference(current, previous)
         if(Math.round(elapsed/msPerMinute) != 1)
         {
          return Math.round(elapsed/msPerMinute) + ' minutes ago';   
-    }
+        }
         else
         {
             return Math.round(elapsed/msPerMinute) + ' minute ago';
@@ -753,7 +757,7 @@ function timeDifference(current, previous)
         if(Math.round(elapsed/msPerHour) != 1)
         {
          return Math.round(elapsed/msPerHour ) + ' hours ago';   
-    }
+        }
         else
         {
             return Math.round(elapsed/msPerHour) + ' hour ago';
@@ -763,8 +767,8 @@ function timeDifference(current, previous)
     {
         if(Math.round(elapsed/msPerDay) != 1)
         {
-        return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
-    }
+            return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';  
+        }
         else
         {
             return Math.round(elapsed/msPerDay) + ' day ago';
@@ -774,10 +778,10 @@ function timeDifference(current, previous)
     {
         if(Math.round(elapsed/msPerMonth) != 1)
         {
-        return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
-    }
-    else 
-    {
+            return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
+        }
+        else
+        {
             return Math.round(elapsed/msPerMonth) + ' month ago';
         }
     }
