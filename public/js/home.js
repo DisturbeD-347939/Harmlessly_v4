@@ -38,7 +38,7 @@ $(document).ready(function()
         width: $('#footerNewSubstanceBtn').width() + 10,
         height: $('#footerNewSubstanceBtn').height() + 10
     })
-    $('#footerNewSubstanceBtnBorder').css('top', screen.height - $('#footerNewSubstanceBtnBorder').height() + 2.5);
+    $('#footerNewSubstanceBtnBorder').css('top', $('#footerNewSubstanceBtn').position().top - 5);
     
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
