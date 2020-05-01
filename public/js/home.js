@@ -165,6 +165,7 @@ $(document).ready(function()
     {
         cancelTimers();
         clearSubstanceInputs();
+        hideAppTabs();
         footerResetImages("social");
         $('#dashboard').show();
         $('#newSubstance').hide();
@@ -253,7 +254,7 @@ $(document).ready(function()
             footerResetImages("add");
             cancelTimers();
             
-            $('#dashboard').hide();
+            hideAppTabs();
             $('#displaySubstancesLoading, #newSubstance, #newSubstanceFirst').show();
             $('#newSubstance').height($(document).height() - $('footer').height());
 
@@ -490,6 +491,11 @@ $(document).ready(function()
     }
 
     /******************************************* GENERAL ************************************************/
+
+    function hideAppTabs()
+    {
+        $('#dashboard, #wikipedia, #newSubstance').hide();
+    }
 
     function footerResetImages(target)
     {
