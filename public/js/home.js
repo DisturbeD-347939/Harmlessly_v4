@@ -490,6 +490,105 @@ $(document).ready(function()
         })
     }
 
+    /******************************************* WIKIPEDIA ************************************************/
+
+    $('#footerWikipediaBtn').click(function()
+    {
+        footerResetImages("wiki");
+        hideAppTabs();
+        $('#wikipedia').show();
+        $('#wikipedia').height($(window).height() - $('footer').height());
+
+        var substancesWikiNames = Object.keys(substancesInfo);
+
+        $('#wikiSubstances').empty();
+
+        for(var i = 0; i < substancesWikiNames.length; i++)
+        {
+            $('#wikiSubstances').append("<div class='wikiSubstance z-depth-4' name='" + substancesWikiNames[i] + "'><img src='./img/substances/" + substancesWikiNames[i].toLowerCase() + ".png'></img><p>" + substancesWikiNames[i] + "</p></div>")
+        }
+    })
+
+    $('body').delegate('.wikiSubstance', 'click', function()
+    {
+        $('#wikipediaMenu').hide();
+        $('#wikipediaSubstanceInfo').show();
+        $('#wikipedia').css({"justify-content": 'flex-start'});
+        $('#wikipediaSubstanceTitle').text($(this).attr('name'));
+
+        for(var i = 0; i < $('#wikipediaSubstanceInfo > ul > li').length; i++)
+        {
+            var infoName = $('#wikipediaSubstanceInfo > ul > li:nth-child(' + (i + 1).toString() + ') > div:first-child').text();
+            console.log(infoName);
+
+            for(var j = 0; j < infoName.length; j++)
+            {
+                if(infoName[j] == infoName[j].toUpperCase() && infoName[j] != " " && infoName[j] != "_")
+                {
+                    if(j > 0)
+                    {
+                        infoName = infoName.substring(j);
+                    }
+                }
+            }
+
+            infoName = infoName.replace(' ', '_');
+            console.log(infoName);
+            var infoBody = substancesInfo[$(this).attr('name')][infoName.toLowerCase()];
+            if(typeof(infoBody) == "object")
+            {
+                var infoBodyKeys = Object.keys(infoBody);
+                infoBody = "";
+                infoBody += "<p>";
+                infoBody += substancesInfo[$(this).attr('name')][infoName.toLowerCase()]["info"];
+                infoBody += "</p>";
+                for(var j = 1; j < infoBodyKeys.length; j++)
+                {
+                    var ulTitle = infoBodyKeys[j].replace("_", " ");
+                    ulTitle = ulTitle[0].toUpperCase() + ulTitle.slice(1);
+                    
+                    if(ulTitle != "Vars")
+                    {
+                        infoBody += "<p><h6>" + ulTitle + "</h6></p><ul>";
+                        if(typeof(substancesInfo[$(this).attr('name')][infoName.toLowerCase()][infoBodyKeys[j]]) == "object")
+                        {
+                            for(var k = 0; k < substancesInfo[$(this).attr('name')][infoName.toLowerCase()][infoBodyKeys[j]].length; k++)
+                            {
+                                infoBody += "<li>" + substancesInfo[$(this).attr('name')][infoName.toLowerCase()][infoBodyKeys[j]][k] + "</li>";
+                                if(k+1 >= substancesInfo[$(this).attr('name')][infoName.toLowerCase()][infoBodyKeys[j]].length)
+                                {
+                                    infoBody += "</ul>";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            infoBody += "<p>" + substancesInfo[$(this).attr('name')][infoName.toLowerCase()][infoBodyKeys[j]] + "</p>";
+                        }
+                    }
+
+                    if(j+1 >= infoBodyKeys.length)
+                    {
+                        $('#wikipediaSubstanceInfo > ul > li:nth-child(' + (i + 1).toString() + ') > div:last-child').append(infoBody);
+                    }
+                }
+                
+            }
+            else
+            {
+                $('#wikipediaSubstanceInfo > ul > li:nth-child(' + (i + 1).toString() + ') > div:last-child').text(infoBody);
+            }
+        }
+    })
+
+    $('#wikipediaBack').click(function()
+    {
+        $('#wikipediaSubstanceInfo').hide();
+        $('#wikipediaMenu').show();
+
+        $('#wikipediaSubstanceInfo > ul > li > div:last-child').empty();
+    })
+
     /******************************************* GENERAL ************************************************/
 
     function hideAppTabs()
