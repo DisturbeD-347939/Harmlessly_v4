@@ -5,7 +5,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center; }
+  align-items: center;
+  padding-bottom: 50px; }
   #dashboard #dashboardNavBar {
     display: flex;
     flex-direction: row;
@@ -66,29 +67,37 @@ body {
     align-items: center;
     width: 100%;
     margin-top: 25px; }
+    #dashboard #dashboardSubstances .dashboardSubstancesGroups:first-child {
+      margin-bottom: 15px; }
     #dashboard #dashboardSubstances .dashboardSubstancesGroups {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
       color: white;
       background-image: linear-gradient(45deg, #3F61AA, #009FE3);
       width: 95%;
-      padding: 10px;
-      border-radius: 2%; }
-      #dashboard #dashboardSubstances .dashboardSubstancesGroups p {
-        margin-top: 0px; }
-      #dashboard #dashboardSubstances .dashboardSubstancesGroups .dashboardSubstancesGroupsStatus {
+      border-radius: 5px; }
+      #dashboard #dashboardSubstances .dashboardSubstancesGroups .dashboardSubstancesGroupsData {
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column;
         justify-content: center;
-        align-items: center; }
-        #dashboard #dashboardSubstances .dashboardSubstancesGroups .dashboardSubstancesGroupsStatus div {
-          margin: 0px 5px;
-          border-radius: 50%;
-          width: 10px;
-          height: 10px;
-          background-color: white; }
+        align-items: flex-start;
+        width: 90%;
+        padding: 10px; }
+        #dashboard #dashboardSubstances .dashboardSubstancesGroups .dashboardSubstancesGroupsData p {
+          margin-top: 0px; }
+        #dashboard #dashboardSubstances .dashboardSubstancesGroups .dashboardSubstancesGroupsData .dashboardSubstancesGroupsStatus {
+          display: flex;
+          flex-direction: row-reverse;
+          justify-content: center;
+          align-items: center; }
+          #dashboard #dashboardSubstances .dashboardSubstancesGroups .dashboardSubstancesGroupsData .dashboardSubstancesGroupsStatus div {
+            margin: 0px 5px;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%; }
 
 #newSubstance {
   display: flex;
@@ -183,6 +192,65 @@ body {
       height: 40px;
       margin-top: 20px;
       margin-bottom: 40px; }
+
+#detailedSubstance {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%; }
+  #detailedSubstance #detailedSubstanceStats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    width: 60%; }
+    #detailedSubstance #detailedSubstanceStats div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      border-radius: 5px;
+      background-image: linear-gradient(45deg, #3F61AA, #009FE3); }
+      #detailedSubstance #detailedSubstanceStats div p {
+        margin: 0px;
+        color: white; }
+      #detailedSubstance #detailedSubstanceStats div p:first-child {
+        font-size: 17px; }
+  #detailedSubstance .detailedSubstanceRecentActivity {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%; }
+    #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      width: 90%;
+      background-image: linear-gradient(45deg, #3F61AA, #009FE3);
+      border-radius: 5px;
+      margin-bottom: 10px; }
+      #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceDanger {
+        width: 5px;
+        min-height: 30px;
+        background-color: red;
+        margin-right: 10px; }
+      #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceData {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        color: white; }
+        #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceData div {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center; }
+          #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceData div p {
+            margin-right: 20px; }
 
 #wikipedia {
   display: flex;

@@ -20,6 +20,8 @@ body
 {
     @include flex(column, flex-start, center);
 
+    padding-bottom: 50px;
+
     #dashboardNavBar
     {
         @include flex(row, space-evenly, center);
@@ -106,35 +108,49 @@ body
         width: 100%;
         margin-top: 25px;
 
+        .dashboardSubstancesGroups:first-child
+        {
+            margin-bottom: 15px;
+        }
+
         .dashboardSubstancesGroups
         {
-            @include flex(column, center, flex-start);
+            @include flex(row, space-between, center);
 
             color: white;
             background-image: linear-gradient(45deg, $color2, $color1);
 
             width: 95%;
-            padding: 10px;
-            border-radius: 2%;
 
-            p
+            border-radius: 5px;
+
+            .dashboardSubstancesGroupsData
             {
-                margin-top: 0px;
-            }
-
-            .dashboardSubstancesGroupsStatus
-            {
-                @include flex(row-reverse, center, center);
-
-                div
+                @include flex(column, center, flex-start);
+    
+                width: 90%;
+                padding: 10px;
+    
+                p
                 {
-                    margin: 0px 5px;
-                    border-radius: 50%;
-                    width: 10px;
-                    height: 10px;
-                    background-color: white;
+                    margin-top: 0px;
                 }
-                
+    
+                .dashboardSubstancesGroupsStatus
+                {
+                    @include flex(row-reverse, center, center);
+    
+                    div
+                    {
+                        margin: 0px 5px;
+                        width: 10px;
+                        height: 10px;
+                        background-color: white;
+
+                        border-radius: 50%;
+                    }
+                    
+                }
             }
         }
     }
@@ -276,6 +292,87 @@ body
 
             margin-top: 20px;
             margin-bottom: 40px;
+        }
+    }
+}
+
+#detailedSubstance
+{
+    @include flex(column, flex-start, center);
+
+    width: 100%;
+
+    #detailedSubstanceStats
+    {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+
+        width: 60%;
+        
+
+        div
+        {
+            @include flex(column, center, center);
+
+            height: 50px;
+
+            border-radius: 5px;
+
+            background-image: linear-gradient(45deg, $color2, $color1);
+
+            p
+            {
+                margin: 0px;
+                color: white;
+            }
+
+            p:first-child
+            {
+                font-size: 17px;
+            }
+        }
+    }
+
+    .detailedSubstanceRecentActivity
+    {
+        @include flex(column-reverse, flex-start, center);
+        width: 100%;
+
+        .detailedSubstanceInput
+        {
+            @include flex(row, flex-start, center);
+
+            width: 90%;
+            background-image: linear-gradient(45deg, $color2, $color1);
+            border-radius: 5px;
+            margin-bottom: 10px;
+
+            .detailedSubstanceDanger
+            {
+                width: 5px;
+                min-height: 30px;
+                background-color: red;
+                margin-right: 10px;
+            }
+
+            .detailedSubstanceData
+            {
+                @include flex(row, space-between, center);
+
+                width: 100%;
+                color: white;
+
+                div
+                {
+                    @include flex(row, center, center);
+
+                    p
+                    {
+                        margin-right: 20px;
+                    }
+                }
+            }
         }
     }
 }
