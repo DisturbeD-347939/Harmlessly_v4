@@ -16,9 +16,10 @@
                 "heavy": "180",
                 "danger_level": "180"
             },
-            "sold_as": "It's usually found as either a powder or a pressed as a pill",
+            "forms": "It's usually found as either a powder or a pressed as a pill",
             "effects":
             {
+                "info": "MDMA has both positive and negative effects, here's a list of all the effects.",
                 "positive_effects": ["Happyness", "Love", "Energised", "Alert", "Euphoria", "Empathy"],
                 "negative_effects": ["Anxiety", "Panic Attacks", "Confused episodes", "Paranoia", "Psychosis"],
                 "physical_effects": ["Dilated pupils", "Tingling sensation", "Tightening or moving of the jaw muscles", "Higher body temperature", "Faster heartbeat", "Nausea", "Thirst", "Dry mouth", "Lack of appetite", "Perspiration", "Restless legs"]
@@ -28,8 +29,8 @@
                 "info": "MDMA durations depend on a lot of circumstances (such as dosage) but here's a general rule of the thumb",
                 "orally": "Orally it can take between 20-60 minutes to kick in. Once it does it, the effects last for around 2-4 hours",
                 "snorting": "Snorting it can take between 5-10 minutes to kick in. Once it does it, the effects last for around 30-60 hours",
-                "comedown": "Comedown: Few days",
-                "detection": "Detection in the blood: 1-4 days",
+                "comedown": "Few days",
+                "detection": "1-4 days in blood",
                 "vars":
                 {
                     "kick_in": 0.05,
@@ -38,66 +39,15 @@
             },
             "risks": 
             {
+                "info": "As every drug, MDMA has risks which could impact you both in the short term and the long term. Here's what those risks are.",
                 "short_term": "Short-term risks exist such as fake MDMA (mixing amphetamine, caffeine or methamphetamine with the MDMA), overheating due to the fact that MDMA increases body temperature or even water intoxication caused by drinking too much water.",
                 "long_term": ["Depression", "Neurotoxicity", "Permanently losing the positive effects of MDMA"]
             },
             "safety":
             {
-                "comedown_cause": ["Fake MDMA", "Unsafe dosages", "Not taking a long enough break between MDMA uses", "Lack of sleep", "Mixing drugs"],
-                "safety_steps":
-                {
-                    "1": 
-                    {
-                        "rule": "I have no pre-existing health conditions that make MDMA less safe",
-                        "info": "Avoid MDMA if you have cardiovascular disease, cerebrovascular disease, uncontrolled hypertension, malignant hyperthermia, anhydrosis, central core disease, or any condition that increases the risk of heat stroke or hyperthermia, you are susceptible to seizures or if you have liver problems"
-                    },
-                    "2": 
-                    {
-                        "rule": "I'm not taking medicines or supplements that may interact badly with MDMA",
-                        "info": 
-                        [
-                            "If you've taken any MAOIs (e.g. Nardil, Parnate, Marplan, Ayahuasca) in the last 3 weeks you could die",
-                            "There are rumors that 5-HTP can react badly to MDMA",
-                            "St John's wort has a high potential for drug interactions, some of which may be serious",
-                            "If you have recently taken any CYP2D6 inhibitors",
-                            "Drugs that increase heat rate or blood pressure (e.g. asthma medications, stimulants like cocaine/amphetamine/caffeine, DXM, stomach acid medications and sedatives like alcohol/opioids",
-                            "Avoid consuming LSD, 2C-B or shrooms since this combination increases neurotoxicity"
-                        ]
-                    },
-                    "3": 
-                    {
-                        "rule": "I have tested my MDMA with a reagent test"
-                    },
-                    "4":
-                    {
-                        "rule": "I have my optional supplements ready",
-                        "info":
-                        {
-                            "regular":
-                            [
-                                "4g Ginger",
-                                "1,5g ALCAR",
-                                "2g Vitamin C",
-                                "200mg Magnesium",
-                                "2,4g ALA"
-                            ],
-                            "minimum":
-                            [
-                                "1g ALCAR",
-                                "200-600mg CoQ10",
-                                "800-IU Vitamin E"
-                            ]
-                        }
-                    },
-                    "5": "I haven't rolled in at least 5 weeks but ideally 3 months",
-                    "6": "I'm aware of the dosage guideline (your weight in kg + 50 = dosage in mg for the night)",
-                    "7": "I'll drink 250-500 ml/h (1-2 cups), definitely no more than 500 ml/h (2 cups) and ideally Gatorade/Lucozade instead of water",
-                    "8": "I'll stay cool to avoid heat stroke",
-                    "9": "I'll take MDMA in a safe, cool and positive environment",
-                    "10": "I'm aware that MDMA can bring to the surface issues that I may be emotionally struggling with",
-                    "11": "I know the signs of heat stroke and agree to pay attention to the friend I am rolling with",
-                    "12": "I know my intention for taking MDMA, even if it's just for fun, and I will tell the people I plan to roll with"
-                }
+                "info": "Before you consume MDMA make sure you read about the biggest risks and you follow the checklist underneath.",
+                "biggest risks": ["Fake MDMA", "Unsafe dosages", "Not taking a long enough break between MDMA uses", "Lack of sleep", "Mixing drugs"],
+                "checklist": ["I have no pre-existing health conditions that make MDMA less safe", "I'm not taking medicines or supplements that may interact badly with MDMA", "I have tested my MDMA with a reagent test", "I have my optional supplements ready", "I haven't rolled in at least 5 weeks but ideally 3 months", "I'm aware of the dosage guideline (your weight in kg + 50 = dosage in mg for the night)", "I'll drink 250-500 ml/h (1-2 cups), definitely no more than 500 ml/h (2 cups) and ideally Gatorade/Lucozade instead of water", "I'll stay cool to avoid heat stroke", "I'll take MDMA in a safe, cool and positive environment", "I'm aware that MDMA can bring to the surface issues that I may be emotionally struggling with", "I know the signs of heat stroke and agree to pay attention to the friend I am rolling with", "I know my intention for taking MDMA, even if it's just for fun, and I will tell the people I plan to roll with"]
             },
             "colour": "violet"
         },
@@ -116,9 +66,10 @@
                 "heavy": "90",
                 "danger_level": "100"
             },
-            "sold_as": "Cocaine is obtainable as cocaine paste,salts, freebase (base form of cocaine), \"crack\", coca leaf infusions and coca leaf chewing",
+            "forms": "Cocaine is obtainable as cocaine paste,salts, freebase (base form of cocaine), \"crack\", coca leaf infusions and coca leaf chewing",
             "effects":
             {
+                "info": "Cocaine has both positive and negative effects, here's a list of all the effects.",
                 "positive_effects": ["Analysis enhancement", "Anxiety suppression", "Cognitive euphoria", "Ego inflation", "Focus enhancement", "Increased libido", "Increased music appreciation", "Mania", "Motivation enhancement", "Thought acceleration", "Thought organization", "Wakefulness"],
                 "negative_effects": ["Compulsive redosing", "Disinhibition", "Irritability", "Memory suppression", "Suggestibility suppression", "Time compression"],
                 "physical_effects": ["Stimulation", "Abnormal heartbeat", "Physical euphoria", "Increased heart rate", "Increased blood pressure", "Appetite supression", "Bodily control enhancement", "Bronchodilation", "Dehydration", "Frequent urination", "Increased bodily temperature", "Increased perspiration", "Pain relief", "Pupil dilation", "Mouth numbing", "Tacticle hallucination", "Teeth grinding", "Temporary erectile dysfunction", "Vasoconstriction"],
