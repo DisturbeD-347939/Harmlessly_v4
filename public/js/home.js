@@ -589,11 +589,76 @@ $(document).ready(function()
         $('#wikipediaSubstanceInfo > ul > li > div:last-child').empty();
     })
 
+    /******************************************* WIKIPEDIA ************************************************/
+
+    $('body').delegate('.dashboardSubstancesGroups', 'click', function()
+    {
+        hideAppTabs();
+        $('#detailedSubstance').show();
+        $('.detailedSubstanceRecentActivity').empty();
+
+        console.log(substancesUsage);
+
+        var substance = $(this).children("div").children("h5").text();
+        var consumed = 0;
+        var timestamps = [];
+        var lastUse;
+        var timesUsed = substancesUsage[substance].length;
+
+        for(var i = 0; i < timesUsed; i++)
+        {
+            var greenLevelLimit = (parseInt(substancesInfo[substance]["dosages"]["common"]) + parseInt(substancesInfo[substance]["dosages"]["strong"])) / 2;
+            var yellowLevelLimit = (parseInt(substancesInfo[substance]["dosages"]["strong"]) + parseInt(substancesInfo[substance]["dosages"]["heavy"])) / 2;
+            //var redLevelLimit = (parseInt(substancesInfo[substance]["dosages"]["heavy"]) + parseInt(substancesInfo[substance]["dosages"]["danger_level"])) / 2;
+            var dangerLevel = "";
+
+            consumed += parseInt(substancesUsage[substance][i]["dosage"]);
+            timestamps.push(parseInt(substancesUsage[substance][i]["timestamp"]));
+
+            $('.detailedSubstanceRecentActivity').append("<div name='" + substance + "' class='detailedSubstanceInput z-depth-2'><div class='detailedSubstanceDanger'></div><div class='detailedSubstanceData'><p>" + parseInt(substancesUsage[substance][i]["dosage"]) + "mg</p><div><p>10 seconds</p><i class='small material-icons'>arrow_forward_ios</i></div></div></div>")
+
+            if(parseInt(substancesUsage[substance][i]["dosage"]) < greenLevelLimit)
+            {
+                dangerLevel = "green";
+            }
+            else if(parseInt(substancesUsage[substance][i]["dosage"]) < yellowLevelLimit)
+            {
+                dangerLevel = "yellow";
+            }
+            else
+            {
+                dangerLevel = "red";
+            }
+            
+            //Set danger level color
+            $('.detailedSubstanceInput:last-child > .detailedSubstanceDanger').css('background-color', dangerLevel);
+
+            //Set timestamp
+            $('.detailedSubstanceInput:last-child > .detailedSubstanceData > div > p').text(timeDifference(+ new Date(), parseInt(substancesUsage[substance][i]["timestamp"]) * 1000));
+
+            if(i+1 >= timesUsed)
+            {
+                lastUse = Math.min(...timestamps) * 1000;
+                lastUse = timeDifference(+ new Date(), lastUse);
+                //lastUse = lastUse.replace("ago", "");
+                lastUse = lastUse.replace("approximately", "");
+                var totalSpent = (consumed * prices[substance]) / 1000;
+                $('#detailedSubstance > h4:first-child').text(substance);
+                $('#detailedSubstanceLastUse > p:last-child').text(lastUse);
+                $('#detailedSubstanceConsumed > p:last-child').text(consumed + "mg");
+                $('#detailedSubstanceTimesUsed > p:last-child').text(timesUsed);
+                $('#detailedSubstanceTotalSpent > p:last-child').text("£" + totalSpent.toFixed(2));
+            }
+        }
+
+        console.log(consumed);
+    })
+
     /******************************************* GENERAL ************************************************/
 
     function hideAppTabs()
     {
-        $('#dashboard, #wikipedia, #newSubstance').hide();
+        $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance').hide();
     }
 
     function footerResetImages(target)
