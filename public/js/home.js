@@ -20,11 +20,17 @@ $(document).ready(function()
     var substancesInfo;
     var substancesUsage;
 
+    //Materialize
+    $('.collapsible').collapsible();
+
     //Hide Elements - New Substance
-    $('#newSubstance').hide();
-    $('#newSubstanceSecond').hide();
-    $('#newSubstanceThird').hide();
-    $('#newSubstanceFourth').hide();
+    $('#newSubstance, #newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
+
+    //Hide Elements - Dashboard Nav Bar
+    $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
+
+    //Hide Elements - Wikipedia
+    $('#wikipedia, #wikipediaSubstanceInfo').hide();
 
     //Timers
     var updateNewSubstances;
@@ -43,9 +49,6 @@ $(document).ready(function()
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
     $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
-
-    //Hide Elements - Dashboard Nav Bar
-    $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
 
     //Initialize materialize items
     $('.timepicker').timepicker();
