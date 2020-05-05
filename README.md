@@ -16,6 +16,20 @@ Right now the app is only ready to be displayed on mobile phones (and it's not y
 Check out this [link](https://imgur.com/a/QDKRUlg) for some screenshots of the app!
 
 ---
+## **Technologies used**
+Back-End:
+  1.NodeJS
+  2.Express
+  3.Google Firebase
+  4.Npm
+  
+Front-end:
+  1.Javascript(JQuery)
+  2.SCSS
+  3.Pug/Jade
+  4.Firebase functions
+
+---
 ## **Development Map**
 These are the steps I've taken in order to create this app:
 1. Research the substances and create a JSON file with all the information.
