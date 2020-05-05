@@ -1,5 +1,5 @@
 # **Harmlessly**
-Developer (Back-End & Front-End) - Ricardo Graça
+Developer (Back-End & Front-End) - Ricardo Graça,
 Designer (Icons) - Zach Mather
 
 ---
