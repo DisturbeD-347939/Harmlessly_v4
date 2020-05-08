@@ -771,7 +771,7 @@ function timeDifference(current, previous)
         }
         else
         {
-            return Math.round(elapsed/msPerDay) + ' day ago';
+            return 'approximately ' + Math.round(elapsed/msPerDay) + ' day ago';
         }
     }
     else if (elapsed < msPerYear) 
@@ -782,7 +782,7 @@ function timeDifference(current, previous)
         }
         else
         {
-            return Math.round(elapsed/msPerMonth) + ' month ago';
+            return 'approximately ' + Math.round(elapsed/msPerMonth) + ' month ago';
         }
     }
     else 
@@ -793,7 +793,7 @@ function timeDifference(current, previous)
         }
         else
         {
-            return Math.round(elapsed/msPerYear) + ' year ago';
+            return 'approximately ' + Math.round(elapsed/msPerYear) + ' year ago';
         }
     }
 }
