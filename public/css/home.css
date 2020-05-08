@@ -261,7 +261,7 @@ body {
   #wikipedia #wikipediaMenu {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -270,16 +270,20 @@ body {
       color: #3F61AA;
       margin-bottom: 30px; }
     #wikipedia #wikipediaMenu #wikiSubstances {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 25px; }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%; }
       #wikipedia #wikipediaMenu #wikiSubstances .wikiSubstance {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+        width: 100%;
         border: 1px solid grey;
-        background-color: white; }
+        background-color: white;
+        margin-bottom: 10px; }
         #wikipedia #wikipediaMenu #wikiSubstances .wikiSubstance p {
           justify-self: center;
           align-self: center;
