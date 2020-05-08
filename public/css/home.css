@@ -225,7 +225,7 @@ body {
     width: 100%; }
     #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       width: 90%;
@@ -233,17 +233,17 @@ body {
       border-radius: 5px;
       margin-bottom: 10px; }
       #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceDanger {
-        width: 5px;
-        min-height: 30px;
-        background-color: red;
-        margin-right: 10px; }
+        width: 100%;
+        height: 5px;
+        background-color: red; }
       #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceData {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        color: white; }
+        color: white;
+        margin-left: 10px; }
         #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceData div {
           display: flex;
           flex-direction: row;
@@ -251,6 +251,66 @@ body {
           align-items: center; }
           #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceData div p {
             margin-right: 20px; }
+
+#editDetailedSubstance {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; }
+  #editDetailedSubstance #editDetailedSubstanceInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%; }
+    #editDetailedSubstance #editDetailedSubstanceInputs #editSubstanceName {
+      padding-right: 28px; }
+    #editDetailedSubstance #editDetailedSubstanceInputs div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%; }
+      #editDetailedSubstance #editDetailedSubstanceInputs div div {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center; }
+    #editDetailedSubstance #editDetailedSubstanceInputs #editSubstanceMoods {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+      #editDetailedSubstance #editDetailedSubstanceInputs #editSubstanceMoods div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center; }
+        #editDetailedSubstance #editDetailedSubstanceInputs #editSubstanceMoods div div {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center; }
+  #editDetailedSubstance img {
+    width: 40px;
+    height: 40px; }
+  #editDetailedSubstance #btnDeleteEntry {
+    width: 30%;
+    margin-top: 15px; }
+
+#editDetailedSubstanceField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 95%; }
+  #editDetailedSubstanceField .editDetailedSubstanceFieldInput {
+    width: 70%; }
+  #editDetailedSubstanceField #submitEdit {
+    width: 30px;
+    height: 30px; }
 
 #wikipedia {
   display: flex;
