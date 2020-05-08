@@ -100,6 +100,7 @@ html
                         div.circle-cippler.right
                             div.circle
         div#detailedSubstance
+            i#detailedSubstanceBack.small.material-icons.backArrow arrow_back
             h4 MDMA
             div#detailedSubstanceStats
                 div#detailedSubstanceConsumed.z-depth-3
@@ -116,6 +117,70 @@ html
                     p £3.5
             p Recent activity
             div.detailedSubstanceRecentActivity
+        div#editDetailedSubstance
+            i#editDetailedSubstanceBack.small.material-icons.backArrow arrow_back
+            h4 Info
+            div#editDetailedSubstanceInputs
+                div#editSubstanceName
+                    p Name
+                    p MDMA
+                div#editSubstanceDate(name="Date")
+                    p Date
+                    div
+                        p
+                        i.material-icons.small arrow_forward_ios
+                div#editSubstanceTime(name="Date")
+                    p Time
+                    div
+                        p
+                        i.material-icons.small arrow_forward_ios
+                div#editSubstanceDose(name="Dose")
+                    p Dosage
+                    div
+                        p 200mg
+                        i.material-icons.small arrow_forward_ios
+                div#editSubstanceCost(name="Cost")
+                    p Cost
+                    div
+                        p £35
+                        i.material-icons.small arrow_forward_ios
+                div#editSubstanceMoods(name="Moods")
+                    p Moods
+                    div#editMoodBefore(name="Before")
+                        p Before taking
+                        div
+                            img
+                            p Undefined
+                            i.material-icons.small arrow_forward_ios
+                    div#editMoodWhileOnIt(name="While")
+                        p While on the substance
+                        div
+                            img
+                            p Undefined
+                            i.material-icons.small arrow_forward_ios
+                    div#editMoodAfterwards(name="After")
+                        p Afterwards
+                        div
+                            img
+                            p Undefined
+                            i.material-icons.small arrow_forward_ios
+            div#btnDeleteEntry.waves-effect.waves-light.btn.red.z-depth-4 Delete
+        div#editDetailedSubstanceField
+            i#editDetailedSubstanceFieldBack.small.material-icons.backArrow arrow_back
+            h4    
+            div.editDetailedSubstanceFieldInput(name="Date")
+                h5 When?
+                input#editInputDoseTime.timepicker(placeholder="Time" type="text" readonly="true")
+                input#editInputDoseDate.datepicker(placeholder="Date" type="text")
+            div.editDetailedSubstanceFieldInput(name="Dose")
+                h5 How much?
+                div
+                    div
+                        div.input-field.inline
+                            input#editInputDose.validate(placeholder="100" type="number" data-length="4")
+                        div#editInputDoseScale
+            img#submitEdit(src="./img/icons/check.png")
+
         div#wikipedia
             div#wikipediaMenu
                 h4 Wikipedia
@@ -161,7 +226,7 @@ html
                         div#wikipediaSafetyBody.collapsible-body
         footer
             div#footerNavBar
-                    img#footerDashboardBtn(src="./img/icons/social.png")(name="social")
+                    img#footerDashboardBtn(src="./img/icons/home.png")(name="home")
                     img#footerWikipediaBtn(src="./img/icons/wiki.png")(name="wiki")
                     img#footerNewSubstanceBtn(src="./img/icons/add.png")(name="add")
                     img#footerCalendarBtn(src="./img/icons/calendar.png")(name="calendar")

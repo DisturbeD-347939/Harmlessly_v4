@@ -34,7 +34,7 @@ $(document).ready(function()
     $('#wikipedia, #wikipediaSubstanceInfo').hide();
 
     //Hide Elements - Detailed Substance
-    $('#detailedSubstance').hide();
+    $('#detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput').hide();
 
     //Timers
     var updateNewSubstances;
@@ -162,7 +162,7 @@ $(document).ready(function()
         }
     })
 
-    footerResetImages("social");
+    footerResetImages("home");
 
     /******************************************* DASHBOARD ************************************************/
     $('#footerDashboardBtn').click(function()
@@ -170,7 +170,7 @@ $(document).ready(function()
         cancelTimers();
         clearSubstanceInputs();
         hideAppTabs();
-        footerResetImages("social");
+        footerResetImages("home");
         $('#dashboard').show();
         $('#newSubstance').hide();
     })
@@ -599,14 +599,13 @@ $(document).ready(function()
         $('#wikipediaSubstanceInfo > ul > li > div:last-child').empty();
     })
 
-    /******************************************* WIKIPEDIA ************************************************/
+    /******************************************* GROUPS INSIGHTS ************************************************/
 
     $('body').delegate('.dashboardSubstancesGroups', 'click', function()
     {
         hideAppTabs();
         $('#detailedSubstance').show();
         $('.detailedSubstanceRecentActivity').empty();
-
         console.log(substancesUsage);
 
         var substance = $(this).children("div").children("h5").text();
@@ -625,7 +624,7 @@ $(document).ready(function()
             consumed += parseInt(substancesUsage[substance][i]["dosage"]);
             timestamps.push(parseInt(substancesUsage[substance][i]["timestamp"]));
 
-            $('.detailedSubstanceRecentActivity').append("<div name='" + substance + "' class='detailedSubstanceInput z-depth-2'><div class='detailedSubstanceDanger'></div><div class='detailedSubstanceData'><p>" + parseInt(substancesUsage[substance][i]["dosage"]) + "mg</p><div><p>10 seconds</p><i class='small material-icons'>arrow_forward_ios</i></div></div></div>")
+            $('.detailedSubstanceRecentActivity').append("<div id='" + i + "' name='" + substance + "' class='detailedSubstanceInput z-depth-2'><div class='detailedSubstanceData'><p>" + parseInt(substancesUsage[substance][i]["dosage"]) + "mg</p><div><p>10 seconds</p><i class='small material-icons'>arrow_forward_ios</i></div></div><div class='detailedSubstanceDanger'></div></div>")
 
             if(parseInt(substancesUsage[substance][i]["dosage"]) < greenLevelLimit)
             {
@@ -660,15 +659,93 @@ $(document).ready(function()
                 $('#detailedSubstanceTotalSpent > p:last-child').text("£" + totalSpent.toFixed(2));
             }
         }
+    })
 
-        console.log(consumed);
+    $('#detailedSubstanceBack').click(function()
+    {
+        hideAppTabs();
+        $('#dashboard').show();
+    })
+
+    $('body').delegate('.detailedSubstanceInput', 'click', function(e)
+    {
+        $('#editDetailedSubstance').show();
+        $('#detailedSubstance').hide();
+        var data = substancesUsage[$(this).attr('name')][$(this).attr('id')];
+        var editTimestamp = new Date(data["timestamp"] * 1000);
+
+        $('#editSubstanceName > div > p').text($(this).attr('name'));
+        $('#editSubstanceDate > div > p').text(editTimestamp.toLocaleDateString());
+        $('#editSubstanceTime > div > p').text(editTimestamp.getHours() + ":" + (editTimestamp.getMinutes()<10?'0':'') + editTimestamp.getMinutes());
+        $('#editSubstanceDose > div > p').text(data["dosage"] + "mg");
+        $('#editSubstanceCost > div > p').text("£35");
+
+        if(data["moods"][0] != "f")
+        {
+            $('#editMoodBefore > div > img').show();
+            $('#editMoodBefore > div > p').hide();
+
+            $('#editMoodBefore > div > img').attr('src', './img/moods/' + data["moods"][0] + '.png');
+        }
+        else
+        {
+            $('#editMoodBefore > div > img').hide();
+            $('#editMoodBefore > div > p').show();
+        }
+
+        if(data["moods"][1] != "f")
+        {
+            $('#editMoodWhileOnIt > div > img').show();
+            $('#editMoodWhileOnIt > div > p').hide();
+
+            $('#editMoodWhileOnIt > div > img').attr('src', './img/moods/' + data["moods"][1] + '.png');
+        }
+        else
+        {
+            $('#editMoodWhileOnIt > div > img').hide();
+            $('#editMoodWhileOnIt > div > p').show();
+        }
+
+        if(data["moods"][2] != "f")
+        {
+            $('#editMoodAfterwards > div > img').show();
+            $('#editMoodAfterwards > div > p').hide();
+
+            $('#editMoodAfterwards > div > img').attr('src', './img/moods/' + data["moods"][2] + '.png');
+        }
+        else
+        {
+            $('#editMoodAfterwards > div > img').hide();
+            $('#editMoodAfterwards > div > p').show();
+        }
+    })
+
+    $('#editDetailedSubstanceBack').click(function()
+    {
+        hideAppTabs();
+        $('#detailedSubstance').show();
+    })
+
+    $('#editDetailedSubstance > div > div').click(function(e)
+    {
+        hideAppTabs();
+        $('#editDetailedSubstanceField').show();
+        console.log($(this).attr('name'));
+        $('#editDetailedSubstanceField > h4').text($(this).attr('name'));
+        $('.editDetailedSubstanceFieldInput[name="' + $(this).attr('name') + '"').show();
+    })
+
+    $('#editDetailedSubstanceFieldBack').click(function()
+    {
+        hideAppTabs();
+        $('#editDetailedSubstance').show();
     })
 
     /******************************************* GENERAL ************************************************/
 
     function hideAppTabs()
     {
-        $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance').hide();
+        $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput').hide();
     }
 
     function footerResetImages(target)
