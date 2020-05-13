@@ -63,6 +63,8 @@ $(document).ready(function()
         top: $('#footerNewSubstanceBtn').position().top - 5,
     })
     
+    $('#burger').css('top', screen.height - $('#burger').height() - $('#footerNavBar').height());
+    
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
     $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
