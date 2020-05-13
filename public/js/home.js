@@ -780,6 +780,46 @@ $(document).ready(function()
         window.location.href = "https://www.reddit.com/r/harmlessly/";
     })
 
+    /******************************************* BURGER MENU ************************************************/
+
+    var burgerOpen = false;
+
+    $('#footerBurgerBtn').click(function()
+    {
+        burgerToggle();
+        burgerOpen = true;
+        $('#burger').css('left', screen.width - $('#burger').width());
+    })
+
+    function burgerToggle()
+    {
+        if($('#burger').is(":visible"))
+        {
+            $('#burger').hide();
+            $("#footerBurgerBtn").attr('src', './img/icons/burger.png');
+            burgerOn = true;
+        }
+        else
+        {
+            $('#burger').show();
+            $("#footerBurgerBtn").attr('src', './img/icons/burgerClicked.png');
+            burgerOn = true;
+        }
+    }
+
+    $('body').click(function(e)
+    {
+        if(burgerOpen)
+        {
+            burgerOpen = false;
+        }
+        else if($(e.target).parents('#burger').length == 0)
+        {
+            $('#burger').hide();
+            $("#footerBurgerBtn").attr('src', './img/icons/burger.png');
+        }
+    })
+
     /******************************************* GENERAL ************************************************/
 
     function hideAppTabs()
