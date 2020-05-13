@@ -39,8 +39,15 @@ $(document).ready(function()
     //Hide Elements - Wikipedia
     $('#wikipediaSubstanceInfo').hide();
 
-    //Hide Elements - Detailed Substance
-    $('#detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput').hide();
+    //Hide Elements - Burguer
+    $('#burger').hide();
+
+    //Hide Elements - Settings
+    $('#settingsColors, #settingsCurrency, #settingsSubstancePriceList').hide();
+
+    //Hide more elements
+    hideAppTabs();
+    $('#dashboard').show();
 
     //Timers
     var updateNewSubstances;
