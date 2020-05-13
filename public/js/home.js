@@ -766,6 +766,20 @@ $(document).ready(function()
         $('#editDetailedSubstance').show();
     })
 
+    /******************************************* SOCIAL ************************************************/
+
+    $('#footerSocialBtn').click(function()
+    {
+        hideAppTabs();
+        footerResetImages("social");
+        $('#social').show();
+    })
+
+    $('#redditLogo').click(function()
+    {
+        window.location.href = "https://www.reddit.com/r/harmlessly/";
+    })
+
     /******************************************* GENERAL ************************************************/
 
     function hideAppTabs()
