@@ -820,11 +820,94 @@ $(document).ready(function()
         }
     })
 
+    /******************************************* SETTINGS ************************************************/
+
+    $('#settingsBtn').click(function()
+    {
+        hideAppTabs();
+        burgerToggle();
+        footerResetImages("none");
+        $('#settings').show();
+    })
+
+    $('#settingsColors > div > input').keyup(function(e)
+    {
+        //Check if its an hex color code
+        if(/^#[0-9A-F]{6}$/i.test($(this).val()))
+        {
+            $(this).addClass('valid');
+            $(this).removeClass('invalid');
+            $('#' + $(this).attr('id') + 'Preview').css('background-color', $(this).val());
+        }
+        else
+        {
+            $(this).removeClass('valid');
+            $(this).addClass('invalid');
+        }
+    })
+
+    $('#applyColors').click(function()
+    {
+        $('.backgroundColorInside').css('color', $('#backgroundColor').val());
+        $('.backgroundColorBack').css('background-color', $('#backgroundColor').val());
+
+        $('.gradient').css('background-image', 'linear-gradient(45deg, ' + $('#secondaryColor').val() + ',' + $('#mainColor').val() + ')');
+        $('.gradientFooter').css('background-image', 'linear-gradient(0deg, ' + $('#secondaryColor').val() + ',' + $('#mainColor').val() + ')');
+        $('.gradientFooterBorder').css('background-image', 'linear-gradient(0deg, ' + $('#secondaryColor').val() + ',' + $('#tertiaryColor').val() + ')');
+
+        $('.mainColorInside').css('color', $('#mainColor').val());
+        $('.mainColorBack').css('background-color', $('#mainColor').val());
+    })
+
+    $('#themeBtn').click(function()
+    {
+        $('#settingsMenu').hide();
+        $('#settingsColors').show();
+    })
+
+    $('#settingsColorBack').click(function()
+    {
+        $('#settingsMenu').show();
+        $('#settingsColors').hide();
+    })
+
+    $('#currencyBtn').click(function()
+    {
+        $('#settingsMenu').hide();
+        $('#settingsCurrency').show();
+    })
+
+    $('#settingsCurrencyBack').click(function()
+    {
+        $('#settingsMenu').show();
+        $('#settingsCurrency').hide();
+    })
+
+    $('#pricesBtn').click(function()
+    {
+        $('#settingsMenu').hide();
+        $('#settingsSubstancePriceList').show();
+    })
+
+    $('#settingsSubstancePriceListBack').click(function()
+    {
+        $('#settingsMenu').show();
+        $('#settingsSubstancePriceList').hide();
+    })
+
+    function populateSubstancesPriceList()
+    {
+        for(var i = 0; i < Object.keys(substancesInfo).length; i++)
+        {
+            $('#substancesPriceLists').append('<div><p>' + Object.keys(substancesInfo)[i] + '</p><input type="number" value=' + "35" + '></input></div>')
+        }
+    }
+
     /******************************************* GENERAL ************************************************/
 
     function hideAppTabs()
     {
-        $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput').hide();
+        $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput, #social, #settings').hide();
     }
 
     function footerResetImages(target)
