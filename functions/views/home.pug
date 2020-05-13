@@ -11,27 +11,27 @@ html
         script(src="./js/jquery-3.4.1.min.js")
         script(src="./js/materialize.min.js")
         script(src="./js/home.js")
-    body
+    body.backgroundColorBack
         div#dashboard
             div#dashboardNavBar
                 div
                     p#dashboardBtn Dashboard
-                    div.dashboardSelected
+                    div.dashboardSelected.mainColorBack
                 div
                     p#calendarBtn Calendar
-                    div.dashboardSelected
-            div#dashboardMiniCalendar.z-depth-3
+                    div.dashboardSelected.mainColorBack
+            div#dashboardMiniCalendar.gradient.z-depth-3
                 div 
-                    p#dashboardMiniCalendarTitle Calendar
-                    p#dashboardMiniCalendarMonth
+                    p.backgroundColorInside#dashboardMiniCalendarTitle Calendar
+                    p.backgroundColorInside#dashboardMiniCalendarMonth
                 div
-                    p.bold.weekDaysMiniCalendar Mon
-                    p.bold.weekDaysMiniCalendar Tue
-                    p.bold.weekDaysMiniCalendar Wed
-                    p.bold.weekDaysMiniCalendar Thu
-                    p.bold.weekDaysMiniCalendar Fri
-                    p.bold.weekDaysMiniCalendar Sat
-                    p.bold.weekDaysMiniCalendar Sun
+                    p.backgroundColorInside.bold.weekDaysMiniCalendar Mon
+                    p.backgroundColorInside.bold.weekDaysMiniCalendar Tue
+                    p.backgroundColorInside.bold.weekDaysMiniCalendar Wed
+                    p.backgroundColorInside.bold.weekDaysMiniCalendar Thu
+                    p.backgroundColorInside.bold.weekDaysMiniCalendar Fri
+                    p.backgroundColorInside.bold.weekDaysMiniCalendar Sat
+                    p.backgroundColorInside.bold.weekDaysMiniCalendar Sun
             div#dashboardSubstances
                 div#displayEntriesLoading.preloader-wrapper.big.active
                     div.spinner-layer.spinner-blue-only
@@ -73,19 +73,19 @@ html
                 h5
                 div.moodsBox#moodInputBefore
                     h5 Before taking it?
-                    div.moods.z-depth-4
+                    div.moods.gradient.z-depth-4
                         img.bad(src="./img/moods/bad.png")
                         img.neutral(src="./img/moods/neutral.png")
                         img.good(src="./img/moods/good.png")
                 div.moodsBox#moodInputDuring
                     h5 While on it?
-                    div.moods.z-depth-4
+                    div.moods.gradient.z-depth-4
                         img.bad(src="./img/moods/bad.png")
                         img.neutral(src="./img/moods/neutral.png")
                         img.good(src="./img/moods/good.png")
                 div.moodsBox#moodInputAfter
                     h5 After you've comedown?
-                    div.moods.z-depth-4
+                    div.moods.gradient.z-depth-4
                         img.bad(src="./img/moods/bad.png")
                         img.neutral(src="./img/moods/neutral.png")
                         img.good(src="./img/moods/good.png")
@@ -103,16 +103,16 @@ html
             i#detailedSubstanceBack.small.material-icons.backArrow arrow_back
             h4 MDMA
             div#detailedSubstanceStats
-                div#detailedSubstanceConsumed.z-depth-3
+                div.gradient#detailedSubstanceConsumed.z-depth-3
                     p.bold Consumed
                     p 100mg
-                div#detailedSubstanceTimesUsed.z-depth-3
+                div.gradient#detailedSubstanceTimesUsed.z-depth-3
                     p.bold Times used
                     p 1
-                div#detailedSubstanceLastUse.z-depth-3
+                div.gradient#detailedSubstanceLastUse.z-depth-3
                     p.bold Last use
                     p 1 second ago
-                div#detailedSubstanceTotalSpent.z-depth-3
+                div.gradient#detailedSubstanceTotalSpent.z-depth-3
                     p.bold Spent
                     p £3.5
             p Recent activity
@@ -180,7 +180,6 @@ html
                             input#editInputDose.validate(placeholder="100" type="number" data-length="4")
                         div#editInputDoseScale
             img#submitEdit(src="./img/icons/check.png")
-
         div#wikipedia
             div#wikipediaMenu
                 h4 Wikipedia
@@ -190,37 +189,37 @@ html
                 h4#wikipediaSubstanceTitle MDMA
                 ul.collapsible
                     li
-                        div#wikipediaNicknameTitle.collapsible-header
+                        div#wikipediaNicknameTitle.collapsible-header.gradient
                             i.material-icons create
                             |Nicknames
                         div#wikipediaNicknameBody.collapsible-body
                     li
-                        div#wikipediaDosingTitle.collapsible-header
+                        div#wikipediaDosingTitle.collapsible-header.gradient
                             i.material-icons merge_type
                             |Dosing methods
                         div#wikipediaDosingBody.collapsible-body
                     li
-                        div#wikipediaFormsTitle.collapsible-header
+                        div#wikipediaFormsTitle.collapsible-header.gradient
                             i.material-icons notes
                             |Forms
                         div#wikipediaFormsBody.collapsible-body
                     li
-                        div#wikipediaEffectsTitle.collapsible-header
+                        div#wikipediaEffectsTitle.collapsible-header.gradient
                             i.material-icons equalizer
                             |Effects
                         div#wikipediaEffectsBody.collapsible-body
                     li
-                        div#wikipediaDurationTitle.collapsible-header
+                        div#wikipediaDurationTitle.collapsible-header.gradient
                             i.material-icons timer
                             |Duration
                         div#wikipediaDurationBody.collapsible-body
                     li
-                        div#wikipediaRisksTitle.collapsible-header
+                        div#wikipediaRisksTitle.collapsible-header.gradient
                             i.material-icons warning
                             |Risks
                         div#wikipediaRisksBody.collapsible-body
                     li
-                        div#wikipediaSafetyTitle.collapsible-header
+                        div#wikipediaSafetyTitle.collapsible-header.gradient
                             i.material-icons security
                             |Safety
                         div#wikipediaSafetyBody.collapsible-body
@@ -229,7 +228,7 @@ html
                     img#footerDashboardBtn(src="./img/icons/home.png")(name="home")
                     img#footerWikipediaBtn(src="./img/icons/wiki.png")(name="wiki")
                     img#footerNewSubstanceBtn(src="./img/icons/add.png")(name="add")
-                    img#footerCalendarBtn(src="./img/icons/calendar.png")(name="calendar")
+                    img#footerSocialBtn(src="./img/icons/social.png")(name="social")
                     img#footerBurgerBtn(src="./img/icons/burger.png")(name="burger")
-                    div#footerNewSubstanceBtnBorder
+                    div#footerNewSubstanceBtnBorder.gradientFooterBorder
             
