@@ -11,9 +11,44 @@ $color1: #009FE3;
 $color2: #3F61AA;
 $color3: #31c1ff;
 
-body
+.backgroundColorInside
 {
-    background-color: $background;
+    color: #EAEDED;
+}
+
+.backgroundColorBack
+{
+    background-color: #EAEDED;
+}
+
+.black
+{
+    color: black;
+}
+
+.gradient
+{
+    background-image: linear-gradient(45deg, #3F61AA, #009FE3);
+}
+
+.gradientFooter
+{
+    background-image: linear-gradient(0deg, #3F61AA, #009FE3);
+}
+
+.gradientFooterBorder
+{
+    background-image: linear-gradient(0deg, #3F61AA, #31C1FF);
+}
+
+.mainColorInside
+{
+    color: #009FE3;
+}
+
+.mainColorBack
+{
+    background-color: #009FE3;
 }
 
 #dashboard
@@ -48,15 +83,13 @@ body
             width: 10px;
             height: 6px;
     
-            background-color: $color1;
+            //background-color: $color1;
         }
     }
 
     #dashboardMiniCalendar
     {
         @include flex(column, center, flex-start);
-
-        background-image: linear-gradient(45deg, $color2, $color1);
 
         margin-top: 20px;
         border-radius: 2%;
@@ -71,7 +104,6 @@ body
 
             p
             {
-                color: $background;
                 margin-top: 10px;
                 margin-bottom: 0px;
                 font-size: 15px;
@@ -88,11 +120,6 @@ body
 
             width: 95%;
             margin-bottom: 15px;
-
-            p
-            {
-                color: $background
-            }
         }
 
         .weekDaysMiniCalendar
@@ -116,9 +143,6 @@ body
         .dashboardSubstancesGroups
         {
             @include flex(row, space-between, center);
-
-            color: white;
-            background-image: linear-gradient(45deg, $color2, $color1);
 
             width: 95%;
 
@@ -271,8 +295,6 @@ body
 
                 padding: 10px;
                 margin: 10px 0px;
-
-                background-image: linear-gradient(-45deg, $color2, $color1);
                 border-radius: 2%;
 
                 img
@@ -319,8 +341,6 @@ body
 
             border-radius: 5px;
 
-            background-image: linear-gradient(45deg, $color2, $color1);
-
             p
             {
                 margin: 0px;
@@ -344,7 +364,6 @@ body
             @include flex(column, flex-start, center);
 
             width: 90%;
-            background-image: linear-gradient(45deg, $color2, $color1);
             border-radius: 5px;
             margin-bottom: 10px;
 
@@ -531,8 +550,121 @@ body
 
             .collapsible-header
             {
-                background-image: linear-gradient(45deg, $color2, $color1);
                 color: white;
+            }
+        }
+    }
+}
+
+#social
+{
+    @include flex(column, center, center);
+
+    width: 100%;
+    height: 95%;
+
+    #redditDiv
+    {
+        @include flex(column, center, center);
+
+        #redditLogo
+        {
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
+
+#burger
+{
+    position: fixed;
+
+    width: auto;
+    height: auto;
+
+    ul
+    {
+        border: 2px solid black;
+        border-right: 0px;
+        margin: 0px;
+
+        li
+        {
+            border-bottom: 2px solid black;
+            padding: 5px;
+
+            div
+            {
+                @include flex(row, flex-start, center);
+
+                i
+                {
+                    margin-right: 10px;
+                }
+
+                p
+                {
+                    margin: 0px;
+                }
+            }
+        }
+
+        li:last-child
+        {
+            border-bottom: 0px;
+        }
+    }
+}
+
+#settings
+{
+    @include flex(column, center, center);
+
+    width: 100%;
+    height: 90%;
+
+    #settingsMenu
+    {
+        h4
+        {
+            margin-bottom: 30px;
+        }
+
+        div
+        {
+            width: 90%;
+            height: 40px;
+
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid grey;
+
+            margin-bottom: 20px;
+        }
+    }
+
+    div
+    {
+        @include flex(column, center, center);
+
+        width: 90%;
+
+        #manualInputColors
+        {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            div
+            {
+                justify-self: center;
+                align-self: center;
+
+                height: 30px;
+                width: 30px;
+
+                border: 1px solid black;
+                background-color: red;
+                border-radius: 50%;
             }
         }
     }
@@ -547,13 +679,10 @@ footer
 
     z-index: 1;
 
-    background-image: linear-gradient(0deg, $color2, $color1);
-
     #footerNewSubstanceBtnBorder
     {
         position: absolute;
         border-radius: 50%;
-        background-image: linear-gradient(0deg, $color2, $color3);
         z-index: -1;
     }
 

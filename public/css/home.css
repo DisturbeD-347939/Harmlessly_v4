@@ -1,5 +1,26 @@
-body {
+.backgroundColorInside {
+  color: #EAEDED; }
+
+.backgroundColorBack {
   background-color: #EAEDED; }
+
+.black {
+  color: black; }
+
+.gradient {
+  background-image: linear-gradient(45deg, #3F61AA, #009FE3); }
+
+.gradientFooter {
+  background-image: linear-gradient(0deg, #3F61AA, #009FE3); }
+
+.gradientFooterBorder {
+  background-image: linear-gradient(0deg, #3F61AA, #31C1FF); }
+
+.mainColorInside {
+  color: #009FE3; }
+
+.mainColorBack {
+  background-color: #009FE3; }
 
 #dashboard {
   display: flex;
@@ -25,14 +46,12 @@ body {
     #dashboard #dashboardNavBar .dashboardSelected {
       position: relative;
       width: 10px;
-      height: 6px;
-      background-color: #009FE3; }
+      height: 6px; }
   #dashboard #dashboardMiniCalendar {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-image: linear-gradient(45deg, #3F61AA, #009FE3);
     margin-top: 20px;
     border-radius: 2%;
     width: 95%;
@@ -44,7 +63,6 @@ body {
       align-items: center;
       width: 95%; }
       #dashboard #dashboardMiniCalendar div:first-child p {
-        color: #EAEDED;
         margin-top: 10px;
         margin-bottom: 0px;
         font-size: 15px;
@@ -56,8 +74,6 @@ body {
       align-items: center;
       width: 95%;
       margin-bottom: 15px; }
-      #dashboard #dashboardMiniCalendar div:last-child p {
-        color: #EAEDED; }
     #dashboard #dashboardMiniCalendar .weekDaysMiniCalendar {
       margin-bottom: 0px; }
   #dashboard #dashboardSubstances {
@@ -74,8 +90,6 @@ body {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      color: white;
-      background-image: linear-gradient(45deg, #3F61AA, #009FE3);
       width: 95%;
       border-radius: 5px; }
       #dashboard #dashboardSubstances .dashboardSubstancesGroups .dashboardSubstancesGroupsData {
@@ -181,7 +195,6 @@ body {
         align-items: center;
         padding: 10px;
         margin: 10px 0px;
-        background-image: linear-gradient(-45deg, #3F61AA, #009FE3);
         border-radius: 2%; }
         #newSubstance #newSubstanceFourth .moodsBox .moods img {
           width: 80px;
@@ -210,8 +223,7 @@ body {
       justify-content: center;
       align-items: center;
       height: 50px;
-      border-radius: 5px;
-      background-image: linear-gradient(45deg, #3F61AA, #009FE3); }
+      border-radius: 5px; }
       #detailedSubstance #detailedSubstanceStats div p {
         margin: 0px;
         color: white; }
@@ -229,7 +241,6 @@ body {
       justify-content: flex-start;
       align-items: center;
       width: 90%;
-      background-image: linear-gradient(45deg, #3F61AA, #009FE3);
       border-radius: 5px;
       margin-bottom: 10px; }
       #detailedSubstance .detailedSubstanceRecentActivity .detailedSubstanceInput .detailedSubstanceDanger {
@@ -369,20 +380,90 @@ body {
         list-style-type: circle;
         margin-left: 28px; }
       #wikipedia #wikipediaSubstanceInfo .collapsible .collapsible-header {
-        background-image: linear-gradient(45deg, #3F61AA, #009FE3);
         color: white; }
+
+#social {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 95%; }
+  #social #redditDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    #social #redditDiv #redditLogo {
+      width: 40px;
+      height: 40px; }
+
+#burger {
+  position: fixed;
+  width: auto;
+  height: auto; }
+  #burger ul {
+    border: 2px solid black;
+    border-right: 0px;
+    margin: 0px; }
+    #burger ul li {
+      border-bottom: 2px solid black;
+      padding: 5px; }
+      #burger ul li div {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center; }
+        #burger ul li div i {
+          margin-right: 10px; }
+        #burger ul li div p {
+          margin: 0px; }
+    #burger ul li:last-child {
+      border-bottom: 0px; }
+
+#settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90%; }
+  #settings #settingsMenu h4 {
+    margin-bottom: 30px; }
+  #settings #settingsMenu div {
+    width: 90%;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-bottom: 20px; }
+  #settings div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%; }
+    #settings div #manualInputColors {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); }
+      #settings div #manualInputColors div {
+        justify-self: center;
+        align-self: center;
+        height: 30px;
+        width: 30px;
+        border: 1px solid black;
+        background-color: red;
+        border-radius: 50%; }
 
 footer {
   position: fixed;
   bottom: 0px;
   width: 100%;
   height: 5%;
-  z-index: 1;
-  background-image: linear-gradient(0deg, #3F61AA, #009FE3); }
+  z-index: 1; }
   footer #footerNewSubstanceBtnBorder {
     position: absolute;
     border-radius: 50%;
-    background-image: linear-gradient(0deg, #3F61AA, #31c1ff);
     z-index: -1; }
   footer #footerNavBar {
     display: flex;
