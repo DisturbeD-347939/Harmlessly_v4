@@ -248,6 +248,30 @@ html
                 div#themeBtn.mainColorBack.backgroundColorInside.z-depth-4 Theme
                 div#currencyBtn.mainColorBack.backgroundColorInside.z-depth-4 Currency
                 div#pricesBtn.mainColorBack.backgroundColorInside.z-depth-4 Substances price list
+            div#settingsColors
+                i#settingsColorBack.small.material-icons.backArrow arrow_back
+                h4 Theme
+                div
+                    p Dark Mode
+                    div.switch
+                        label
+                            input(type="checkbox")
+                            span.lever
+                p Manually choose colors
+                div#manualInputColors
+                    p Background:
+                    input#backgroundColor(type="text" placeholder="33aaff")
+                    div#backgroundColorPreview
+                    p Main:
+                    input#mainColor(type="text" placeholder="33aaff")
+                    div#mainColorPreview
+                    p Secondary:
+                    input#secondaryColor(type="text" placeholder="33aaff")
+                    div#secondaryColorPreview
+                    p Tertiary:
+                    input#tertiaryColor(type="text" placeholder="33aaff")
+                    div#tertiaryColorPreview
+                div#applyColors.waves-effect.waves-light.btn.light-blue Apply
             div#footerNavBar
                     img#footerDashboardBtn(src="./img/icons/home.png")(name="home")
                     img#footerWikipediaBtn(src="./img/icons/wiki.png")(name="wiki")
