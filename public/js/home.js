@@ -15,8 +15,10 @@ $(document).ready(function()
 {
     /******************************************* SETUP ************************************************/
     //Variables
-    var backgroundColorHEX = "#EAEDED";
+    var backgroundColor = "#EAEDED";
     var color1 = "#009FE3";
+    var color2 = "#3F61AA";
+    var color3 = "#31C1FF";
     var substancesInfo;
     var substancesUsage = {};
     var prices = {"MDMA": 35, "Cocaine": 80}
@@ -29,13 +31,13 @@ $(document).ready(function()
     $('select').formSelect();
 
     //Hide Elements - New Substance
-    $('#newSubstance, #newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
+    $('#newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
 
     //Hide Elements - Dashboard Nav Bar
-    $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
+    $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColor);
 
     //Hide Elements - Wikipedia
-    $('#wikipedia, #wikipediaSubstanceInfo').hide();
+    $('#wikipediaSubstanceInfo').hide();
 
     //Hide Elements - Detailed Substance
     $('#detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput').hide();
