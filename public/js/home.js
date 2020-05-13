@@ -23,6 +23,10 @@ $(document).ready(function()
 
     //Materialize
     $('.collapsible').collapsible();
+    $('.dropdown-trigger').dropdown();
+    $('.timepicker').timepicker();
+    $('.datepicker').datepicker();
+    $('select').formSelect();
 
     //Hide Elements - New Substance
     $('#newSubstance, #newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
