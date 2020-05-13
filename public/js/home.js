@@ -67,9 +67,18 @@ $(document).ready(function()
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
     $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
 
-    //Initialize materialize items
-    $('.timepicker').timepicker();
-    $('.datepicker').datepicker();
+    //Fill up settings colors
+    $('#backgroundColor').attr('value', backgroundColor);
+    $('#backgroundColorPreview').css('background-color', backgroundColor);
+
+    $('#mainColor').attr('value', color1);
+    $('#mainColorPreview').css('background-color', color1);
+
+    $('#secondaryColor').attr('value', color2);
+    $('#secondaryColorPreview').css('background-color', color2);
+
+    $('#tertiaryColor').attr('value', color3);
+    $('#tertiaryColorPreview').css('background-color', color3);
 
     //Processing calendar
     $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
