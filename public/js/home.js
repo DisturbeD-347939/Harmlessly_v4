@@ -120,7 +120,7 @@ $(document).ready(function()
                                 {
                                     for(var r = 0; r < days.length; r++)
                                     {
-                                        $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
+                                        $('#dashboardMiniCalendar > div:last-child').append("<p class='backgroundColorInside'>" + days[r] + "</p>");
                                     }
                                 }
                             }
@@ -129,7 +129,7 @@ $(document).ready(function()
                         {
                             for(var r = 0; r < days.length; r++)
                             {
-                                $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[r] + "</p>");
+                                $('#dashboardMiniCalendar > div:last-child').append("<p class='backgroundColorInside'>" + days[r] + "</p>");
                             }
                         }
                     }
@@ -178,6 +178,7 @@ $(document).ready(function()
         {
             substancesUsage = data["data"];
             populateDashboardSubstances();
+            populateSubstancesPriceList();
         }
         else if(data["code"] == "204")
         {
@@ -201,13 +202,13 @@ $(document).ready(function()
 
     $("#calendarBtn").click(function()
     {
-        $('#dashboardNavBar > div:first-child > div').css('background-color', backgroundColorHEX);
+        $('#dashboardNavBar > div:first-child > div').css('background-color', backgroundColor);
         $('#dashboardNavBar > div:last-child > div').css('background-color', color1);
     })
 
     $("#dashboardBtn").click(function()
     {
-        $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColorHEX);
+        $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColor);
         $('#dashboardNavBar > div:first-child > div').css('background-color', color1);
     })
 
@@ -247,7 +248,7 @@ $(document).ready(function()
 
         for(var i = 0; i < Object.keys(substancesUsage).length; i++)
         {
-            $('#dashboardSubstances').append("<div class='dashboardSubstancesGroups z-depth-3'><div class='dashboardSubstancesGroupsData'><h5>" + Object.keys(substancesUsage)[i] + "</h5><p>Last consumed - " + timeDifference(+ new Date(), recentTimestamp[Object.keys(substancesUsage)[i]]*1000) + "</p><div class='dashboardSubstancesGroupsStatus'></div></div><i class='medium material-icons'>arrow_forward_ios</i>");
+            $('#dashboardSubstances').append("<div class='dashboardSubstancesGroups backgroundColorInside z-depth-3 gradient'><div class='dashboardSubstancesGroupsData'><h5>" + Object.keys(substancesUsage)[i] + "</h5><p>Last consumed - " + timeDifference(+ new Date(), recentTimestamp[Object.keys(substancesUsage)[i]]*1000) + "</p><div class='dashboardSubstancesGroupsStatus'></div></div><i class='medium material-icons'>arrow_forward_ios</i>");
 
             if(i+1 >= Object.keys(substancesUsage).length)
             {
@@ -648,7 +649,7 @@ $(document).ready(function()
             consumed += parseInt(substancesUsage[substance][i]["dosage"]);
             timestamps.push(parseInt(substancesUsage[substance][i]["timestamp"]));
 
-            $('.detailedSubstanceRecentActivity').append("<div id='" + i + "' name='" + substance + "' class='detailedSubstanceInput z-depth-2'><div class='detailedSubstanceData'><p>" + parseInt(substancesUsage[substance][i]["dosage"]) + "mg</p><div><p>10 seconds</p><i class='small material-icons'>arrow_forward_ios</i></div></div><div class='detailedSubstanceDanger'></div></div>")
+            $('.detailedSubstanceRecentActivity').append("<div id='" + i + "' name='" + substance + "' class='detailedSubstanceInput z-depth-2 gradient'><div class='detailedSubstanceData'><p>" + parseInt(substancesUsage[substance][i]["dosage"]) + "mg</p><div><p>10 seconds</p><i class='small material-icons'>arrow_forward_ios</i></div></div><div class='detailedSubstanceDanger'></div></div>")
 
             if(parseInt(substancesUsage[substance][i]["dosage"]) < greenLevelLimit)
             {
