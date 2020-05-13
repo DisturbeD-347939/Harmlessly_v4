@@ -47,14 +47,14 @@ $(document).ready(function()
 
     //Sizing/Position - Footer
     $('#footerNewSubstanceBtn').width($('#footerNewSubstanceBtn').height());
-    $('#footerCalendarBtn').width($('#footerCalendarBtn').height());
+    $('#footerSocialBtn').width($('#footerSocialBtn').height());
     $('#footerBurgerBtn').width($('#footerBurgerBtn').height());
     $('#footerNewSubstanceBtnBorder').css
     ({
         width: $('#footerNewSubstanceBtn').width() + 10,
-        height: $('#footerNewSubstanceBtn').height() + 10
+        height: $('#footerNewSubstanceBtn').height() + 10,
+        top: $('#footerNewSubstanceBtn').position().top - 5,
     })
-    $('#footerNewSubstanceBtnBorder').css('top', $('#footerNewSubstanceBtn').position().top - 5);
     
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
