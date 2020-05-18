@@ -74,6 +74,8 @@
       align-items: center;
       width: 95%;
       margin-bottom: 15px; }
+      #dashboard #dashboardMiniCalendar div:last-child p {
+        border-radius: 50%; }
     #dashboard #dashboardMiniCalendar .weekDaysMiniCalendar {
       margin-bottom: 0px; }
   #dashboard #dashboardSubstances {

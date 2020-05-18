@@ -120,6 +120,11 @@ $color3: #31c1ff;
 
             width: 95%;
             margin-bottom: 15px;
+
+            p
+            {
+                border-radius: 50%;
+            }
         }
 
         .weekDaysMiniCalendar
