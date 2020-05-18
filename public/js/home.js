@@ -82,85 +82,6 @@ $(document).ready(function()
     $('#tertiaryColor').attr('value', color3);
     $('#tertiaryColorPreview').css('background-color', color3);
 
-    //Processing calendar
-    $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
-    var days = [];
-
-    //Get first date of the month number
-    var firstDayMonthNumber = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    var daysLength = 34;
-
-    //If the month starts on a Sunday, add an extra week to the calendar
-    if(firstDayMonthNumber == 7)
-    {
-        daysLength = 41;
-    }
-    
-    //If it's not monday
-    if(firstDayMonthNumber != 1)
-    {
-        for(var i = -Math.abs(firstDayMonthNumber - 2); i <= 0; i++)
-        {
-            days.push(new Date(date.getFullYear(), date.getMonth(), i).getDate())
-            if(i+1 >= 1)
-            {
-                for(var j = 1; j <= new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); j++)
-                {
-                    days.push(j);
-                    if(j+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
-                    {
-                        var counterDays = 1;
-                        if(days.length <= daysLength)
-                        {
-                            for(var k = 0; k <= daysLength; k++)
-                            {
-                                days.push(counterDays);
-                                counterDays++;
-                                if(k == daysLength)
-                                {
-                                    for(var r = 0; r < days.length; r++)
-                                    {
-                                        $('#dashboardMiniCalendar > div:last-child').append("<p class='backgroundColorInside'>" + days[r] + "</p>");
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for(var r = 0; r < days.length; r++)
-                            {
-                                $('#dashboardMiniCalendar > div:last-child').append("<p class='backgroundColorInside'>" + days[r] + "</p>");
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    else
-    {
-        for(var i = 1; i <= new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); i++)
-        {
-            days.push(i);
-            if(i+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
-            {
-                var counterDays = 1;
-                for(var j = days.length; j <= daysLength; j++)
-                {
-                    days.push(counterDays);
-                    counterDays++;
-                    if(j == daysLength)
-                    {
-                        for(var k = 0; k < days.length; k++)
-                        {
-                            $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[k] + "</p>");
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     //Get data.json
     $.get('/getSubstanceData', function(data, status)
     {
@@ -179,6 +100,7 @@ $(document).ready(function()
             substancesUsage = data["data"];
             populateDashboardSubstances();
             populateSubstancesPriceList();
+            populateMiniCalendar();
         }
         else if(data["code"] == "204")
         {
@@ -269,6 +191,157 @@ $(document).ready(function()
             }
         }
     }
+
+    /******************************************* MINI CALENDAR ************************************************/
+
+    //Processing calendar
+    $('#dashboardMiniCalendarMonth').text(date.toLocaleString('default', { month: 'long' }));
+    var days = [];
+
+    //Get first date of the month number
+    var firstDayMonthNumber = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    var daysLength = 34;
+
+    //If the month starts on a Sunday, add an extra week to the calendar
+    if(firstDayMonthNumber == 7)
+    {
+        daysLength = 41;
+    }
+    
+    //If it's not monday
+    if(firstDayMonthNumber != 1)
+    {
+        for(var i = -Math.abs(firstDayMonthNumber - 2); i <= 0; i++)
+        {
+            days.push(new Date(date.getFullYear(), date.getMonth(), i).getDate())
+            if(i+1 >= 1)
+            {
+                for(var j = 1; j <= new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); j++)
+                {
+                    days.push(j);
+                    if(j+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
+                    {
+                        var counterDays = 1;
+                        if(days.length <= daysLength)
+                        {
+                            for(var k = 0; k <= daysLength; k++)
+                            {
+                                days.push(counterDays);
+                                counterDays++;
+                                if(k == daysLength)
+                                {
+                                    for(var r = 0; r < days.length; r++)
+                                    {
+                                        $('#dashboardMiniCalendar > div:last-child').append("<p class='backgroundColorInside'>" + days[r] + "</p>");
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for(var r = 0; r < days.length; r++)
+                            {
+                                $('#dashboardMiniCalendar > div:last-child').append("<p class='backgroundColorInside'>" + days[r] + "</p>");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        for(var i = 1; i <= new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); i++)
+        {
+            days.push(i);
+            if(i+1 > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate())
+            {
+                var counterDays = 1;
+                for(var j = days.length; j <= daysLength; j++)
+                {
+                    days.push(counterDays);
+                    counterDays++;
+                    if(j == daysLength)
+                    {
+                        for(var k = 0; k < days.length; k++)
+                        {
+                            $('#dashboardMiniCalendar > div:last-child').append("<p>" + days[k] + "</p>");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function populateMiniCalendar()
+    {
+        for(var i = 0; i < Object.keys(substancesUsage).length; i++)
+        {
+            console.log(Object.keys(substancesUsage)[i]);
+            for(var j = 0; j < substancesUsage[Object.keys(substancesUsage)[i]].length; j++)
+            {
+                var date = new Date(substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"] * 1000);
+                var currentDate = new Date();
+                if(date.getMonth() == currentDate.getMonth())
+                {
+                    $('#dashboardMiniCalendar > div:last-child').children('p').each(function()
+                    {
+                        if(date.getDate() == $(this).text())
+                        {
+                            var averageMood = 0;
+                            var averageMoodCounter = 0;
+                            for(var k = 0; k < substancesUsage[Object.keys(substancesUsage)[i]][j]["moods"].length; k++)
+                            {
+                                if(substancesUsage[Object.keys(substancesUsage)[i]][j]["moods"][k] == "good")
+                                {
+                                    averageMood += 3;
+                                    averageMoodCounter++;
+                                }
+                                else if(substancesUsage[Object.keys(substancesUsage)[i]][j]["moods"][k] == "neutral")
+                                {
+                                    averageMood += 2;
+                                    averageMoodCounter++;
+                                }
+                                else if(substancesUsage[Object.keys(substancesUsage)[i]][j]["moods"][k] == "bad")
+                                {
+                                    averageMood += 1;
+                                    averageMoodCounter++;
+                                }
+
+                                if(k+1 >= substancesUsage[Object.keys(substancesUsage)[i]][j]["moods"].length)
+                                {
+                                    var finalAverage = Math.round(averageMood/averageMoodCounter);
+
+                                    $(this).width('20px');
+                                    $(this).css('text-align', 'center');
+                                    $(this).css('color', "black");
+                                    
+                                    switch(finalAverage)
+                                    {
+                                        case 1:
+                                            $(this).css("background-color", "red");
+                                            break;
+                                        case 2:
+                                            $(this).css("background-color", "yellow");
+                                            break;
+                                        case 3:
+                                            $(this).css("background-color", "green");
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                            
+                            
+                        }
+                    })
+                }
+            }
+        }
+    }
+
 
     /******************************************* NEW SUBSTANCE ************************************************/
     var moods, substanceInputData;
@@ -519,6 +592,7 @@ $(document).ready(function()
                 $('#uploadingInputsLoading, #newSubstanceFourth, #newSubstance').hide();
 
                 populateDashboardSubstances();
+                populateMiniCalendar();
                 footerResetImages("social");
                 clearSubstanceInputs();
             }
