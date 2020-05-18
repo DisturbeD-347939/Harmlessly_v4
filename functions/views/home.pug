@@ -61,8 +61,14 @@ html
                         div.input-field.inline
                             input#inputDose.validate(placeholder="100" type="number" data-length="4")
                         div#inputDoseScale
-                    img#submitDosage(src="./img/icons/check.png")
+                    img#submitDosage(src="./img/icons/check.png" href="#alert")
             div#newSubstanceThird
+                div#alert.modal
+                    div.modal-content
+                        h4
+                        p
+                    div.modal-footer
+                        a.modal-close.waves-effect.waves-green.btn-flat(href="#!") Ok
                 i#newSubstanceThirdBack.small.material-icons.backArrow arrow_back
                 h5 When?
                 input#inputDoseTime.timepicker(placeholder="Time" type="text" readonly="true")

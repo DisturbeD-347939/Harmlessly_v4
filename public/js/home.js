@@ -29,6 +29,7 @@ $(document).ready(function()
     $('.timepicker').timepicker();
     $('.datepicker').datepicker();
     $('select').formSelect();
+    $('.modal').modal();
 
     //Hide Elements - New Substance
     $('#newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
@@ -62,13 +63,13 @@ $(document).ready(function()
         height: $('#footerNewSubstanceBtn').height() + 10,
         top: $('#footerNewSubstanceBtn').position().top - 5,
     })
-    
+
     $('#burger').css('top', screen.height - $('#burger').height() - $('#footerNavBar').height());
     
     //Sizing/Position - Dashboard Nav Bar
     $('#dashboardNavBar > div:first-child > div').css('width', $('#dashboardNavBar > div:first-child > p').width()/1.5);
     $('#dashboardNavBar > div:last-child > div').css('width', $('#dashboardNavBar > div:last-child > p').width()/1.5);
-
+    
     //Fill up settings colors
     $('#backgroundColor').attr('value', backgroundColor);
     $('#backgroundColorPreview').css('background-color', backgroundColor);
@@ -344,7 +345,7 @@ $(document).ready(function()
 
 
     /******************************************* NEW SUBSTANCE ************************************************/
-    var moods, substanceInputData;
+    var moods, substanceInputData, dosageDangerLevel;
 
     $('#footerNewSubstanceBtn').click(function()
     {
@@ -403,11 +404,25 @@ $(document).ready(function()
 
     $('body').delegate('#submitDosage', 'click', function(e)
     {
+        var alert = M.Modal.getInstance($('#alert'));
         if($('#inputDose').hasClass("valid"))
         {
             substanceInputData.push($('#inputDose').val());
             $('#newSubstanceSecond').hide();
             $('#newSubstanceThird').show();
+
+            if(dosageDangerLevel == "red")
+            {
+                $('#alert > .modal-content > h4').text("High dose");
+                $('#alert > .modal-content > p').text("You are taking a dose higher than the recommended amount. Please make sure to read the substance wikipedia to know what to expect and to gather some information on what to do in order not to have a bad time.");
+                alert.open();
+            }
+            else if(dosageDangerLevel == "yellow")
+            {
+                $('#alert > .modal-content > h4').text("Be safe");
+                $('#alert > .modal-content > p').text("Make sure you read more about the substance you are taking in our wikipedia for more information on what to expect and what you should do.");
+                alert.open();
+            }
         }
     })
 
@@ -537,6 +552,27 @@ $(document).ready(function()
         $('#newSubstanceFourth').hide();
         $('#newSubstanceThird').show();
         $('#newSubstance').height($(document).height() - $('footer').height());
+    })
+
+    $('#inputDose').on('input', function()
+    {
+        var greenLevelLimit = (parseInt(substancesInfo[substanceInputData]["dosages"]["common"]) + parseInt(substancesInfo[substanceInputData]["dosages"]["strong"])) / 2;
+        var yellowLevelLimit = (parseInt(substancesInfo[substanceInputData]["dosages"]["strong"]) + parseInt(substancesInfo[substanceInputData]["dosages"]["heavy"])) / 2;
+        if($(this).val() < greenLevelLimit)
+        {
+            dosageDangerLevel = "green";
+            $(this).css('border-bottom', '2px solid green');
+        }
+        else if($(this).val() < yellowLevelLimit)
+        {
+            dosageDangerLevel = "yellow";
+            $(this).css('border-bottom', '2px solid yellow');
+        }
+        else
+        {
+            dosageDangerLevel = "red";
+            $(this).css('border-bottom', '2px solid red');
+        }
     })
 
     function displayMoodsTab()
