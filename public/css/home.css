@@ -496,6 +496,13 @@
         background-color: red;
         border-radius: 50%; }
 
+#supportUs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 95%; }
+
 footer {
   position: fixed;
   bottom: 0px;
