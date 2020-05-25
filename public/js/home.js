@@ -1179,6 +1179,14 @@ $(document).ready(function()
         $('#settingsSubstancePriceList').hide();
     })
 
+    $('#supportUsBtn').click(function()
+    {
+        hideAppTabs();
+        burgerToggle();
+        footerResetImages("none");
+        $('#supportUs').show();
+    })
+
     function populateSubstancesPriceList()
     {
         for(var i = 0; i < Object.keys(substancesInfo).length; i++)
