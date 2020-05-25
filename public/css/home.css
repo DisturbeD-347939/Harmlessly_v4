@@ -340,16 +340,16 @@
           width: 80px;
           height: 80px;
           margin: 0px 10px; }
-  #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Date"] {
+  #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Timestamp"] {
     width: 70%; }
-  #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Dose"] {
+  #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Dosage"] {
     width: 70%; }
-    #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Dose"] div div {
+    #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Dosage"] div div {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center; }
-    #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Dose"] .input-field {
+    #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Dosage"] .input-field {
       width: 20%; }
   #editDetailedSubstanceField .editDetailedSubstanceFieldInput[name="Cost"] {
     width: 70%; }
