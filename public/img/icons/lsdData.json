@@ -1,0 +1,70 @@
+{
+    "Substances":
+    {
+        "LSD":
+        {
+            "name": "Lysergic acid diethylamide",
+            "nicknames": ["Acid", "Tab", "Lucy"],
+            "dosing_methods": ["Orally"],
+            "sold_as": ["Blotting paper (tab)"],
+            "effects":
+            {
+                "positive_effects": ["Euphoria", "Love", "Connectedness"],
+                "negative_effects": ["Anxiety", "Panic Attacks", "Confusion", "Paranoia"],
+		"mental_effects": ["Volatile emotions", "Change in perception of time", "Visual hallucinations", "Auditory hallucinations", "Distorted reality"],
+                "physical_effects": ["Dilated pupils", "Sleeplessness", "Goosebumps"]
+            },
+            "duration":
+            {
+                "orally":
+                {
+                    "kick_in": "30-90 minutes",
+                    "duration": "9-14 hours"
+                },
+                "comedown": "1-2 days",
+                "detection":
+		{
+		    "urine": "up to 8 hours",
+		    "blood": "6-12 hours",
+		    "hair": "up to 3 months"
+  		}
+            },
+            "risks": 
+            {
+                "short_term": ["Bad trip","Anxiety","Irrational behavior", "Fake LSD"],
+                "long_term": ["Hallucinogen Persisting Perceptual Disorder (HPPD)", "Psychosis (if previously dormant)"]
+            },
+            "safety":
+            {
+                "safety_steps":
+                {
+                    "1": 
+                    {
+                        "rule": "If i'm using a new source or trying LSD for the first time I should only take a small dose",
+                        "info":
+			[
+                            "Low - 25–100 µg",
+                            "Medium (standard) - 65-175 µg",
+                            "High - 175-250 µg",
+                            "Very high - 250+ µg"
+                        ]
+                    },
+		    "2": 
+		    {
+		        "rule": "I have tested my LSD with an Ehrlich reagent",
+			"info": "take a small piece of your tab and place it on a clean surface then apply a drop of reagent. If the liquid turns purple then it is LSD"
+		    }
+                    "3": "I shouldn't mix LSD with other substances",
+                    "4": "I should be aware of any history of psychosis in my family as LSD can trigger dormant symptoms",
+		    "5": "I should not take LSD if I am in a bad mental state (i.e dealing with a stressful situation such as death or job loss) as it could increase the risk of having a bad trip",
+                    "6": "If I am not experienced with LSD or trying a stronger dose I should have someone with me that can look after me and calm me down if I am overwhelmed",
+                    "7": "I have not taken LSD within at least 3 months",
+                    "8": "I'm aware that LSD can bring to the surface issues that I may be struggling with emotionally",
+                    "9": "I will take LSD in a safe place that I am comfortable in and preferably not with strangers present. If I am outside I should have a prepared safe spot to come back to if i'm overwhelmed",
+                    "10": "I should prepare some calming music to listen to"
+                }
+            }
+        }
+    },
+    "Disclaimer": "We do not promote the use of illegal psychoactive substances. This content has been created strictly for harm reduction purposes, and you should note that the only way to be perfectly safe using LSD is to not take it at all."
+}
