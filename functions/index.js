@@ -74,7 +74,11 @@ app.get('/getSubstanceUsage', (request, response) =>
                         numberEntries += snapshot["_size"];
                         snapshot.forEach(doc =>
                         {
-                            substanceUse[substance].push(doc.data());
+                            data = doc.data();
+                            data["id"] = doc.id;
+                            
+                            substanceUse[substance].push(data);
+
                             counter++;
                             if(counter >= numberEntries)
                             {
