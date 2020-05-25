@@ -467,7 +467,67 @@ $color3: #31c1ff;
 
     .editDetailedSubstanceFieldInput
     {
+        @include flex(column, center, center);
+
+        width: 100%;
+
+        .moodsBox
+        {
+            padding: 10px;
+            margin: 10px 0px;
+
+            .moods
+            {
+                @include flex(row, center, center);
+
+                padding: 10px;
+                margin: 10px 0px;
+                border-radius: 2%;
+
+                img
+                {
+                    width: 80px;
+                    height: 80px;
+
+                    margin: 0px 10px;
+                }
+            }
+        }
+    }
+
+    .editDetailedSubstanceFieldInput[name="Date"]
+    {
         width: 70%;
+    }
+
+    .editDetailedSubstanceFieldInput[name="Dose"]
+    {
+        width: 70%;
+
+        div div
+        {
+            @include flex(column, center, center);
+        }
+
+        .input-field
+        {
+            width: 20%;
+        }
+    }
+
+    .editDetailedSubstanceFieldInput[name="Cost"]
+    {
+        width: 70%;
+
+        div div
+        {
+            @include flex(column, center, center);
+        }
+
+        .input-field
+        {
+            width: 20%;
+        }
     }
 
     #submitEdit
