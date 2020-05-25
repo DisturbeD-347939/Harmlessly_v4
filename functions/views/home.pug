@@ -129,18 +129,18 @@ html
             div#editDetailedSubstanceInputs
                 div#editSubstanceName
                     p Name
-                    p MDMA
-                div#editSubstanceDate(name="Date")
+                    p 
+                div#editSubstanceDate(name="Timestamp")
                     p Date
                     div
                         p
                         i.material-icons.small arrow_forward_ios
-                div#editSubstanceTime(name="Date")
+                div#editSubstanceTime(name="Timestamp")
                     p Time
                     div
                         p
                         i.material-icons.small arrow_forward_ios
-                div#editSubstanceDose(name="Dose")
+                div#editSubstanceDose(name="Dosage")
                     p Dosage
                     div
                         p 200mg
@@ -174,17 +174,42 @@ html
         div#editDetailedSubstanceField
             i#editDetailedSubstanceFieldBack.small.material-icons.backArrow arrow_back
             h4    
-            div.editDetailedSubstanceFieldInput(name="Date")
+            div.editDetailedSubstanceFieldInput(name="Timestamp")
                 h5 When?
                 input#editInputDoseTime.timepicker(placeholder="Time" type="text" readonly="true")
                 input#editInputDoseDate.datepicker(placeholder="Date" type="text")
-            div.editDetailedSubstanceFieldInput(name="Dose")
+            div.editDetailedSubstanceFieldInput(name="Dosage")
                 h5 How much?
                 div
                     div
                         div.input-field.inline
                             input#editInputDose.validate(placeholder="100" type="number" data-length="4")
                         div#editInputDoseScale
+            div.editDetailedSubstanceFieldInput(name="Moods")
+                div.moodsBox#moodInputBefore
+                    h5 Before taking it?
+                    div.moods.gradient.z-depth-4
+                        img.bad(src="./img/moods/bad.png")
+                        img.neutral(src="./img/moods/neutral.png")
+                        img.good(src="./img/moods/good.png")
+                div.moodsBox#moodInputDuring
+                    h5 While on it?
+                    div.moods.gradient.z-depth-4
+                        img.bad(src="./img/moods/bad.png")
+                        img.neutral(src="./img/moods/neutral.png")
+                        img.good(src="./img/moods/good.png")
+                div.moodsBox#moodInputAfter
+                    h5 After you've comedown?
+                    div.moods.gradient.z-depth-4
+                        img.bad(src="./img/moods/bad.png")
+                        img.neutral(src="./img/moods/neutral.png")
+                        img.good(src="./img/moods/good.png")
+            div.editDetailedSubstanceFieldInput(name="Cost")
+                h5 How much?
+                div
+                    div
+                        div.input-field.inline
+                            input#editInputCost.validate(placeholder="100" type="number" data-length="4")
             img#submitEdit(src="./img/icons/check.png")
         div#wikipedia
             div#wikipediaMenu

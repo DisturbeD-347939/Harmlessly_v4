@@ -345,6 +345,7 @@ $(document).ready(function()
 
 
     /******************************************* NEW SUBSTANCE ************************************************/
+    
     var moods, substanceInputData, dosageDangerLevel;
 
     $('#footerNewSubstanceBtn').click(function()
@@ -736,12 +737,13 @@ $(document).ready(function()
 
     /******************************************* GROUPS INSIGHTS ************************************************/
 
+    var editingThis;
+
     $('body').delegate('.dashboardSubstancesGroups', 'click', function()
     {
         hideAppTabs();
         $('#detailedSubstance').show();
         $('.detailedSubstanceRecentActivity').empty();
-        console.log(substancesUsage);
 
         var substance = $(this).children("div").children("h5").text();
         var consumed = 0;
@@ -759,7 +761,7 @@ $(document).ready(function()
             consumed += parseInt(substancesUsage[substance][i]["dosage"]);
             timestamps.push(parseInt(substancesUsage[substance][i]["timestamp"]));
 
-            $('.detailedSubstanceRecentActivity').append("<div id='" + i + "' name='" + substance + "' class='detailedSubstanceInput z-depth-2 gradient'><div class='detailedSubstanceData'><p>" + parseInt(substancesUsage[substance][i]["dosage"]) + "mg</p><div><p>10 seconds</p><i class='small material-icons'>arrow_forward_ios</i></div></div><div class='detailedSubstanceDanger'></div></div>")
+            $('.detailedSubstanceRecentActivity').append("<div id='" + i + "' name='" + substance + "' value='" + substancesUsage[substance][i]["id"] + "'' class='detailedSubstanceInput z-depth-2 gradient'><div class='detailedSubstanceData'><p>" + parseInt(substancesUsage[substance][i]["dosage"]) + "mg</p><div><p>10 seconds</p><i class='small material-icons'>arrow_forward_ios</i></div></div><div class='detailedSubstanceDanger'></div></div>")
 
             if(parseInt(substancesUsage[substance][i]["dosage"]) < greenLevelLimit)
             {
@@ -787,7 +789,7 @@ $(document).ready(function()
                 //lastUse = lastUse.replace("ago", "");
                 lastUse = lastUse.replace("approximately", "");
                 var totalSpent = (consumed * prices[substance]) / 1000;
-                $('#detailedSubstance > h4:first-child').text(substance);
+                $('#detailedSubstance > h4').text(substance);
                 $('#detailedSubstanceLastUse > p:last-child').text(lastUse);
                 $('#detailedSubstanceConsumed > p:last-child').text(consumed + "mg");
                 $('#detailedSubstanceTimesUsed > p:last-child').text(timesUsed);
@@ -806,10 +808,12 @@ $(document).ready(function()
     {
         $('#editDetailedSubstance').show();
         $('#detailedSubstance').hide();
+
         var data = substancesUsage[$(this).attr('name')][$(this).attr('id')];
         var editTimestamp = new Date(data["timestamp"] * 1000);
 
-        $('#editSubstanceName > div > p').text($(this).attr('name'));
+        $('#editDetailedSubstance').attr('value', data["id"]);
+        $('#editSubstanceName > p:last-child').text($(this).attr('name'));
         $('#editSubstanceDate > div > p').text(editTimestamp.toLocaleDateString());
         $('#editSubstanceTime > div > p').text(editTimestamp.getHours() + ":" + (editTimestamp.getMinutes()<10?'0':'') + editTimestamp.getMinutes());
         $('#editSubstanceDose > div > p').text(data["dosage"] + "mg");
@@ -861,13 +865,36 @@ $(document).ready(function()
         $('#detailedSubstance').show();
     })
 
+    var moodsEdit = {};
+
     $('#editDetailedSubstance > div > div').click(function(e)
     {
         hideAppTabs();
         $('#editDetailedSubstanceField').show();
+        editingThis = $(this).attr('name');
         console.log($(this).attr('name'));
         $('#editDetailedSubstanceField > h4').text($(this).attr('name'));
         $('.editDetailedSubstanceFieldInput[name="' + $(this).attr('name') + '"').show();
+
+        $('.moods > img').click(function(e)
+        {
+            var moodInputVar = ["moodInputBefore", "moodInputDuring", "moodInputAfter"];
+            for(var i = 0; i < moodInputVar.length; i++)
+            {
+                if($(e.target).parent().parent().attr('id') == moodInputVar[i])
+                {
+                    if(moodsEdit[i])
+                    {
+                        $('#' + moodInputVar[i] + " > .moods").children('img').each(function()
+                        {
+                            $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
+                        })
+                    }
+                    moodsEdit[i] = $(e.target).attr('class');
+                }
+            }
+            $(e.target).attr('src', './img/moods/' + $(e.target).attr('class') + 'Clicked.png');
+        })
     })
 
     $('#editDetailedSubstanceFieldBack').click(function()
@@ -875,6 +902,153 @@ $(document).ready(function()
         hideAppTabs();
         $('#editDetailedSubstance').show();
     })
+
+    $('#submitEdit').click(function()
+    {
+        var inputData;
+
+        if(editingThis == "Timestamp")
+        {
+            var timeChosen = $('.editDetailedSubstanceFieldInput[name="' + editingThis + '"] > .timepicker').val();
+            var dateChosen = $('.editDetailedSubstanceFieldInput[name="' + editingThis + '"] > input:last-child').val();
+
+            //Parse Time
+            timeChosen = timeChosen.split(" ");
+            var timeChosenSplit = timeChosen[0].split(":");
+            var timeChosenHour = parseInt(timeChosenSplit[0]);
+            var timeChosenMin = timeChosenSplit[1];
+
+            //Convert from 12 hour clock to 24 hour clock
+            if(timeChosen[1] == "AM")
+            {
+                if(timeChosenHour == 12)
+                {
+                    timeChosenHour = 0;
+                }
+            }
+            else
+            {
+                if(timeChosenHour != 12)
+                {
+                    timeChosenHour += 12;
+                }
+            }
+
+            //Parse Date
+            dateChosen = dateChosen.replace(',', "");
+            dateChosen = dateChosen.split(" ");
+            [dateChosen[0], dateChosen[1]] = [dateChosen[1], dateChosen[0]];
+            dateChosen = dateChosen.join(" ");
+
+            //Detect timezone
+            var timeChosenTimezone = new Date().getTimezoneOffset();
+            if(timeChosenTimezone < 0)
+            {
+                timeChosenTimezone = "+" + Math.abs(timeChosenTimezone/60);
+            }
+            else
+            {
+                timeChosenTimezone = "-" + Math.abs(timeChosenTimezone/60);
+            }
+
+            //Put it all together and create timestamp
+            var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":" + new Date().getSeconds() + " GMT"+ timeChosenTimezone);
+            
+            inputData = timeChosenTimestamp/1000;
+        }
+        else if(editingThis == "Dosage")
+        {
+            var dose = $('#editInputDose').val();
+            inputData = dose;
+        }
+        else if(editingThis == "Cost")
+        {
+            var cost = $('#editInputCost').val();
+            inputData = cost;
+        }
+        else if(editingThis == "Moods")
+        {
+            inputData = moodsEdit;
+        }
+
+        $.post('/updateField',
+            {
+                field: editingThis,
+                data: inputData,
+                id: $('#editDetailedSubstance').attr('value'),
+                email: getCookie("email"),
+                substance: $('#editSubstanceName > p:last-child').text()
+            },
+            function(data, status)
+            {
+                if(data["code"] == "200")
+                {
+                    for(var i = 0; i < substancesUsage[$('#editSubstanceName > p:last-child').text()].length; i++)
+                    {
+                        if(substancesUsage[$('#editSubstanceName > p:last-child').text()][i]["id"] == $('#editDetailedSubstance').attr('value'))
+                        {
+                            substancesUsage[$('#editSubstanceName > p:last-child').text()][i][editingThis.toLowerCase()] = inputData.toString();
+                            
+                            if(editingThis == "Timestamp")
+                            {
+                                var editTimestamp = new Date(inputData * 1000);
+                                $('#editSubstanceDate > div > p').text(editTimestamp.toLocaleDateString());
+                                $('#editSubstanceTime > div > p').text(editTimestamp.getHours() + ":" + (editTimestamp.getMinutes()<10?'0':'') + editTimestamp.getMinutes());
+                            }
+                            else if(editingThis == "Moods")
+                            {
+                                console.log(moodsEdit);
+                                if(moodsEdit[0] != "f")
+                                {
+                                    $('#editMoodBefore > div > img').show();
+                                    $('#editMoodBefore > div > p').hide();
+                                
+                                    $('#editMoodBefore > div > img').attr('src', './img/moods/' + moodsEdit[0] + '.png');
+                                }
+                                else
+                                {
+                                    $('#editMoodBefore > div > img').hide();
+                                    $('#editMoodBefore > div > p').show();
+                                }
+                            
+                                if(moodsEdit[1] != "f")
+                                {
+                                    $('#editMoodWhileOnIt > div > img').show();
+                                    $('#editMoodWhileOnIt > div > p').hide();
+                                
+                                    $('#editMoodWhileOnIt > div > img').attr('src', './img/moods/' + moodsEdit[1] + '.png');
+                                }
+                                else
+                                {
+                                    $('#editMoodWhileOnIt > div > img').hide();
+                                    $('#editMoodWhileOnIt > div > p').show();
+                                }
+                            
+                                if(moodsEdit[2] != "f")
+                                {
+                                    $('#editMoodAfterwards > div > img').show();
+                                    $('#editMoodAfterwards > div > p').hide();
+                                
+                                    $('#editMoodAfterwards > div > img').attr('src', './img/moods/' + moodsEdit[2] + '.png');
+                                }
+                                else
+                                {
+                                    $('#editMoodAfterwards > div > img').hide();
+                                    $('#editMoodAfterwards > div > p').show();
+                                }
+                            }
+                            else
+                            {
+                                $('#editDetailedSubstanceInputs > div[name=' + editingThis + '] > div > p').text(inputData.toString());
+                            }
+                            $('#editDetailedSubstanceFieldBack').click();
+                        }
+                    }
+                }
+            })
+
+    })
+
 
     /******************************************* SOCIAL ************************************************/
 

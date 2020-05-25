@@ -76,7 +76,7 @@ app.get('/getSubstanceUsage', (request, response) =>
                         {
                             data = doc.data();
                             data["id"] = doc.id;
-                            
+
                             substanceUse[substance].push(data);
 
                             counter++;
@@ -225,6 +225,30 @@ app.post('/addDose', (request, response) =>
         {
             response.send("500");
         })
+})
+
+app.post('/updateField', (request, response) =>
+{
+    var data = request.body;
+
+    if(data["field"] == "Timestamp")
+    {
+        db.collection('Users').doc(data["email"]).collection('Usage').doc(data["substance"]).collection('Entries').doc(data["id"]).update({timestamp: data["data"]})
+    }
+    else if(data["field"] == "Dosage")
+    {
+        db.collection('Users').doc(data["email"]).collection('Usage').doc(data["substance"]).collection('Entries').doc(data["id"]).update({dosage: data["data"]})
+    }
+    else if(data["field"] == "Cost")
+    {
+        db.collection('Users').doc(data["email"]).collection('Usage').doc(data["substance"]).collection('Entries').doc(data["id"]).update({cost: data["data"]})
+    }
+    else if(data["field"] == "Moods")
+    {
+        db.collection('Users').doc(data["email"]).collection('Usage').doc(data["substance"]).collection('Entries').doc(data["id"]).update({moods: data["data"]})
+    }
+
+    response.send({code: "200"});
 })
 
 //Export app
