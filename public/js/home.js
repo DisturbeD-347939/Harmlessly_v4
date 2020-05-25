@@ -147,24 +147,20 @@ $(document).ready(function()
         for(var i = 0; i < Object.keys(substancesUsage).length; i++)
         {
             recentTimestamp[Object.keys(substancesUsage)[i]] = [];
+            weekTimestamps[Object.keys(substancesUsage)[i]] = [];
             for(var j = 0; j < substancesUsage[Object.keys(substancesUsage)[i]].length; j++)
             {
                 recentTimestamp[Object.keys(substancesUsage)[i]].push(substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"]);
 
-                weekTimestamps[lessThanAWeek(+ new Date(), substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"] * 1000)] = true;
+                var recent = lessThanAWeek(+ new Date(), substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"] * 1000);
+                if(recent || recent == 0)
+                {
+                    weekTimestamps[Object.keys(substancesUsage)[i]].push(recent);
+                }
 
                 if(j+1 >= substancesUsage[Object.keys(substancesUsage)[i]].length)
                 {
                     recentTimestamp[Object.keys(substancesUsage)[i]] = Math.max(...recentTimestamp[Object.keys(substancesUsage)[i]]);
-                    
-                }
-            }
-            if(i+1 >= Object.keys(substancesUsage).length)
-            {
-                if(weekTimestamps[0] || weekTimestamps[1])
-                {
-                    weekTimestamps.shift();
-                    weekTimestamps[0] = true;
                 }
             }
         }
@@ -173,21 +169,21 @@ $(document).ready(function()
         {
             $('#dashboardSubstances').append("<div class='dashboardSubstancesGroups backgroundColorInside z-depth-3 gradient'><div class='dashboardSubstancesGroupsData'><h5>" + Object.keys(substancesUsage)[i] + "</h5><p>Last consumed - " + timeDifference(+ new Date(), recentTimestamp[Object.keys(substancesUsage)[i]]*1000) + "</p><div class='dashboardSubstancesGroupsStatus'></div></div><i class='medium material-icons'>arrow_forward_ios</i>");
 
-            if(i+1 >= Object.keys(substancesUsage).length)
+            for(var j = 0; j < 7; j++)
             {
-                for(var j = 0; j < 7; j++)
+                $('.dashboardSubstancesGroups:last-child > .dashboardSubstancesGroupsData > .dashboardSubstancesGroupsStatus').append("<div class='dashboardSubstancesGroupsStatus" + j + "'></div>");
+
+                for(var k = 0; k < weekTimestamps[Object.keys(substancesUsage)[i]].length; k++)
                 {
-                    $('.dashboardSubstancesGroupsStatus').append("<div class='dashboardSubstancesGroupsStatus" + j + "'></div>");
-
-                    if(weekTimestamps[j])
+                    if(weekTimestamps[Object.keys(substancesUsage)[i]][k] ==  j)
                     {
-                        $('.dashboardSubstancesGroupsStatus:last-child > div:last-child').css('background-color', 'red');
+                        $('.dashboardSubstancesGroups:last-child > .dashboardSubstancesGroupsData > .dashboardSubstancesGroupsStatus > div:last-child').css('background-color', 'black');
                     }
+                }
 
-                    if(j+1 >= 7)
-                    {
-                        $('.dashboardSubstancesGroups > .dashboardSubstancesGroupsStatus').css('margin-bottom', $('.dashboardSubstancesGroups > h5').css('marginBottom'));
-                    }
+                if(j+1 >= 7)
+                {
+                    $('.dashboardSubstancesGroups:last-child > .dashboardSubstancesGroupsData > .dashboardSubstancesGroupsStatus').css('margin-bottom', $('.dashboardSubstancesGroups > h5').css('marginBottom'));
                 }
             }
         }
@@ -1343,8 +1339,11 @@ function lessThanAWeek(current, previous)
     var msPerDay = msPerHour * 24;
     var msPerMonth = msPerDay * 30;
 
+    console.log(current + " - " + previous);
+
     if (elapsed < msPerMonth) 
     {
+        console.log(Math.round(elapsed/msPerDay));
         if(Math.round(elapsed/msPerDay) <= 7)
         {
             return Math.round(elapsed/msPerDay);
