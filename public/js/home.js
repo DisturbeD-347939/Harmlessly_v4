@@ -1187,6 +1187,11 @@ $(document).ready(function()
         $('#supportUs').show();
     })
 
+    $('#sourcesBtn').click(function()
+    {
+        window.location.href = "https://docs.google.com/document/d/1HyivFcpqTz44WCpG-LtdSwXZ4kYH-tLdkP7KWQvPPXI/edit?usp=sharing";
+    })
+
     function populateSubstancesPriceList()
     {
         for(var i = 0; i < Object.keys(substancesInfo).length; i++)
@@ -1199,7 +1204,7 @@ $(document).ready(function()
 
     function hideAppTabs()
     {
-        $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput, #social, #settings').hide();
+        $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput, #social, #settings, #supportUs').hide();
     }
 
     function footerResetImages(target)
