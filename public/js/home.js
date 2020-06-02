@@ -89,13 +89,14 @@ $(document).ready(function()
         substancesInfo = data["Substances"];
     })
 
+    //Get user usage
     $.get('/getSubstanceUsage',
     {
         email: email
     },
     function(data, status)
     {
-        console.log(data);
+        //If there is any, populate everything
         if(data["code"] == "200")
         {
             substancesUsage = data["data"];
@@ -103,6 +104,7 @@ $(document).ready(function()
             populateSubstancesPriceList();
             populateMiniCalendar();
         }
+        //If there isn't any, congratulate the user
         else if(data["code"] == "204")
         {
             $('#displayEntriesLoading').hide();
@@ -110,9 +112,11 @@ $(document).ready(function()
         }
     })
 
+    //Set initial page to home
     footerResetImages("home");
 
     /******************************************* DASHBOARD ************************************************/
+    //Go back to main page
     $('#footerDashboardBtn').click(function()
     {
         cancelTimers();
@@ -123,18 +127,21 @@ $(document).ready(function()
         $('#newSubstance').hide();
     })
 
+    //Go to full calendar page (not completed)
     $("#calendarBtn").click(function()
     {
         $('#dashboardNavBar > div:first-child > div').css('background-color', backgroundColor);
         $('#dashboardNavBar > div:last-child > div').css('background-color', color1);
     })
 
+    //Go back to dashboard page
     $("#dashboardBtn").click(function()
     {
         $('#dashboardNavBar > div:last-child > div').css('background-color', backgroundColor);
         $('#dashboardNavBar > div:first-child > div').css('background-color', color1);
     })
 
+    //Populate groups of substances
     function populateDashboardSubstances()
     {
         $('#displayEntriesLoading').hide();
@@ -144,10 +151,13 @@ $(document).ready(function()
         var recentTimestamp = {};
         var weekTimestamps = [];
 
+        //Loop through substances groups
         for(var i = 0; i < Object.keys(substancesUsage).length; i++)
         {
             recentTimestamp[Object.keys(substancesUsage)[i]] = [];
             weekTimestamps[Object.keys(substancesUsage)[i]] = [];
+
+            //Check for the most recent ones
             for(var j = 0; j < substancesUsage[Object.keys(substancesUsage)[i]].length; j++)
             {
                 recentTimestamp[Object.keys(substancesUsage)[i]].push(substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"]);
@@ -165,6 +175,7 @@ $(document).ready(function()
             }
         }
 
+        //Populate the 7 week days underneath each drug group
         for(var i = 0; i < Object.keys(substancesUsage).length; i++)
         {
             $('#dashboardSubstances').append("<div class='dashboardSubstancesGroups backgroundColorInside z-depth-3 gradient'><div class='dashboardSubstancesGroupsData'><h5>" + Object.keys(substancesUsage)[i] + "</h5><p>Last consumed - " + timeDifference(+ new Date(), recentTimestamp[Object.keys(substancesUsage)[i]]*1000) + "</p><div class='dashboardSubstancesGroupsStatus'></div></div><i class='medium material-icons'>arrow_forward_ios</i>");
@@ -270,23 +281,29 @@ $(document).ready(function()
         }
     }
 
+    //Populate the mini calendar with the days the user consumed a substance
     function populateMiniCalendar()
     {
+        //Loop through both the substance group and the individual dosages taken
         for(var i = 0; i < Object.keys(substancesUsage).length; i++)
         {
-            console.log(Object.keys(substancesUsage)[i]);
             for(var j = 0; j < substancesUsage[Object.keys(substancesUsage)[i]].length; j++)
             {
                 var date = new Date(substancesUsage[Object.keys(substancesUsage)[i]][j]["timestamp"] * 1000);
                 var currentDate = new Date();
+
+                //Check if entry was in the same month as the current one
                 if(date.getMonth() == currentDate.getMonth())
                 {
                     $('#dashboardMiniCalendar > div:last-child').children('p').each(function()
                     {
+                        //Check if entry was on the same day
                         if(date.getDate() == $(this).text())
                         {
                             var averageMood = 0;
                             var averageMoodCounter = 0;
+
+                            //Check which mood the user was on when he created that entry
                             for(var k = 0; k < substancesUsage[Object.keys(substancesUsage)[i]][j]["moods"].length; k++)
                             {
                                 if(substancesUsage[Object.keys(substancesUsage)[i]][j]["moods"][k] == "good")
@@ -313,6 +330,7 @@ $(document).ready(function()
                                     $(this).css('text-align', 'center');
                                     $(this).css('color', "black");
                                     
+                                    //Colour the background depending on the mood average
                                     switch(finalAverage)
                                     {
                                         case 1:
@@ -330,8 +348,6 @@ $(document).ready(function()
                                     }
                                 }
                             }
-                            
-                            
                         }
                     })
                 }
@@ -344,8 +360,10 @@ $(document).ready(function()
     
     var moods, substanceInputData, dosageDangerLevel;
 
+    //When clicking on "+"
     $('#footerNewSubstanceBtn').click(function()
     {
+        //Only show again if the user is not already adding a substance
         if(!$("#newSubstanceFirst, #newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth").is(":visible"))
         {
             moods = ["f", "f", "f"];
@@ -358,12 +376,14 @@ $(document).ready(function()
             $('#displaySubstancesLoading, #newSubstance, #newSubstanceFirst').show();
             $('#newSubstance').height($(document).height() - $('footer').height());
 
+            //Check if there is data about the substances before proceeding
             if(substancesInfo)
             {
                 $('#displaySubstances').empty();
 
                 $('#displaySubstancesLoading').hide();
 
+                //Create grids
                 if(Object.keys(substancesInfo).length >= 3)
                 {
                     $('#displaySubstances').css('grid-template-columns', 'repeat(3, 1fr)');
@@ -373,7 +393,7 @@ $(document).ready(function()
                     $('#displaySubstances').css('grid-template-columns', 'repeat(' + Object.keys(substancesInfo).length + ', 1fr)   ')  ;
                 }
 
-                $('#displaySubstancesLoading')
+                //Display substances
                 for(var i = 0; i < Object.keys(substancesInfo).length; i++)
                 {
                     $('#displaySubstances').append("<div class='substanceCard z-depth-4'><div class='substanceCardImage'><img   src='./img/substances/" + Object.keys(substancesInfo)[i].toLowerCase() + ".png'></div><div class='substanceCardName'><p class='center'>" + Object.keys(substancesInfo)[i] + "</p></div></div");
@@ -381,6 +401,7 @@ $(document).ready(function()
             }
             else
             {
+                //Wait for substances to be ready
                 updateNewSubstances = setTimeout(function()
                 {
                     $('#footerNewSubstanceBtn').click();
@@ -399,15 +420,19 @@ $(document).ready(function()
         $('#inputDoseScale').text(substancesInfo[$(e.currentTarget).children()[1].innerText]["dosages"]["scale"]);
     })
 
+    //Submiting the dose
     $('body').delegate('#submitDosage', 'click', function(e)
     {
+        //Create modal in case an alert needs to be displayed
         var alert = M.Modal.getInstance($('#alert'));
+
         if($('#inputDose').hasClass("valid"))
         {
             substanceInputData.push($('#inputDose').val());
             $('#newSubstanceSecond').hide();
             $('#newSubstanceThird').show();
 
+            //Check if warning is needed
             if(dosageDangerLevel == "red")
             {
                 $('#alert > .modal-content > h4').text("High dose");
@@ -423,17 +448,21 @@ $(document).ready(function()
         }
     })
 
+    //Submit dose time
     $('#submitDoseTime').click(function()
     {
         if($('#inputDoseTime').val() != "" && $('#inputDoseDate').val() != "")
         {
             var timeChosen = $('#inputDoseTime').val();
             var dateChosen = $('#inputDoseDate').val();
+
             //Parse Time
             timeChosen = timeChosen.split(" ");
+
             var timeChosenSplit = timeChosen[0].split(":");
             var timeChosenHour = parseInt(timeChosenSplit[0]);
             var timeChosenMin = timeChosenSplit[1];
+
             //Convert from 12 hour clock to 24 hour clock
             if(timeChosen[1] == "AM")
             {
@@ -449,13 +478,16 @@ $(document).ready(function()
                     timeChosenHour += 12;
                 }
             }
+
             //Parse Date
             dateChosen = dateChosen.replace(',', "");
             dateChosen = dateChosen.split(" ");
             [dateChosen[0], dateChosen[1]] = [dateChosen[1], dateChosen[0]];
             dateChosen = dateChosen.join(" ");
+
             //Detect timezone
             var timeChosenTimezone = new Date().getTimezoneOffset();
+
             if(timeChosenTimezone < 0)
             {
                 timeChosenTimezone = "+" + Math.abs(timeChosenTimezone/60);
@@ -464,19 +496,23 @@ $(document).ready(function()
             {
                 timeChosenTimezone = "-" + Math.abs(timeChosenTimezone/60);
             }
+
             //Put it all together and create timestamp
             var timeChosenTimestamp = Date.parse(dateChosen + " " + timeChosenHour + ":" + timeChosenMin + ":" + new Date().getSeconds() + " GMT"+ timeChosenTimezone);
 
+            //Push time to substance data
             substanceInputData.push(timeChosenTimestamp/1000);
 
             $('#newSubstanceThird').hide();
 
+            //Check when the user is going to take the substance
             var timeDifference = (Math.round((timeChosenTimestamp - Math.round(new Date().getTime()))/1000))/3600;
             var chosenSubstanceTimes = substancesInfo[substanceInputData[0]]["duration"]["vars"];
 
             $('#uploadingInputsLoading').hide();
             $('#moodInputBefore > h6').show();
 
+            //Depending of when it's gonna be taken, ask different questions
             if(timeDifference >= -Math.abs(chosenSubstanceTimes["kick_in"]) && timeDifference < 4)
             {
                 //About to take the substance
@@ -509,26 +545,31 @@ $(document).ready(function()
         }
     })
 
+    //If skipped, make all of the moods not set
     $('#skipMoodsInput').click(function()
     {
         moods[0] = "f";
         moods[1] = "f";
         moods[2] = "f";
+
         $('#submitMoods').click();
     })
 
+    //Submit moods
     $('#submitMoods').click(function()
     {
         if(moods[0] && moods[1] && moods[2])
         {
             substanceInputData.push(moods);
+
             $('#submitMoods, #skipMoodsInput').hide();
             $('#uploadingInputsLoading').show();
+
             submitMoods(substanceInputData);
         }
     })
 
-    //Go back on second page
+    //Go back on the second page
     $('#newSubstanceSecondBack').click(function(e)
     {
         substanceInputData.pop();
@@ -536,6 +577,7 @@ $(document).ready(function()
         $('#newSubstanceFirst').show();
     })
 
+    //Go back on the third page
     $('#newSubstanceThirdBack').click(function(e)
     {
         substanceInputData.pop();
@@ -543,6 +585,7 @@ $(document).ready(function()
         $('#newSubstanceSecond').show();
     })
 
+    //Go back on the fourth page
     $('#newSubstanceFourthBack').click(function(e)
     {
         substanceInputData.pop();
@@ -551,10 +594,12 @@ $(document).ready(function()
         $('#newSubstance').height($(document).height() - $('footer').height());
     })
 
+    //Display a coloured danger bar underneath the input
     $('#inputDose').on('input', function()
     {
         var greenLevelLimit = (parseInt(substancesInfo[substanceInputData]["dosages"]["common"]) + parseInt(substancesInfo[substanceInputData]["dosages"]["strong"])) / 2;
         var yellowLevelLimit = (parseInt(substancesInfo[substanceInputData]["dosages"]["strong"]) + parseInt(substancesInfo[substanceInputData]["dosages"]["heavy"])) / 2;
+        
         if($(this).val() < greenLevelLimit)
         {
             dosageDangerLevel = "green";
@@ -572,11 +617,13 @@ $(document).ready(function()
         }
     })
 
+    //Display mood tab
     function displayMoodsTab()
     {
         $('#newSubstance').height("auto");
         $('#newSubstanceFourth').show();
 
+        //Make images clickable and store their values
         $('.moods > img').click(function(e)
         {
             var moodInputVar = ["moodInputBefore", "moodInputDuring", "moodInputAfter"];
@@ -598,8 +645,10 @@ $(document).ready(function()
         })
     }
 
+    //Submit moods
     function submitMoods(inputs)
     {
+        //Save entry in the database
         $.post('/addDose',
         {
             data: inputs,
@@ -607,23 +656,28 @@ $(document).ready(function()
         }, 
         function(data, status)
         {
+            //Reset moods images
             $('.moods').children('img').each(function()
             {
                 $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
             })
+
+            //On sucess
             if(data == "200")
             {
+                //If there were no substance inputs before, create a new array
                 if(!substancesUsage[inputs[0]])
                 {
                     substancesUsage[inputs[0]] = [];
                 }
 
+                //Push new entry into array
                 substancesUsage[inputs[0]].push({dosage: inputs[1], timestamp: inputs[2], moods: inputs[3]});
-                console.log(substancesUsage);
 
                 $('#submitMoods, #skipMoodsInput, #dashboard').show();
                 $('#uploadingInputsLoading, #newSubstanceFourth, #newSubstance').hide();
 
+                //Populate the app with new entry
                 populateDashboardSubstances();
                 populateMiniCalendar();
                 footerResetImages("social");
@@ -634,6 +688,7 @@ $(document).ready(function()
 
     /******************************************* WIKIPEDIA ************************************************/
 
+    //Display wikipedia
     $('#footerWikipediaBtn').click(function()
     {
         footerResetImages("wiki");
@@ -645,12 +700,14 @@ $(document).ready(function()
 
         $('#wikiSubstances').empty();
 
+        //For every substance available, create a new div
         for(var i = 0; i < substancesWikiNames.length; i++)
         {
             $('#wikiSubstances').append("<div class='wikiSubstance z-depth-4' name='" + substancesWikiNames[i] + "'><img src='./img/substances/" + substancesWikiNames[i].toLowerCase() + ".png'></img><p>" + substancesWikiNames[i] + "</p></div>")
         }
     })
 
+    //On substance click
     $('body').delegate('.wikiSubstance', 'click', function()
     {
         $('#wikipediaMenu').hide();
@@ -658,11 +715,12 @@ $(document).ready(function()
         $('#wikipedia').css({"justify-content": 'flex-start'});
         $('#wikipediaSubstanceTitle').text($(this).attr('name'));
 
+        //Display information
         for(var i = 0; i < $('#wikipediaSubstanceInfo > ul > li').length; i++)
         {
             var infoName = $('#wikipediaSubstanceInfo > ul > li:nth-child(' + (i + 1).toString() + ') > div:first-child').text();
-            console.log(infoName);
 
+            //Make it readable for humans
             for(var j = 0; j < infoName.length; j++)
             {
                 if(infoName[j] == infoName[j].toUpperCase() && infoName[j] != " " && infoName[j] != "_")
@@ -674,16 +732,22 @@ $(document).ready(function()
                 }
             }
 
+            //Replace _ with " "
             infoName = infoName.replace(' ', '_');
-            console.log(infoName);
+
             var infoBody = substancesInfo[$(this).attr('name')][infoName.toLowerCase()];
+
+            //Check if infoBody is an object
             if(typeof(infoBody) == "object")
             {
                 var infoBodyKeys = Object.keys(infoBody);
+
                 infoBody = "";
                 infoBody += "<p>";
                 infoBody += substancesInfo[$(this).attr('name')][infoName.toLowerCase()]["info"];
                 infoBody += "</p>";
+
+                //If it is an object, divide all it's keys into titles and its values into text
                 for(var j = 1; j < infoBodyKeys.length; j++)
                 {
                     var ulTitle = infoBodyKeys[j].replace("_", " ");
@@ -723,6 +787,7 @@ $(document).ready(function()
         }
     })
 
+    //Go back on the wikipedia pages
     $('#wikipediaBack').click(function()
     {
         $('#wikipediaSubstanceInfo').hide();
@@ -735,6 +800,7 @@ $(document).ready(function()
 
     var editingThis;
 
+    //On group substance click
     $('body').delegate('.dashboardSubstancesGroups', 'click', function()
     {
         hideAppTabs();
@@ -747,11 +813,11 @@ $(document).ready(function()
         var lastUse;
         var timesUsed = substancesUsage[substance].length;
 
+        //Display all the entries of this substance
         for(var i = 0; i < timesUsed; i++)
         {
             var greenLevelLimit = (parseInt(substancesInfo[substance]["dosages"]["common"]) + parseInt(substancesInfo[substance]["dosages"]["strong"])) / 2;
             var yellowLevelLimit = (parseInt(substancesInfo[substance]["dosages"]["strong"]) + parseInt(substancesInfo[substance]["dosages"]["heavy"])) / 2;
-            //var redLevelLimit = (parseInt(substancesInfo[substance]["dosages"]["heavy"]) + parseInt(substancesInfo[substance]["dosages"]["danger_level"])) / 2;
             var dangerLevel = "";
 
             consumed += parseInt(substancesUsage[substance][i]["dosage"]);
@@ -782,9 +848,10 @@ $(document).ready(function()
             {
                 lastUse = Math.min(...timestamps) * 1000;
                 lastUse = timeDifference(+ new Date(), lastUse);
-                //lastUse = lastUse.replace("ago", "");
                 lastUse = lastUse.replace("approximately", "");
+
                 var totalSpent = (consumed * prices[substance]) / 1000;
+
                 $('#detailedSubstance > h4').text(substance);
                 $('#detailedSubstanceLastUse > p:last-child').text(lastUse);
                 $('#detailedSubstanceConsumed > p:last-child').text(consumed + "mg");
@@ -794,12 +861,14 @@ $(document).ready(function()
         }
     })
 
+    //Go back on details
     $('#detailedSubstanceBack').click(function()
     {
         hideAppTabs();
         $('#dashboard').show();
     })
 
+    //Show details about entry
     $('body').delegate('.detailedSubstanceInput', 'click', function(e)
     {
         $('#editDetailedSubstance').show();
@@ -855,6 +924,7 @@ $(document).ready(function()
         }
     })
 
+    //Go back from edit substance
     $('#editDetailedSubstanceBack').click(function()
     {
         hideAppTabs();
@@ -863,18 +933,23 @@ $(document).ready(function()
 
     var moodsEdit = {};
 
+    //Edit an entry
     $('#editDetailedSubstance > div > div').click(function(e)
     {
         hideAppTabs();
         $('#editDetailedSubstanceField').show();
+
+        //Detect what the user wants to edit
         editingThis = $(this).attr('name');
-        console.log($(this).attr('name'));
+
         $('#editDetailedSubstanceField > h4').text($(this).attr('name'));
         $('.editDetailedSubstanceFieldInput[name="' + $(this).attr('name') + '"').show();
 
+        //Check if user is editing the moods
         $('.moods > img').click(function(e)
         {
             var moodInputVar = ["moodInputBefore", "moodInputDuring", "moodInputAfter"];
+
             for(var i = 0; i < moodInputVar.length; i++)
             {
                 if($(e.target).parent().parent().attr('id') == moodInputVar[i])
@@ -886,23 +961,30 @@ $(document).ready(function()
                             $(this).attr('src', './img/moods/' + $(this).attr('class') + '.png');
                         })
                     }
+
                     moodsEdit[i] = $(e.target).attr('class');
+
                 }
             }
+
             $(e.target).attr('src', './img/moods/' + $(e.target).attr('class') + 'Clicked.png');
+
         })
     })
 
+    //Go back from editing a field
     $('#editDetailedSubstanceFieldBack').click(function()
     {
         hideAppTabs();
         $('#editDetailedSubstance').show();
     })
 
+    //Submit new edit
     $('#submitEdit').click(function()
     {
         var inputData;
 
+        //If editing the timestamp
         if(editingThis == "Timestamp")
         {
             var timeChosen = $('.editDetailedSubstanceFieldInput[name="' + editingThis + '"] > .timepicker').val();
@@ -952,21 +1034,25 @@ $(document).ready(function()
             
             inputData = timeChosenTimestamp/1000;
         }
+        //If editing dosage
         else if(editingThis == "Dosage")
         {
             var dose = $('#editInputDose').val();
             inputData = dose;
         }
+        //If editing cost
         else if(editingThis == "Cost")
         {
             var cost = $('#editInputCost').val();
             inputData = cost;
         }
+        //If editing moods
         else if(editingThis == "Moods")
         {
             inputData = moodsEdit;
         }
 
+        //Update the entry on the database
         $.post('/updateField',
             {
                 field: editingThis,
@@ -977,6 +1063,7 @@ $(document).ready(function()
             },
             function(data, status)
             {
+                //Update all the data again
                 if(data["code"] == "200")
                 {
                     for(var i = 0; i < substancesUsage[$('#editSubstanceName > p:last-child').text()].length; i++)
@@ -1048,6 +1135,7 @@ $(document).ready(function()
 
     /******************************************* SOCIAL ************************************************/
 
+    //Open social tab
     $('#footerSocialBtn').click(function()
     {
         hideAppTabs();
@@ -1055,6 +1143,7 @@ $(document).ready(function()
         $('#social').show();
     })
 
+    //Take users to our subreddit
     $('#redditLogo').click(function()
     {
         window.location.href = "https://www.reddit.com/r/harmlessly/";
@@ -1064,6 +1153,7 @@ $(document).ready(function()
 
     var burgerOpen = false;
 
+    //Open burger menu
     $('#footerBurgerBtn').click(function()
     {
         burgerToggle();
@@ -1071,6 +1161,7 @@ $(document).ready(function()
         $('#burger').css('left', screen.width - $('#burger').width());
     })
 
+    //Toggle burger
     function burgerToggle()
     {
         if($('#burger').is(":visible"))
@@ -1087,6 +1178,7 @@ $(document).ready(function()
         }
     }
 
+    //Disable burger on click outside burger
     $('body').click(function(e)
     {
         if(burgerOpen)
@@ -1102,6 +1194,7 @@ $(document).ready(function()
 
     /******************************************* SETTINGS ************************************************/
 
+    //Open settings tab
     $('#settingsBtn').click(function()
     {
         hideAppTabs();
@@ -1110,6 +1203,7 @@ $(document).ready(function()
         $('#settings').show();
     })
 
+    //Update colours in real time
     $('#settingsColors > div > input').keyup(function(e)
     {
         //Check if its an hex color code
@@ -1126,6 +1220,7 @@ $(document).ready(function()
         }
     })
 
+    //Apply new colours to the app (EXPERIMENTAL)
     $('#applyColors').click(function()
     {
         $('.backgroundColorInside').css('color', $('#backgroundColor').val());
@@ -1139,42 +1234,49 @@ $(document).ready(function()
         $('.mainColorBack').css('background-color', $('#mainColor').val());
     })
 
+    //Choose a theme (IN PROGRESS)
     $('#themeBtn').click(function()
     {
         $('#settingsMenu').hide();
         $('#settingsColors').show();
     })
 
+    //Go back to settings
     $('#settingsColorBack').click(function()
     {
         $('#settingsMenu').show();
         $('#settingsColors').hide();
     })
 
+    //Open currency tab
     $('#currencyBtn').click(function()
     {
         $('#settingsMenu').hide();
         $('#settingsCurrency').show();
     })
 
+    //Go back from currency tab
     $('#settingsCurrencyBack').click(function()
     {
         $('#settingsMenu').show();
         $('#settingsCurrency').hide();
     })
 
+    //Open prices tab
     $('#pricesBtn').click(function()
     {
         $('#settingsMenu').hide();
         $('#settingsSubstancePriceList').show();
     })
 
+    //Go back from prices tab
     $('#settingsSubstancePriceListBack').click(function()
     {
         $('#settingsMenu').show();
         $('#settingsSubstancePriceList').hide();
     })
 
+    //Open support us tab
     $('#supportUsBtn').click(function()
     {
         hideAppTabs();
@@ -1183,11 +1285,13 @@ $(document).ready(function()
         $('#supportUs').show();
     })
 
+    //Take users to our sources
     $('#sourcesBtn').click(function()
     {
         window.location.href = "https://docs.google.com/document/d/1HyivFcpqTz44WCpG-LtdSwXZ4kYH-tLdkP7KWQvPPXI/edit?usp=sharing";
     })
 
+    //UNFINISHED
     function populateSubstancesPriceList()
     {
         for(var i = 0; i < Object.keys(substancesInfo).length; i++)
@@ -1198,11 +1302,13 @@ $(document).ready(function()
 
     /******************************************* GENERAL ************************************************/
 
+    //Hide all tabs
     function hideAppTabs()
     {
         $('#dashboard, #wikipedia, #newSubstance, #detailedSubstance, #editDetailedSubstance, #editDetailedSubstanceField, .editDetailedSubstanceFieldInput, #social, #settings, #supportUs').hide();
     }
 
+    //Display which tab the user is on with images on the footer
     function footerResetImages(target)
     {
         for(var i = 0; i < $('#footerNavBar').children('img').length; i++)
@@ -1218,19 +1324,29 @@ $(document).ready(function()
         }
     }
 
+    //Cancel timers
     function cancelTimers()
     {
         clearTimeout(updateNewSubstances);
     }
 
+    //Clear input from new entry
     function clearSubstanceInputs()
     {
         $('#newSubstanceSecond, #newSubstanceThird, #newSubstanceFourth').hide();
         $('#inputDose, #inputDoseTime, #inputDoseDate').val("");
         $('#inputDose, #inputDoseTime, #inputDoseDate').removeClass("valid");
     }
+
+    //Log out
+    $('#logOut').click(function()
+    {
+        setCookie('email', '', -1);
+        window.location.href = "/";
+    })
 })
 
+//Get cookies from the browser
 function getCookie(cname) 
 {
     var name = cname + "=";
@@ -1251,9 +1367,18 @@ function getCookie(cname)
     return "";
 }
 
+//Set cookies in the browser
+function setCookie(cname, cvalue, exdays) 
+{
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+//Check for the time difference between two timestamps
 function timeDifference(current, previous) 
 {
-
     var msPerMinute = 60 * 1000;
     var msPerHour = msPerMinute * 60;
     var msPerDay = msPerHour * 24;
@@ -1330,6 +1455,7 @@ function timeDifference(current, previous)
     }
 }
 
+//Check if timestamp was less than a week ago
 function lessThanAWeek(current, previous)
 {
     var elapsed = current - previous;
@@ -1339,11 +1465,8 @@ function lessThanAWeek(current, previous)
     var msPerDay = msPerHour * 24;
     var msPerMonth = msPerDay * 30;
 
-    console.log(current + " - " + previous);
-
     if (elapsed < msPerMonth) 
     {
-        console.log(Math.round(elapsed/msPerDay));
         if(Math.round(elapsed/msPerDay) <= 7)
         {
             return Math.round(elapsed/msPerDay);

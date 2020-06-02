@@ -40,12 +40,14 @@ app.get('/home', (request, response) =>
     response.render('home');
 })
 
+//Retrieve substance data
 app.get('/getSubstanceData', (request, response) =>
 {
     var data = JSON.parse(fs.readFileSync('substances.json'));
     response.send(data);
 })
 
+//Retrieve substance usage from a user
 app.get('/getSubstanceUsage', (request, response) =>
 {
     var email = request.query.email;
@@ -56,22 +58,28 @@ app.get('/getSubstanceUsage', (request, response) =>
     var numberEntries = 0;
     var counter = 0;
 
+    //Loop through database usage of the user
     db.collection('Users').doc(email).collection('Usage').get()
     .then(snapshot =>
     {
         if(snapshot["_size"] > 0)
         {
             substancesNumber = snapshot["_size"];
+
+            //Loop through each substance
             snapshot.forEach(doc =>
             {
                 var substance = doc.id;
                 substanceUse[substance] = [];
+
                 db.collection('Users').doc(email).collection('Usage').doc(doc.id).collection('Entries').get()
                 .then(snapshot =>
                 {
                     if(snapshot["_size"] > 0)
                     {
                         numberEntries += snapshot["_size"];
+
+                        //Loop through each entry
                         snapshot.forEach(doc =>
                         {
                             data = doc.data();
@@ -108,6 +116,7 @@ app.get('/getSubstanceUsage', (request, response) =>
     })
 })
 
+//Register user
 app.post('/register', (request, response) =>
 {
     var data = request.body.data;
@@ -117,16 +126,19 @@ app.post('/register', (request, response) =>
     db.collection('Users').get()
     .then(snapshot => 
     {
+        //Check if email isnt taken
         snapshot.forEach(doc => 
         {
             if(doc.id == data.email)
             {
-                console.log("Same email");
                 emailAvailable = false;
             }
+
             counter++;
+
             if(counter == snapshot["_size"])
             {
+                //Encrypt password
                 bcrypt.genSalt(10, function(err, salt)
                 {
                     bcrypt.hash(data["password"], salt, function(err, hash) 
@@ -136,17 +148,18 @@ app.post('/register', (request, response) =>
                             username: data.name,
                             password: hash
                         }
+
                         if(emailAvailable)
                         {
+                            //Create account
                             db.collection('Users').doc(data.email).set(fields).then(() =>
                             {
-                                console.log("Account created");
                                 response.send("200");
                             })
                         }
                         else
                         {
-                            console.log("Email in use");
+                            //Email in use
                             response.send("409");
                         }
                     });
@@ -156,42 +169,45 @@ app.post('/register', (request, response) =>
     })
     .catch(err => 
     {
-      console.log('Error getting documents', err);
-      response.send("500");
+        response.send("500");
     });
 })
 
+//Log in users
 app.post('/login', (request, response) =>
 {
     var data = request.body.data;
     
+    //Get user data
     db.collection('Users').doc(data.email).get()
     .then(function(doc) 
     {
         if (doc.exists) 
         {
+            //Check for user
             bcrypt.compare(data.password, doc.data()["password"], function(err, res) 
             {
                 if(res == true)
                 {
-                    console.log("Logged in");
+                    //Log in user
                     response.send(doc.data()["username"]);
                 }
                 else
                 {
-                    console.log("Wrong email/password");
+                    //Wrong password
                     response.send("409");
                 }
             });
         } 
         else 
         {
-            console.log("No such document!");
-            response.send("500");
+            //Wrong email
+            response.send("409");
         }
     })
 })
 
+//Add dose to database
 app.post('/addDose', (request, response) =>
 {
     var data = request.body;
@@ -208,6 +224,7 @@ app.post('/addDose', (request, response) =>
         name: data["data"][0]
     }
 
+    //Add dose to entries and inside it's respective group
     db.collection('Users').doc(data["email"]).collection('Usage').doc(data["data"][0]).set(substanceName)
         .then(doc =>
         {
@@ -227,6 +244,7 @@ app.post('/addDose', (request, response) =>
         })
 })
 
+//Update field of an entry
 app.post('/updateField', (request, response) =>
 {
     var data = request.body;

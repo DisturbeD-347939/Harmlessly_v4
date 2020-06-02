@@ -21,18 +21,21 @@ $(document).ready(function()
     $('#registerDiv').hide();
     $('.back').css("color", "black");
 
+    //Take user to register page
     $('#register').click(function()
     {
         $('#home').hide();
         $('#registerDiv').show();
     })
     
+    //Take user to login page
     $('#login').click(function()
     {
         $('#home').hide();
         $('#loginDiv').show();
     })
 
+    //Take user back to the main page
     $('.back').click(function()
     {
         $('#home').show();
@@ -40,16 +43,19 @@ $(document).ready(function()
         $('#registerDiv').hide();
     })
 
+    //Submit login
     $('#loginButton').click(function()
     {
         $('#loginForm').submit();
     })
 
+    //Submit registration
     $('#registerButton').click(function()
     {
         $('#registerForm').submit();
     })
 
+    //Login form submission
     $('#loginForm').submit(function(e)
     {
         e.preventDefault();
@@ -57,6 +63,8 @@ $(document).ready(function()
         var valid = true;
         var inputs = $('#loginForm :input');
         var values = {};
+
+        //Check if fields are valid
         inputs.each(function()
         {
             values[this.name] = $(this).val();
@@ -67,6 +75,7 @@ $(document).ready(function()
             if(!$(this).hasClass("valid")) { valid = false; }
         })
 
+        //If they are attempt to login
         if(valid)
         {
             $.post("/login",
@@ -79,7 +88,6 @@ $(document).ready(function()
                 //409 - Wrong password/email
                 if(data == "409")
                 {
-                    console.log("Wrong password/email");
                     $('#loginForm > div:first-child() > input, #loginForm > div:nth-child(2) > input').val("");
                     $('#loginForm > div:first-child() > input, #loginForm > div:nth-child(2) > input').removeClass("valid");
                     $('#loginForm > div:first-child() > input, #loginForm > div:nth-child(2) > input').addClass("invalid");
@@ -100,10 +108,10 @@ $(document).ready(function()
                     window.location.href = "/home";
                 }
             })
-            console.log("Submitted register");
         }
     })
     
+    //Registration submission
     $('#registerForm').submit(function(e)
     {
         e.preventDefault();
@@ -111,12 +119,15 @@ $(document).ready(function()
         var valid = true;
         var inputs = $('#registerForm :input');
         var values = {};
+
+        //Check if inputs are valid
         inputs.each(function()
         {
             values[this.name] = $(this).val();
             if(!$(this).hasClass("valid")) { valid = false; }
         })
 
+        //If they are attempt to register the user
         if(valid)
         {
             $.post("/register",
@@ -150,15 +161,12 @@ $(document).ready(function()
                 }
     
             })
-            console.log("Submitted register");
         }
         else
         {
             alert("Fill up all the fields correctly before submitting!");
         }
     })
-
-    //Put both together using $(this)
 
     //Enable users to press enter to submit the form
     $("#registerForm").keypress(function(event)
@@ -185,6 +193,7 @@ $(document).ready(function()
     })
 })
 
+//Sets cookie in browser
 function setCookie(cname, cvalue, exdays) 
 {
     var d = new Date();
@@ -193,6 +202,7 @@ function setCookie(cname, cvalue, exdays)
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+//Gets cookie from browser
 function getCookie(cname) 
 {
     var name = cname + "=";
